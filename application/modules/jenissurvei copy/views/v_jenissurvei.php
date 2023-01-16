@@ -82,7 +82,7 @@
     <div class="body clearfix">
         <div class="x_panel col-sm-12">
             <div class="x_title">
-                <h2><small>Pg: </small><b>Daftar Soal</b></h2>
+                <h2><small>Pg: </small><b>Daftar Jenis Survei</b></h2>
                 <ul class="nav navbar-right">
                     <li><a class="close-link" href="<?php echo base_url('home'); ?>"><i class="fa fa-close"></i></a></li>
                 </ul>
@@ -96,12 +96,12 @@
                                 <form class="" action="<?php echo base_url() . 'jenissurvei/simpan_data'; ?>" method="post" novalidate="">
                                     <!-- spacebar -->
                                     <div style="width: 100%; height:7px; border: 0px solid white;"></div>
-                                    <span class="section" id="title_addedit">Data Soal</span>
+                                    <span class="section" id="title_addedit">Data Jenis</span>
                                     <div class="field item form-group">
-                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Soal<span class="required"> *</span></label>
+                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Jenis Survei<span class="required"> *</span></label>
                                         <div class="col-md-8 col-sm-8">
-                                            <input class="form-control" data-validate-length-range="4" data-validate-words="2" id="soal_kepuasan" name="soal_kepuasan" placeholder="Pertanyaan" required="required">
-                                            <input type="hidden" id="id_soal" name="id_soal">
+                                            <input class="form-control" data-validate-length-range="4" data-validate-words="2" id="jenis_survei" name="jenis_survei" placeholder="Pertanyaan" required="required">
+                                            <input type="hidden" id="id_jenis_survei" name="id_jenis_survei">
                                         </div>
                                     </div>
                                     <div class="ln_solid">
@@ -159,7 +159,7 @@
                                         <tr>
                                             <?php if ($akun[0]->zp[4] == "1") { ?>
                                                 <td>
-                                                    <input type="checkbox" <?= $i->ada; ?> class="chkCheckBoxId filled-in chk-col-red" value="<?php echo $i->id_soal; ?>" name="idsoal[]" id="<?php echo $no; ?>" onclick="cekit(<?php echo $no; ?>)" />
+                                                    <input type="checkbox" <?= $i->ada; ?> class="chkCheckBoxId filled-in chk-col-red" value="<?php echo $i->id_jenis_survei; ?>" name="idjenissurvei[]" id="<?php echo $no; ?>" onclick="cekit(<?php echo $no; ?>)" />
                                                     <label for="<?php echo $no; ?>"></label>
                                                 </td>
                                             <?php } ?>
@@ -167,7 +167,7 @@
                                             <td><?php echo $i->jenis_survei; ?></td>
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
-                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData(<?php echo $i->id_soal; ?>,'<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData(<?php echo $i->id_jenis_survei; ?>,'<?php echo $i->jenis_survei; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
                                                 </td>
                                             <?php } ?>
                                         </tr>
