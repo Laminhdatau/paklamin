@@ -16,10 +16,7 @@ $db['default'] = array(
 // _______________________________________________________
 
 // ==KONFIGURASI IP SIAKAD==
-	'hostname' => '172.17.1.203',
-	'username' => 'siakad',
-	'password' => 'poltekg0',
-	'database' => 'db_latih',
+	
 
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
