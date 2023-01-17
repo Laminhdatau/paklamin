@@ -33,11 +33,12 @@
             document.getElementById("btnck").disabled = bCek;
         }
 
+
+
         function showForm(id = null) {
             $("#pnladd").slideDown("slow");
             $("#pnldata").slideDown("slow");
             $("#btn-tmb").hide("slow");
-            $("#btn-ctng").hide("slow");
 
             if (id == null) {
                 $("#id_soal").val("");
@@ -53,7 +54,6 @@
             $("#pnladd").slideUp("slow");
             $("#pnldata").slideUp("slow");
             $("#btn-tmb").show("slow");
-            $("#btn-ctng").show("slow");
         }
 
         function editData(id_soal, soal_kepuasan,id_jenis_survei,status) {
@@ -135,7 +135,9 @@
                                 </td>
                             <?php } ?>
                             <?php echo form_open('kuismatakuliah/delete_data'); ?>
-                            <input type="hidden" id="id_del_arr" name="id_del_arr" value="">
+                            <input type="text" id="id_del_arr" name="id_del_arr" value="">
+
+                        
                             
                             <table id="listdata" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
@@ -143,6 +145,8 @@
                                         <?php if ($akun[0]->zp[4] == "1") { ?>
                                             <td width="3%">
                                                 <button type="submit" id="btnck" disabled="disabled" class="btn btn-danger btn-circle" onclick="return confirm('Anda Yakin')"><i class="glyphicon glyphicon-trash"></i></button>
+
+                                                 
                                             </td>
                                         <?php } ?>
                                         <td width="3%"><b>No</b></td>
@@ -154,14 +158,14 @@
                                                 <td width="10%">
                                                     <button type="button" id="btn-tmb" class="btn btn-primary btn-circle" onclick="showForm();"><i class="glyphicon glyphicon-plus"></i></button>
 
-                                                    <!-- <button type="button" id="btn-ctng" class="btn btn-success btn-circle" onclick="showForm();"><i class="glyphicon glyphicon-ok"></i></button> -->
+                                                
 
-                                                    <button type="submit" id="btn-ctng" disabled="disabled" class="btn btn-success btn-circle" onclick="return confirm('Anda Yakin')"><i class="glyphicon glyphicon-ok"></i></button>
+                                                    <button type="submit" id="btnck" disabled="disabled" class="btn btn-success btn-circle" onclick="return confirm('Anda Yakin Mencentang Semua?')"><i class="glyphicon glyphicon-ok"></i></button>
+
+
                                                 </td>
-                                               <!--  <td width="3%">
-                                                    <button type="button" id="btn-ctng" class="btn btn-success btn-circle" onclick="showForm();"><i class="glyphicon glyphicon-ok"></i></button>
 
-                                                </td> -->
+                                              
                                             <?php } else { ?>
                                                 <td width="3%"><b>Edit</b></td>
                                             <?php } ?>
@@ -191,11 +195,7 @@
                                                     echo '<div class="badge badge-warning">Ambigu</div>';
                                                 }; ?>
                                             </td>
-                                           <!--  <?php if ($akun[0]->zp[2] == "1") { ?>
-                                                <td>
-                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>','<?php echo $i->status; ?>');"><i class="glyphicon glyphicon-ok"></i></button>
-                                                </td>
-                                            <?php } ?> -->
+                                          
                                         </tr>
                                     <?php } ?>
                                 </tbody>
