@@ -57,7 +57,7 @@
             $("#jenis_survei").val(jenis_survei);
             $("#title_addedit").html('<h2>Edit Data : Soal</h2>');
             $("#btn").html('Update');
-            showForm(id);
+            showForm(id_jenis_survei);
         }
     </script>
 
@@ -167,7 +167,7 @@
                                             <td><?php echo $i->jenis_survei; ?></td>
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
-                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData(<?php echo $i->id_jenis_survei; ?>,'<?php echo $i->jenis_survei; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_jenis_survei; ?>','<?php echo $i->jenis_survei; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
                                                 </td>
                                             <?php } ?>
                                         </tr>

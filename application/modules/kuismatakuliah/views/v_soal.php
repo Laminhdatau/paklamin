@@ -37,11 +37,13 @@
             $("#pnladd").slideDown("slow");
             $("#pnldata").slideDown("slow");
             $("#btn-tmb").hide("slow");
+            $("#btn-ctng").hide("slow");
 
             if (id == null) {
                 $("#id_soal").val("");
                 $("#soal_kepuasan").val("");
                 $("#id_jenis_survei").val("");
+                $("#status").val("");
                 $("#title_addedit").html('<h2>Tambah Data : Soal</h2>');
                 $("#btn").html('Simpan');
             }
@@ -51,15 +53,17 @@
             $("#pnladd").slideUp("slow");
             $("#pnldata").slideUp("slow");
             $("#btn-tmb").show("slow");
+            $("#btn-ctng").show("slow");
         }
 
-        function editData(id_soal, soal_kepuasan,id_jenis_survei) {
+        function editData(id_soal, soal_kepuasan,id_jenis_survei,status) {
             $("#id_soal").val(id_soal);
             $("#soal_kepuasan").val(soal_kepuasan);
             $("#id_jenis_survei").val(id_jenis_survei);
+            $("#status").val(status);
             $("#title_addedit").html('<h2>Edit Data : Soal</h2>');
             $("#btn").html('Update');
-            showForm(id);
+            showForm(id_soal);
         }
     </script>
 
@@ -143,12 +147,21 @@
                                         <?php } ?>
                                         <td width="3%"><b>No</b></td>
                                         <td><b>Pertanyaan</b></td>
-                                        <td><b>Jenis Survei</b></td>
+                                        <td ><b>Jenis Survei</b></td>
+                                        <td ><b>Status</b></td>
                                         <?php if ($akun[0]->zp[2] == "1") { ?>
                                             <?php if ($akun[0]->zp[0] == "1") { ?>
-                                                <td width="3%">
+                                                <td width="10%">
                                                     <button type="button" id="btn-tmb" class="btn btn-primary btn-circle" onclick="showForm();"><i class="glyphicon glyphicon-plus"></i></button>
+
+                                                    <!-- <button type="button" id="btn-ctng" class="btn btn-success btn-circle" onclick="showForm();"><i class="glyphicon glyphicon-ok"></i></button> -->
+
+                                                    <button type="submit" id="btn-ctng" disabled="disabled" class="btn btn-success btn-circle" onclick="return confirm('Anda Yakin')"><i class="glyphicon glyphicon-ok"></i></button>
                                                 </td>
+                                               <!--  <td width="3%">
+                                                    <button type="button" id="btn-ctng" class="btn btn-success btn-circle" onclick="showForm();"><i class="glyphicon glyphicon-ok"></i></button>
+
+                                                </td> -->
                                             <?php } else { ?>
                                                 <td width="3%"><b>Edit</b></td>
                                             <?php } ?>
@@ -169,11 +182,20 @@
                                             <td><?php echo $no; ?></td>
                                             <td><?php echo $i->soal_kepuasan; ?></td>
                                             <td><?php echo $i->jenis_survei; ?></td>
-                                            <?php if ($akun[0]->zp[2] == "1") { ?>
+                                            <td>
+                                                <?php if($i->status == 1){
+                                                    echo '<div class="badge badge-success">Aktif</div>';
+                                                }else if($i->status ==0 ){
+                                                    echo '<div class="badge badge-danger">Tidak Aktif</div>';
+                                                }else{
+                                                    echo '<div class="badge badge-warning">Ambigu</div>';
+                                                }; ?>
+                                            </td>
+                                           <!--  <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
-                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData(<?php echo $i->id_soal; ?>,'<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>','<?php echo $i->status; ?>');"><i class="glyphicon glyphicon-ok"></i></button>
                                                 </td>
-                                            <?php } ?>
+                                            <?php } ?> -->
                                         </tr>
                                     <?php } ?>
                                 </tbody>

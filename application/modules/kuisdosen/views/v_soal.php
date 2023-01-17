@@ -42,6 +42,7 @@
                 $("#id_soal").val("");
                 $("#soal_kepuasan").val("");
                 $("#id_jenis_survei").val("");
+                $("#status").val("");
                 $("#title_addedit").html('<h2>Tambah Data : Soal</h2>');
                 $("#btn").html('Simpan');
             }
@@ -53,13 +54,14 @@
             $("#btn-tmb").show("slow");
         }
 
-        function editData(id_soal, soal_kepuasan,id_jenis_survei) {
+        function editData(id_soal, soal_kepuasan,id_jenis_survei,status) {
             $("#id_soal").val(id_soal);
             $("#soal_kepuasan").val(soal_kepuasan);
             $("#id_jenis_survei").val(id_jenis_survei);
+            $("#status").val(status);
             $("#title_addedit").html('<h2>Edit Data : Soal</h2>');
             $("#btn").html('Update');
-            showForm(id);
+            showForm(id_soal);
         }
     </script>
 
@@ -144,6 +146,7 @@
                                         <td width="3%"><b>No</b></td>
                                         <td><b>Pertanyaan</b></td>
                                         <td><b>Jenis Survei</b></td>
+                                        <td><b>Status</b></td>
                                         <?php if ($akun[0]->zp[2] == "1") { ?>
                                             <?php if ($akun[0]->zp[0] == "1") { ?>
                                                 <td width="3%">
@@ -169,9 +172,19 @@
                                             <td><?php echo $no; ?></td>
                                             <td><?php echo $i->soal_kepuasan; ?></td>
                                             <td><?php echo $i->jenis_survei; ?></td>
+                                           <td>
+                                                <?php if($i->status == 1){
+                                                    echo '<div class="badge badge-success">Aktif</div>';
+                                                }else if($i->status ==0 ){
+                                                    echo '<div class="badge badge-danger">Tidak Aktif</div>';
+                                                }else{      
+                                                    echo '<div class="badge badge-warning">Ambigu</div>';
+                                                }; ?>
+                                            </td>
+
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
-                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData(<?php echo $i->id_soal; ?>,'<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>','<?php echo $i->status; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
                                                 </td>
                                             <?php } ?>
                                         </tr>
