@@ -130,7 +130,7 @@
                             <?php } ?>
                             <?php echo form_open('hari/delete_data'); ?>
                             <input type="hidden" id="id_del_arr" name="id_del_arr" value="">
-                            
+
                             <table id="listdata" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
