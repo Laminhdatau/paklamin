@@ -12,7 +12,7 @@ class Kuismatakuliah extends MX_Controller{
     public function index(){
         $a['data'] = $this->m_kuismatakuliah->getData();
         $a['layout'] = 'v_soal';
-        $a['modules'] = 'Kuismatakuliah';
+        $a['modules'] = 'kuismatakuliah';
         echo Modules::run('template/backend', $a);
     }
 

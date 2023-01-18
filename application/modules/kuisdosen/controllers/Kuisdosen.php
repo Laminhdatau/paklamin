@@ -12,7 +12,7 @@ class Kuisdosen extends MX_Controller{
     public function index(){
         $a['data'] = $this->m_kuisdosen->getData();
         $a['layout'] = 'v_soal';
-        $a['modules'] = 'Kuisdosen';
+        $a['modules'] = 'kuisdosen';
         echo Modules::run('template/backend', $a);
     }
 

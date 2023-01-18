@@ -56,7 +56,7 @@
             $("#btn-tmb").show("slow");
         }
 
-        function editData(id_soal, soal_kepuasan,id_jenis_survei,status) {
+        function editData(id_soal, soal_kepuasan, id_jenis_survei, status) {
             $("#id_soal").val(id_soal);
             $("#soal_kepuasan").val(soal_kepuasan);
             $("#id_jenis_survei").val(id_jenis_survei);
@@ -108,6 +108,7 @@
                                         <div class="col-md-8 col-sm-8">
                                             <input class="form-control" data-validate-length-range="4" data-validate-words="2" id="soal_kepuasan" name="soal_kepuasan" placeholder="Pertanyaan" required="required">
                                             <input type="hidden" id="id_soal" name="id_soal">
+                                            <input type="hidden" id="status" name="status">
                                         </div>
                                     </div>
                                     <div class="ln_solid">
@@ -137,8 +138,8 @@
                             <?php echo form_open('kuismatakuliah/delete_data'); ?>
                             <input type="text" id="id_del_arr" name="id_del_arr" value="">
 
-                        
-                            
+
+
                             <table id="listdata" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
@@ -146,26 +147,26 @@
                                             <td width="3%">
                                                 <button type="submit" id="btnck" disabled="disabled" class="btn btn-danger btn-circle" onclick="return confirm('Anda Yakin')"><i class="glyphicon glyphicon-trash"></i></button>
 
-                                                 
+
                                             </td>
                                         <?php } ?>
                                         <td width="3%"><b>No</b></td>
                                         <td><b>Pertanyaan</b></td>
-                                        <td ><b>Jenis Survei</b></td>
-                                        <td ><b>Status</b></td>
+                                        <td><b>Jenis Survei</b></td>
+                                        <td><b>Status</b></td>
                                         <?php if ($akun[0]->zp[2] == "1") { ?>
                                             <?php if ($akun[0]->zp[0] == "1") { ?>
                                                 <td width="10%">
                                                     <button type="button" id="btn-tmb" class="btn btn-primary btn-circle" onclick="showForm();"><i class="glyphicon glyphicon-plus"></i></button>
 
-                                                
+
 
                                                     <button type="submit" id="btnck" disabled="disabled" class="btn btn-success btn-circle" onclick="return confirm('Anda Yakin Mencentang Semua?')"><i class="glyphicon glyphicon-ok"></i></button>
 
 
                                                 </td>
 
-                                              
+
                                             <?php } else { ?>
                                                 <td width="3%"><b>Edit</b></td>
                                             <?php } ?>
@@ -187,15 +188,15 @@
                                             <td><?php echo $i->soal_kepuasan; ?></td>
                                             <td><?php echo $i->jenis_survei; ?></td>
                                             <td>
-                                                <?php if($i->status == 1){
+                                                <?php if ($i->status == 1) {
                                                     echo '<div class="badge badge-success">Aktif</div>';
-                                                }else if($i->status ==0 ){
+                                                } else if ($i->status == 0) {
                                                     echo '<div class="badge badge-danger">Tidak Aktif</div>';
-                                                }else{
+                                                } else {
                                                     echo '<div class="badge badge-warning">Ambigu</div>';
                                                 }; ?>
                                             </td>
-                                          
+
                                         </tr>
                                     <?php } ?>
                                 </tbody>
