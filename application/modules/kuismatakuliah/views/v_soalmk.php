@@ -33,6 +33,8 @@
             document.getElementById("btnck").disabled = bCek;
         }
 
+
+
         function showForm(id = null) {
             $("#pnladd").slideDown("slow");
             $("#pnldata").slideDown("slow");
@@ -54,7 +56,7 @@
             $("#btn-tmb").show("slow");
         }
 
-        function editData(id_soal, soal_kepuasan,id_jenis_survei,status) {
+        function editData(id_soal, soal_kepuasan, id_jenis_survei, status) {
             $("#id_soal").val(id_soal);
             $("#soal_kepuasan").val(soal_kepuasan);
             $("#id_jenis_survei").val(id_jenis_survei);
@@ -86,7 +88,7 @@
     <div class="body clearfix">
         <div class="x_panel col-sm-12">
             <div class="x_title">
-                <h2><small>Pg: </small><b>Daftar Soal Kuis Dosen</b></h2>
+                <h2><small>Pg: </small><b>Daftar Soal Kuis Mata Kuliah</b></h2>
                 <ul class="nav navbar-right">
                     <li><a class="close-link" href="<?php echo base_url('home'); ?>"><i class="fa fa-close"></i></a></li>
                 </ul>
@@ -97,7 +99,7 @@
                     <?php if (($akun[0]->zp[0] == "1") || ($akun[0]->zp[2] == "1")) { ?>
                         <div class="col-sm-12" id="pnladd">
                             <div class="col-sm-12" style="background: #D3D3D3;">
-                                <form class="" action="<?php echo base_url() . 'kuisdosen/simpan_data'; ?>" method="post" novalidate="">
+                                <form class="" action="<?php echo base_url() . 'kuismatakuliah/simpan_data'; ?>" method="post" novalidate="">
                                     <!-- spacebar -->
                                     <div style="width: 100%; height:7px; border: 0px solid white;"></div>
                                     <span class="section" id="title_addedit">Data Soal</span>
@@ -106,6 +108,7 @@
                                         <div class="col-md-8 col-sm-8">
                                             <input class="form-control" data-validate-length-range="4" data-validate-words="2" id="soal_kepuasan" name="soal_kepuasan" placeholder="Pertanyaan" required="required">
                                             <input type="hidden" id="id_soal" name="id_soal">
+                                            <input type="hidden" id="status" name="status">
                                         </div>
                                     </div>
                                     <div class="ln_solid">
@@ -132,15 +135,19 @@
                                     <button type="button" id="btn-tmb" class="btn btn-primary btn-circle" onclick="showForm();"><i class="glyphicon glyphicon-plus"></i>Tambah</button>
                                 </td>
                             <?php } ?>
-                            <?php echo form_open('kuisdosen/delete_data'); ?>
-                            <input type="hidden" id="id_del_arr" name="id_del_arr" value="">
-                            
+                            <?php echo form_open('kuismatakuliah/delete_data'); ?>
+                            <input type="text" id="id_del_arr" name="id_del_arr" value="">
+
+
+
                             <table id="listdata" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
                                         <?php if ($akun[0]->zp[4] == "1") { ?>
                                             <td width="3%">
                                                 <button type="submit" id="btnck" disabled="disabled" class="btn btn-danger btn-circle" onclick="return confirm('Anda Yakin')"><i class="glyphicon glyphicon-trash"></i></button>
+
+
                                             </td>
                                         <?php } ?>
                                         <td width="3%"><b>No</b></td>
@@ -149,9 +156,12 @@
                                         <td><b>Status</b></td>
                                         <?php if ($akun[0]->zp[2] == "1") { ?>
                                             <?php if ($akun[0]->zp[0] == "1") { ?>
-                                                <td width="3%">
+                                                <td width="10%">
                                                     <button type="button" id="btn-tmb" class="btn btn-primary btn-circle" onclick="showForm();"><i class="glyphicon glyphicon-plus"></i></button>
+
                                                 </td>
+
+
                                             <?php } else { ?>
                                                 <td width="3%"><b>Edit</b></td>
                                             <?php } ?>
@@ -172,16 +182,15 @@
                                             <td><?php echo $no; ?></td>
                                             <td><?php echo $i->soal_kepuasan; ?></td>
                                             <td><?php echo $i->jenis_survei; ?></td>
-                                           <td>
-                                                <?php if($i->status == 1){
+                                            <td>
+                                                <?php if ($i->status == 1) {
                                                     echo '<div class="badge badge-success">Aktif</div>';
-                                                }else if($i->status ==0 ){
+                                                } else if ($i->status == 0) {
                                                     echo '<div class="badge badge-danger">Tidak Aktif</div>';
-                                                }else{      
+                                                } else {
                                                     echo '<div class="badge badge-warning">Ambigu</div>';
                                                 }; ?>
                                             </td>
-
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
                                                     <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>','<?php echo $i->status; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>

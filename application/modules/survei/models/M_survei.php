@@ -1,11 +1,11 @@
 <?php
 
-class M_jenissurvei extends CI_Model
+class M_survei extends CI_Model
 {
     //put your code here
     public function getData()
     {
-        return $this->db->query('SELECT *,if((!isnull(id_jenis_survei))," "," ") as ada FROM t_jenis_survei where id_jenis_survei !=0 group by id_jenis_survei order by id_jenis_survei asc')->result();
+        return $this->db->query('SELECT * from t_survei')->result();
     }
     public function save_jenis($data = array())
     {
