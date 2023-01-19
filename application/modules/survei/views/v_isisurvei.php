@@ -104,14 +104,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                                <?php foreach ($data as $dk) : ?>
-                                    <tr>
-                                        <td>
-                                            <a href="<?= base_url('survei/isisurvei'); ?>" class="btn btn-danger"><?= $dk->nama_dosen; ?></a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
+                                <tr>
+                                    <td>
+                                        <a href="<?= base_url('survei/isisurvei'); ?>" class="btn btn-danger">Saiful Bahri Musa</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="<?= base_url('survei/isisurvei'); ?>" class="btn btn-danger">Irwan Karim</a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <table class="col-md-6 col-sm-6 table table-bordered">
@@ -121,13 +123,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($data as $dm) : ?>
-                                    <tr>
-                                        <td>
-                                            <a href="<?= base_url('survei/isisurvei'); ?>" class="btn btn-danger"><?= $dm->nama_mata_kuliah; ?></a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
+                                <tr>
+                                    <td>
+                                        <a href="<?= base_url('survei/isisurvei'); ?>" class="btn btn-danger">Framework 2</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a href="<?= base_url('survei/isisurvei'); ?>" class="btn btn-danger">Keamanan Komputer</a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="ln_solid"></div>
