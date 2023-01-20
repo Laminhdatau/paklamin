@@ -18,12 +18,19 @@ class M_survei extends CI_Model
            left join t_biodata_karyawan bk on (bk.nik=d.nik)
         where k.kd_krs = dk.kd_krs
           and kp.nim = k.nim
-          and k.nim = '".$nim."'
+          and k.nim = '" . $nim . "'
           and pp.kd_paket_perkuliahan = dk.kd_paket_perkuliahan
           and (dp.kd_mata_kuliah = pp.kd_mata_kuliah
                and dp.id_periode_perkuliahan = kp.id_periode_perkuliahan
                and kp.id_kelas = dp.id_kelas
                )")->result();
+    }
+    public function getSoal($id)
+    {
+        return $this->db->query("SELECT s.*,js.jenis_survei 
+        from t_soal s 
+        left join t_jenis_survei js on (s.id_jenis_survei=js.id_jenis_survei) 
+        where s.id_jenis_survei='" . $id . "' AND s.status='1'")->result();
     }
 
 

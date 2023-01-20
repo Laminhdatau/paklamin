@@ -86,7 +86,7 @@
     <div class="body clearfix">
         <div class="x_panel col-sm-12">
             <div class="x_title">
-                <h2><small>Pg: </small><b> Survei <?php echo var_dump($data);die; ?></b></h2>
+                <h2><small>Pg: </small><b> Survei</b></h2>
                 <ul class="nav navbar-right">
                     <li><a class="close-link" href="<?php echo base_url('home'); ?>"><i class="fa fa-close"></i></a></li>
                 </ul>
@@ -97,44 +97,19 @@
                     <div class="col-sm-12 justify-content-between">
                         <!-- =============================================== -->
                         <br />
-                        <table class="col-md-6 col-sm-6 table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>DOSEN</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="<?= base_url('survei/isisurvei'); ?>" class="btn btn-danger">Saiful Bahri Musa</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="<?= base_url('survei/isisurvei'); ?>" class="btn btn-danger">Irwan Karim</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="col-md-6 col-sm-6 table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>MATAKULIAH</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="<?= base_url('survei/isisurvei'); ?>" class="btn btn-danger">Framework 2</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <a href="<?= base_url('survei/isisurvei'); ?>" class="btn btn-danger">Keamanan Komputer</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <form action="" method="post">
+                            <?php $no = 1;
+                            foreach ($data as $s) { ?>
+                                <h2><?= $s->soal_kepuasan; ?></h2>
+                                <br>
+                                <input type="radio">Baik
+                                <input type="radio">Sangat Baik
+                                <input type="radio">Cukup
+                                <input type="radio">Kurang
+                                <input type="radio">Sangat Kurang
+
+                            <?php } ?>
+                        </form>
                         <div class="ln_solid"></div>
                         <!-- ====================================================== -->
                     </div>
