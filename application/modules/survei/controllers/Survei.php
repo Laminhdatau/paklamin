@@ -26,7 +26,11 @@ class Survei extends MX_Controller
         $id = $this->uri->segment(3);
         $a['kd'] = $this->uri->segment(4);
         $a['nama'] = $this->uri->segment(5);
-        $a['data'] = $this->m_survei->getSoal($id);
+        $data = $this->m_survei->getSoal($id);
+        $a['soal'] = $data['soal'];
+        $a['jenis'] = $data['jenis'];
+        $a['option'] = $data['option'];
+        // print_r($a);die;
         $a['layout'] = 'v_isisurvei';
         $a['modules'] = 'survei';
         echo Modules::run('template/backend', $a);

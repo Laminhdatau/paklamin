@@ -27,11 +27,20 @@ class M_survei extends CI_Model
     }
     public function getSoal($id)
     {
-        return $this->db->query("SELECT s.*,js.jenis_survei 
+        $soal = $this->db->query("SELECT s.*
         from t_soal s 
-        left join t_jenis_survei js on (s.id_jenis_survei=js.id_jenis_survei) 
         where s.id_jenis_survei='" . $id . "' AND s.status='1'")->result();
+
+        $jenis = $this->db->query("SELECT * FROM t_jenis_survei where id_jenis_survei=" . $id)->row_array();
+        $option = $this->db->query("SELECT * FROM t_jawaban where id_jawaban > 0 order by id_jawaban asc")->result();
+        $data = array(
+            "soal" => $soal,
+            "jenis" => $jenis,
+            "option" => $option
+        );
+        return $data;
     }
+
 
 
     public function save_jenis($data = array())

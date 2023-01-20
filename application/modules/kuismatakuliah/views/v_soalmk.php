@@ -108,7 +108,7 @@
                                         <div class="col-md-8 col-sm-8">
                                             <input class="form-control" data-validate-length-range="4" data-validate-words="2" id="soal_kepuasan" name="soal_kepuasan" placeholder="Pertanyaan" required="required">
                                             <input type="hidden" id="id_soal" name="id_soal">
-                                            <input type="hidden" id="status" name="status">
+                                            
                                         </div>
                                     </div>
                                     <div class="ln_solid">
@@ -136,7 +136,7 @@
                                 </td>
                             <?php } ?>
                             <?php echo form_open('kuismatakuliah/delete_data'); ?>
-                            <input type="text" id="id_del_arr" name="id_del_arr" value="">
+                            <input type="hidden" id="id_del_arr" name="id_del_arr" value="">
 
 
 

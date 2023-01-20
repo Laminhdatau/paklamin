@@ -24,7 +24,7 @@ class Kuismatakuliah extends MX_Controller
         $id = $this->input->post('id_soal');
         $data['soal_kepuasan'] = $this->input->post('soal_kepuasan');
         $data['id_jenis_survei'] = 2;
-        $data['status'] = 0;
+        $data['status'] = '0';
 
         if ($id == "") {
             $data['id_soal'] =  uuid_generator();

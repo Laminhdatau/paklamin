@@ -86,7 +86,7 @@
     <div class="body clearfix">
         <div class="x_panel col-sm-12">
             <div class="x_title">
-                <h2><small>Pg: </small><b> Survei</b></h2>
+                <h2><small>Pg: </small><b> Survei <?php echo $jenis['jenis_survei'] . " : " . $nama; ?></b></h2>
                 <ul class="nav navbar-right">
                     <li><a class="close-link" href="<?php echo base_url('home'); ?>"><i class="fa fa-close"></i></a></li>
                 </ul>
@@ -98,17 +98,33 @@
                         <!-- =============================================== -->
                         <br />
                         <form action="" method="post">
-                            <?php $no = 1;
-                            foreach ($data as $s) { ?>
-                                <h2><?= $s->soal_kepuasan; ?></h2>
-                                <br>
-                                <input type="radio">Baik
-                                <input type="radio">Sangat Baik
-                                <input type="radio">Cukup
-                                <input type="radio">Kurang
-                                <input type="radio">Sangat Kurang
+                            <table>
 
-                            <?php } ?>
+                                <?php $ns = 0;
+                                foreach ($soal as $s) {
+                                    $ns++; ?>
+                                    <tr>
+                                        <td width="100%">
+                                            <h2><?= $ns; ?>. <?= $s->soal_kepuasan; ?></h2>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <table>
+                                            <tr>
+
+                                                <td width="15%"></td>
+                                                <td>
+                                                    <?php $no = 0;
+                                                    foreach ($option as $o) {
+                                                        $no++; ?>
+                                                        <h4><input type="radio" name="option<?= $ns; ?>" id="option<?= $no ?>"><?= " ".$o->jawaban; ?></h4>
+                                                    <?php } ?>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </tr>
+                                <?php } ?>
+                            </table>
                         </form>
                         <div class="ln_solid"></div>
                         <!-- ====================================================== -->
