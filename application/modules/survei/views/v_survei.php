@@ -108,7 +108,7 @@
                                 <?php foreach ($data as $dk) : ?>
                                     <tr>
                                         <td>
-                                            <a href="<?= base_url('survei/isisurvei'); ?>" class="btn btn-danger"><?= $dk->nama_dosen; ?></a>
+                                            <a href="<?= base_url('survei/isisurvei/'.$dk->kd_dosen.'/'.$dk->nama_dosen); ?>" class="btn btn-danger"><?= $dk->nama_dosen; ?></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -124,7 +124,7 @@
                                 <?php foreach ($data as $dm) : ?>
                                     <tr>
                                         <td>
-                                            <a href="<?= base_url('survei/isisurvei'); ?>" class="btn btn-danger"><?= $dm->nama_mata_kuliah; ?></a>
+                                            <a href="<?= base_url('survei/isisurvei/'.$dm->kd_mata_kuliah.'/'.$dm->nama_mata_kuliah); ?>" class="btn btn-danger"><?= $dm->nama_mata_kuliah; ?></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

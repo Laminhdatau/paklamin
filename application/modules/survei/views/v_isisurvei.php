@@ -86,7 +86,7 @@
     <div class="body clearfix">
         <div class="x_panel col-sm-12">
             <div class="x_title">
-                <h2><small>Pg: </small><b> SURVEI KEPUASAN</b></h2>
+                <h2><small>Pg: </small><b> Survei <?php echo var_dump($data);die; ?></b></h2>
                 <ul class="nav navbar-right">
                     <li><a class="close-link" href="<?php echo base_url('home'); ?>"><i class="fa fa-close"></i></a></li>
                 </ul>

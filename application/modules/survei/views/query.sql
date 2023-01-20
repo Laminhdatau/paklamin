@@ -25,11 +25,16 @@ SELECT s.komentar,s.waktu,
                 left join t_periode_perkuliahan pkul on (pkul.id_semester=sm.id_semester)
                 where mhs.id_status_mahasiswa=1
 
+-- =====================================
 
 SELECT DISTINCT t_table from t_tb;
 
+-- =============================================
+-- //menjumlahkan record
 SELECT COUNT(*) as alias from t_table;
 
+
+-- ====================================
 SELECT 
 l.target,
 st.status_mahasiswa,
@@ -47,3 +52,17 @@ left join t_paket_perkuliahan pk on (pk.kd_mata_kuliah=mk.nama_mata_kuliah)
 left join m_semester sm on (sm.id_semester=pk.id_semester)
 left join t_status_mahasiswa st on (st.id_status_mahasiswa=m.id_status_mahasiswa)
 where st.id_status_mahasiswa=1 || sm.id_semester='2' || up.nim=20501049  order by l.target asc
+
+
+
+
+-- MENAMPILKAN KRS BY NIM/MAHASISWA
+
+SELECT * 
+FROM t_detail_krs dk 
+,t_paket_perkuliahan pp
+,t_dosen_pengampu dp
+WHERE pp.kd_paket_perkuliahan=dk.kd_paket_perkuliahan
+AND dp.kd_mata_kuliah=pp.kd_mata_kuliah
+AND dp.id_periode_perkuliahan in (SELECT id_periode_perkuliahan FROM t_periode_perkuliahan WHERE status ="1")
+AND dk.kd_krs=(SELECT kd_krs FROM t_krs WHERE nim='20501049')

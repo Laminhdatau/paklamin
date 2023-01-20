@@ -15,14 +15,16 @@ class Survei extends MX_Controller
 
     public function index()
     {
-        $a['data'] = $this->m_survei->getData();
+        $nim="20501049";
+        $a['data'] = $this->m_survei->getData($nim);
         $a['layout'] = 'v_survei';
         $a['modules'] = 'survei';
         echo Modules::run('template/backend', $a);
     }
     public function isisurvei()
     {
-        // $a['data'] = $this->m_kuisioner->getData();
+        
+        $a['data'] = $this->m_survei->getData($nim);
         $a['layout'] = 'v_isisurvei';
         $a['modules'] = 'survei';
         echo Modules::run('template/backend', $a);
