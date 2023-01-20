@@ -24,3 +24,26 @@ SELECT s.komentar,s.waktu,
                 left join t_biodata_karyawan bk on (bk.nik=dos.nik)
                 left join t_periode_perkuliahan pkul on (pkul.id_semester=sm.id_semester)
                 where mhs.id_status_mahasiswa=1
+
+
+SELECT DISTINCT t_table from t_tb;
+
+SELECT COUNT(*) as alias from t_table;
+
+SELECT 
+l.target,
+st.status_mahasiswa,
+bk.nama_lengkap as nama_dosen,
+mk.nama_mata_kuliah,mk.status as status_mk,
+sm.semester,sm.status as status_semester 
+from t_krs_up up 
+left join t_mahasiswa m on (m.nim=up.nim)
+left join t_krs_list l on (l.kd_krs=up.kd_krs)
+left join t_dosen_pengampu dp on (l.kd_dosen_pengampu=dp.kd_dosen_pengampu)
+left join t_dosen d on (d.kd_dosen=dp.kd_dosen)
+left join t_biodata_karyawan bk on (bk.nik=d.nik)
+left join t_mata_kuliah mk on (mk.kd_mata_kuliah=dp.kd_mata_kuliah)
+left join t_paket_perkuliahan pk on (pk.kd_mata_kuliah=mk.nama_mata_kuliah)
+left join m_semester sm on (sm.id_semester=pk.id_semester)
+left join t_status_mahasiswa st on (st.id_status_mahasiswa=m.id_status_mahasiswa)
+where st.id_status_mahasiswa=1 || sm.id_semester='2' || up.nim=20501049  order by l.target asc

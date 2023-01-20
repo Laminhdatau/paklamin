@@ -65,6 +65,22 @@
         }
     </script>
 
+<script>
+    document.getElementById("statusCheckbox").addEventListener("change",function(){
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST","URLKU",true);
+        xhr.setRequestHeader("x_content","aplication/x-www-form-urlencoded");
+        xhr.send("status" + this.checked);
+
+        xhr.send("status" + this.checked + "&id" +idData)
+
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState === 4 && xhr.status === 200){}
+        };
+    });
+</script>
+
+
     <style>
         #pnladd {
             display: none;
@@ -149,7 +165,7 @@
                                         <td width="3%"><b>No</b></td>
                                         <td><b>Pertanyaan</b></td>
                                         <td><b>Jenis Survei</b></td>
-                                        <td><b>Status</b></td>
+                                        <td><b><input type="checkbox" id="statusCheckbox"></b></td>
                                         <?php if ($akun[0]->zp[2] == "1") { ?>
                                             <?php if ($akun[0]->zp[0] == "1") { ?>
                                                 <td width="3%">
