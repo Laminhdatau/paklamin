@@ -43,6 +43,7 @@
                 $("#soal_kepuasan").val("");
                 $("#id_jenis_survei").val("");
                 $("#status").val("");
+                $("#id_bagian_soal").val("");
                 $("#title_addedit").html('<h2>Tambah Data : Soal</h2>');
                 $("#btn").html('Simpan');
             }
@@ -54,31 +55,17 @@
             $("#btn-tmb").show("slow");
         }
 
-        function editData(id_soal, soal_kepuasan, id_jenis_survei, status) {
+        function editData(id_soal, soal_kepuasan, id_jenis_survei, status, idbagsoal) {
             $("#id_soal").val(id_soal);
             $("#soal_kepuasan").val(soal_kepuasan);
             $("#id_jenis_survei").val(id_jenis_survei);
             $("#status").val(status);
+            $("#id_bagian_soal").val(idbagsoal);
             $("#title_addedit").html('<h2>Edit Data : Soal</h2>');
             $("#btn").html('Update');
             showForm(id_soal);
         }
     </script>
-
-<script>
-    document.getElementById("statusCheckbox").addEventListener("change",function(){
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST","URLKU",true);
-        xhr.setRequestHeader("x_content","aplication/x-www-form-urlencoded");
-        xhr.send("status" + this.checked);
-
-        xhr.send("status" + this.checked + "&id" +idData)
-
-        xhr.onreadystatechange = function(){
-            if(xhr.readyState === 4 && xhr.status === 200){}
-        };
-    });
-</script>
 
 
     <style>
@@ -127,6 +114,17 @@
                                             <input type="hidden" id="id_soal" name="id_soal">
                                         </div>
                                     </div>
+                                    <div class="field item form-group">
+                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Bagian<span class="required"> *</span></label>
+                                        <div class="col-md-8 col-sm-8">
+                                            <select name="id_bagian_soal" id="id_bagian_soal" class="form-control">
+
+                                                <?php foreach ($bsoal as $bs) { ?>
+                                                    <option value="<?= $bs->id_bagian_soal; ?>"><?= $bs->bagian_soal; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="ln_solid">
                                         <div class="form-group">
                                             <!-- spacebar -->
@@ -163,9 +161,10 @@
                                             </td>
                                         <?php } ?>
                                         <td width="3%"><b>No</b></td>
-                                        <td><b>Pertanyaan</b></td>
-                                        <td><b>Jenis Survei</b></td>
-                                        <td><b><input type="checkbox" id="statusCheckbox"></b></td>
+                                        <td width="30%"><b>Bagian Soal</b></td>
+                                        <td width="50%"><b>Pertanyaan</b></td>
+                                        <td width="5%"><b>Jenis Survei</b></td>
+                                        <td><b>Status</b></td>
                                         <?php if ($akun[0]->zp[2] == "1") { ?>
                                             <?php if ($akun[0]->zp[0] == "1") { ?>
                                                 <td width="3%">
@@ -189,6 +188,7 @@
                                                 </td>
                                             <?php } ?>
                                             <td><?php echo $no; ?></td>
+                                            <td><?php echo $i->bagian_soal; ?></td>
                                             <td><?php echo $i->soal_kepuasan; ?></td>
                                             <td><?php echo $i->jenis_survei; ?></td>
                                             <td>
@@ -208,6 +208,28 @@
                                             <?php } ?>
                                         </tr>
                                     <?php } ?>
+                                    <!-- ================================ -->
+                                    <div class="row">
+                                        <div class="col-sm-5">
+                                            <div class="dataTables_info" id="datatable-responsive_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <div class="dataTables_paginate paging_simple_numbers" id="datatable-responsive_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button previous disabled" id="datatable-responsive_previous"><a href="#" aria-controls="datatable-responsive" data-dt-idx="0" tabindex="0">Previous</a></li>
+                                                    <li class="paginate_button active"><a href="#" aria-controls="datatable-responsive" data-dt-idx="1" tabindex="0">1</a></li>
+                                                    <li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="2" tabindex="0">2</a></li>
+                                                    <li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="3" tabindex="0">3</a></li>
+                                                    <li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="4" tabindex="0">4</a></li>
+                                                    <li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="5" tabindex="0">5</a></li>
+                                                    <li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="6" tabindex="0">6</a></li>
+                                                    <li class="paginate_button next" id="datatable-responsive_next"><a href="#" aria-controls="datatable-responsive" data-dt-idx="7" tabindex="0">Next</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ================================== -->
+                                    <h7><b>Total Record</b> : <?= $hitung->jumlah_soal; ?></h7>
                                 </tbody>
                             </table>
                         </div>

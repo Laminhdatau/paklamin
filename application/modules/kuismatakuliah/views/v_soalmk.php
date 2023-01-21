@@ -44,6 +44,7 @@
                 $("#id_soal").val("");
                 $("#soal_kepuasan").val("");
                 $("#id_jenis_survei").val("");
+                $("id_bagian_soal").val("");
                 $("#status").val("");
                 $("#title_addedit").html('<h2>Tambah Data : Soal</h2>');
                 $("#btn").html('Simpan');
@@ -56,10 +57,11 @@
             $("#btn-tmb").show("slow");
         }
 
-        function editData(id_soal, soal_kepuasan, id_jenis_survei, status) {
+        function editData(id_soal, soal_kepuasan, id_jenis_survei, status,id_bagian_soal) {
             $("#id_soal").val(id_soal);
             $("#soal_kepuasan").val(soal_kepuasan);
             $("#id_jenis_survei").val(id_jenis_survei);
+            $("#id_bagian_soal").val(id_bagian_soal);
             $("#status").val(status);
             $("#title_addedit").html('<h2>Edit Data : Soal</h2>');
             $("#btn").html('Update');
@@ -111,6 +113,17 @@
                                             
                                         </div>
                                     </div>
+
+                                    <div class="field item form-group">
+                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Bagian<span class="required"> *</span></label>
+                                        <div class="col-md-8 col-sm-8">
+                                        <select name="id_bagian_soal" id="id_bagian_soal" class="form-control">
+
+                                            <?php foreach ($bsoal as $bs) { ?>
+                                                <option value="<?= $bs->id_bagian_soal; ?>"><?= $bs->bagian_soal; ?></option>
+                                            <?php } ?>
+                                        </select></div>
+                                    </div>
                                     <div class="ln_solid">
                                         <div class="form-group">
                                             <!-- spacebar -->
@@ -151,8 +164,9 @@
                                             </td>
                                         <?php } ?>
                                         <td width="3%"><b>No</b></td>
-                                        <td><b>Pertanyaan</b></td>
-                                        <td><b>Jenis Survei</b></td>
+                                        <td width="30%"><b>Bagian Soal</b></td>
+                                        <td width="50%"><b>Pertanyaan</b></td>
+                                        <td width="5%"><b>Jenis Survei</b></td>
                                         <td><b>Status</b></td>
                                         <?php if ($akun[0]->zp[2] == "1") { ?>
                                             <?php if ($akun[0]->zp[0] == "1") { ?>
@@ -180,6 +194,7 @@
                                                 </td>
                                             <?php } ?>
                                             <td><?php echo $no; ?></td>
+                                            <td><?php echo $i->bagian_soal; ?></td>
                                             <td><?php echo $i->soal_kepuasan; ?></td>
                                             <td><?php echo $i->jenis_survei; ?></td>
                                             <td>
@@ -198,6 +213,7 @@
                                             <?php } ?>
                                         </tr>
                                     <?php } ?>
+                                    <h7><b>Total Record</b> : <?= $hitung->jumlah_soal; ?></h7>
                                 </tbody>
                             </table>
                         </div>

@@ -13,7 +13,17 @@ class Kuisdosen extends MX_Controller
 
     public function index()
     {
+        $this->load->library('pagination');
+        $config['base_url']='kuisdosen/';
+        $config['row']=2;
+        $config['per_page']=2;
+
+        $this->pagination->initialize($config);
+        echo $this->pagination->create_links();
+
         $a['data'] = $this->m_kuisdosen->getData();
+        $a['bsoal'] = $this->m_kuisdosen->getBagianSoal();
+        $a['hitung'] = $this->m_kuisdosen->hitung();
         $a['layout'] = 'v_soaldos';
         $a['modules'] = 'kuisdosen';
         echo Modules::run('template/backend', $a);
@@ -24,6 +34,7 @@ class Kuisdosen extends MX_Controller
         $id = $this->input->post('id_soal');
         $data['soal_kepuasan'] = $this->input->post('soal_kepuasan');
         $data['id_jenis_survei'] = '1';
+        $data['id_bagian_soal'] = $this->input->post('id_bagian_soal');
         $data['status'] = '0';
 
         if ($id == "") {

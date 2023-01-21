@@ -14,6 +14,8 @@ class Kuismatakuliah extends MX_Controller
     public function index()
     {
         $a['data'] = $this->m_kuismatakuliah->getData();
+        $a['bsoal']=$this->m_kuismatakuliah->getBagianSoal();
+        $a['hitung'] = $this->m_kuismatakuliah->hitung();
         $a['layout'] = 'v_soalmk';
         $a['modules'] = 'kuismatakuliah';
         echo Modules::run('template/backend', $a);
@@ -24,6 +26,7 @@ class Kuismatakuliah extends MX_Controller
         $id = $this->input->post('id_soal');
         $data['soal_kepuasan'] = $this->input->post('soal_kepuasan');
         $data['id_jenis_survei'] = 2;
+        $data['id_bagian_soal'] = $this->input->post('id_bagian_soal');
         $data['status'] = '0';
 
         if ($id == "") {

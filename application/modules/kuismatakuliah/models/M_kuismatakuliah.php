@@ -5,7 +5,15 @@ class M_kuismatakuliah extends CI_Model
     //put your code here
     public function getData()
     {
-        return $this->db->query('SELECT s.* ,js.jenis_survei,if((!isnull(js.id_jenis_survei))," "," ") as ada FROM t_soal s left join t_jenis_survei js on (js.id_jenis_survei = s.id_jenis_survei) where s.id_soal !=0 AND s.id_jenis_survei=2 group by s.id_soal order by s.id_soal asc')->result();
+        return $this->db->query('SELECT s.* ,js.jenis_survei,bs.bagian_soal,if((!isnull(js.id_jenis_survei)),"disabled=\"disabled\" "," ") as ada FROM t_soal s left join t_jenis_survei js on (js.id_jenis_survei = s.id_jenis_survei) left join t_bagian_soal bs on (bs.id_bagian_soal=s.id_bagian_soal) where s.id_jenis_survei="2" order by id_kurikulum asc')->result();
+    }
+    public function hitung()
+    {
+        return $this->db->query("SELECT COUNT(soal_kepuasan) as jumlah_soal FROM t_soal WHERE id_jenis_survei='2'")->row();
+    }
+    public function getBagianSoal()
+    {
+        return $this->db->query('SELECT * from t_bagian_soal')->result();
     }
     public function save_soal($data = array())
     {
@@ -16,7 +24,7 @@ class M_kuismatakuliah extends CI_Model
         $this->db->where('id_soal', $id);
         return $this->db->delete('t_soal');
     }
-   
+
     public function update_data($where, $data)
     {
         $this->db->where(array('id_soal' => $where));

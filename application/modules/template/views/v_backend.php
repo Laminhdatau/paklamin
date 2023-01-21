@@ -249,6 +249,9 @@
   <!-- Custom Theme Scripts -->
   <script src="<?= base_url(); ?>assets/build/js/custom.min.js"></script>
 
+  <!-- ISI KUIS SMART WIZARD -->
+  <script src="<?= base_url(); ?>assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js" type="text/javascript"></script>
+
 </body>
 
 </html>
