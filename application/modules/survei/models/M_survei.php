@@ -29,16 +29,52 @@ class M_survei extends CI_Model
                                     and kp.id_kelas = dp.id_kelas
                                     )")->result();
     }
-    public function getSoal($id)
+    public function getSoalStep1($id)
     {
-        $soal = $this->db->query("SELECT s.* from t_soal s 
+        $soal = $this->db->query("SELECT s.*,b.bagian_soal from t_soal s 
         left join t_bagian_soal b on (b.id_bagian_soal=s.id_bagian_soal) 
-        where s.id_jenis_survei='".$id."' 
-        AND s.status='1' ")->result();
+        where s.id_jenis_survei='" . $id . "' 
+        AND s.status='1' AND s.id_bagian_soal='1'")->result();
+        $soalbag = $this->db->query("SELECT * from t_bagian_soal where id_bagian_soal='1'")->row_array();
         $jenis = $this->db->query("SELECT * FROM t_jenis_survei where id_jenis_survei=" . $id)->row_array();
         $option = $this->db->query("SELECT * FROM t_jawaban where id_jawaban > 0 order by id_jawaban asc")->result();
         $data = array(
             "soal" => $soal,
+            "bagian"=>$soalbag,
+            "jenis" => $jenis,
+            "option" => $option
+        );
+        return $data;
+    }
+    public function getSoalStep2($id)
+    {
+        $soal = $this->db->query("SELECT s.*,b.bagian_soal from t_soal s 
+        left join t_bagian_soal b on (b.id_bagian_soal=s.id_bagian_soal) 
+        where s.id_jenis_survei='" . $id . "' 
+        AND s.status='1' AND s.id_bagian_soal='2'")->result();
+        $soalbag = $this->db->query("SELECT * from t_bagian_soal where id_bagian_soal='2'")->row_array();
+        $jenis = $this->db->query("SELECT * FROM t_jenis_survei where id_jenis_survei=" . $id)->row_array();
+        $option = $this->db->query("SELECT * FROM t_jawaban where id_jawaban > 0 order by id_jawaban asc")->result();
+        $data = array(
+            "soal" => $soal,
+            "bagian"=>$soalbag,
+            "jenis" => $jenis,
+            "option" => $option
+        );
+        return $data;
+    }
+    public function getSoalStep3($id)
+    {
+        $soal = $this->db->query("SELECT s.*,b.bagian_soal from t_soal s 
+        left join t_bagian_soal b on (b.id_bagian_soal=s.id_bagian_soal) 
+        where s.id_jenis_survei='" . $id . "' 
+        AND s.status='1' AND s.id_bagian_soal='3'")->result();
+        $soalbag = $this->db->query("SELECT * from t_bagian_soal where id_bagian_soal='3'")->row_array();
+        $jenis = $this->db->query("SELECT * FROM t_jenis_survei where id_jenis_survei=" . $id)->row_array();
+        $option = $this->db->query("SELECT * FROM t_jawaban where id_jawaban > 0 order by id_jawaban asc")->result();
+        $data = array(
+            "soal" => $soal,
+            "bagian"=>$soalbag,
             "jenis" => $jenis,
             "option" => $option
         );
