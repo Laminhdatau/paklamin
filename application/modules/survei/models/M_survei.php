@@ -35,10 +35,12 @@ class M_survei extends CI_Model
         left join t_bagian_soal b on (b.id_bagian_soal=s.id_bagian_soal) 
         where s.id_jenis_survei='" . $id . "' 
         AND s.status='1' AND s.id_bagian_soal='1'")->result();
+        $survei = $this->db->query("SELECT * from t_survei")->row_array();
         $soalbag = $this->db->query("SELECT * from t_bagian_soal where id_bagian_soal='1'")->row_array();
         $jenis = $this->db->query("SELECT * FROM t_jenis_survei where id_jenis_survei=" . $id)->row_array();
         $option = $this->db->query("SELECT * FROM t_jawaban where id_jawaban > 0 order by id_jawaban asc")->result();
         $data = array(
+            "survei" => $survei,
             "soal" => $soal,
             "bagian" => $soalbag,
             "jenis" => $jenis,
@@ -52,10 +54,12 @@ class M_survei extends CI_Model
         left join t_bagian_soal b on (b.id_bagian_soal=s.id_bagian_soal) 
         where s.id_jenis_survei='" . $id . "' 
         AND s.status='1' AND s.id_bagian_soal='2'")->result();
+        $survei = $this->db->query("SELECT * from t_survei")->row_array();
         $soalbag = $this->db->query("SELECT * from t_bagian_soal where id_bagian_soal='2'")->row_array();
         $jenis = $this->db->query("SELECT * FROM t_jenis_survei where id_jenis_survei=" . $id)->row_array();
         $option = $this->db->query("SELECT * FROM t_jawaban where id_jawaban > 0 order by id_jawaban asc")->result();
         $data = array(
+            "survei" => $survei,
             "soal" => $soal,
             "bagian" => $soalbag,
             "jenis" => $jenis,
@@ -69,27 +73,17 @@ class M_survei extends CI_Model
         left join t_bagian_soal b on (b.id_bagian_soal=s.id_bagian_soal) 
         where s.id_jenis_survei='" . $id . "' 
         AND s.status='1' AND s.id_bagian_soal='3'")->result();
+        $survei = $this->db->query("SELECT * from t_survei")->row_array();
         $soalbag = $this->db->query("SELECT * from t_bagian_soal where id_bagian_soal='3'")->row_array();
         $jenis = $this->db->query("SELECT * FROM t_jenis_survei where id_jenis_survei=" . $id)->row_array();
         $option = $this->db->query("SELECT * FROM t_jawaban where id_jawaban > 0 order by id_jawaban asc")->result();
         $data = array(
+            "survei" => $survei,
             "soal" => $soal,
             "bagian" => $soalbag,
             "jenis" => $jenis,
             "option" => $option
         );
         return $data;
-    }
-
-    public function simpanJawaban($response)
-    {
-        $data = array(
-            'soal1_response' => $response['soal1_response'],
-            'soal2_response' => $response['soal2_response'],
-            'soal3_response' => $response['soal3_response'],
-            'user_id' => $this->session->userdata('user_id'),
-            'date_submitted' => date('Y-m-d H:i:s'),
-        );
-        $this->db->insert('survey_responses', $data);
     }
 }

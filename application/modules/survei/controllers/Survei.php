@@ -28,22 +28,25 @@ class Survei extends MX_Controller
         $a['nama'] = $this->uri->segment(5);
         $data = $this->m_survei->getSoalStep1($id);
         if (!empty($data)) {
+            $a['survei1'] = $data['survei'];
             $a['soal1'] = $data['soal'];
-            $a['bagian1']=$data['bagian'];
+            $a['bagian1'] = $data['bagian'];
             $a['jenis1'] = $data['jenis'];
             $a['option1'] = $data['option'];
         }
         $data2 = $this->m_survei->getSoalStep2($id);
         if (!empty($data2)) {
+            $a['survei2'] = $data['survei'];
             $a['soal2'] = $data2['soal'];
-            $a['bagian2']=$data2['bagian'];
+            $a['bagian2'] = $data2['bagian'];
             $a['jenis2'] = $data2['jenis'];
             $a['option2'] = $data2['option'];
         }
         $data3 = $this->m_survei->getSoalStep3($id);
         if (!empty($data3)) {
+            $a['survei3'] = $data['survei'];
             $a['soal3'] = $data3['soal'];
-            $a['bagian3']=$data3['bagian'];
+            $a['bagian3'] = $data3['bagian'];
             $a['jenis3'] = $data3['jenis'];
             $a['option3'] = $data3['option'];
         }
@@ -54,20 +57,5 @@ class Survei extends MX_Controller
     }
 
 
-    public function prosessSurvey()
-{
-    $response = $this->input->post();
-    $valid = true;
-    //validation process
-
-    if ($valid) {
-        //save response to db
-        $this->m_survei->simpanJawaban($response);
-        $this->session->set_flashdata('success', 'Survey has been submitted successfully');
-        redirect('survey/thankyou');
-    } else {
-        $this->session->set_flashdata('error', 'Validation errors occured. Please try again.');
-        redirect('survey');
-    }
-}
+    
 }
