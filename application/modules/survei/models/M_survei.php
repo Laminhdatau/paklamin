@@ -40,7 +40,7 @@ class M_survei extends CI_Model
         $option = $this->db->query("SELECT * FROM t_jawaban where id_jawaban > 0 order by id_jawaban asc")->result();
         $data = array(
             "soal" => $soal,
-            "bagian"=>$soalbag,
+            "bagian" => $soalbag,
             "jenis" => $jenis,
             "option" => $option
         );
@@ -57,7 +57,7 @@ class M_survei extends CI_Model
         $option = $this->db->query("SELECT * FROM t_jawaban where id_jawaban > 0 order by id_jawaban asc")->result();
         $data = array(
             "soal" => $soal,
-            "bagian"=>$soalbag,
+            "bagian" => $soalbag,
             "jenis" => $jenis,
             "option" => $option
         );
@@ -74,27 +74,22 @@ class M_survei extends CI_Model
         $option = $this->db->query("SELECT * FROM t_jawaban where id_jawaban > 0 order by id_jawaban asc")->result();
         $data = array(
             "soal" => $soal,
-            "bagian"=>$soalbag,
+            "bagian" => $soalbag,
             "jenis" => $jenis,
             "option" => $option
         );
         return $data;
     }
 
-
-
-    public function save_jenis($data = array())
+    public function simpanJawaban($response)
     {
-        return $this->db->insert("t_jenis_survei", $data);
-    }
-    public function hapus_data($id)
-    {
-        $this->db->where('id_jenis_survei', $id);
-        return $this->db->delete('t_jenis_survei');
-    }
-    public function update_data($where, $data)
-    {
-        $this->db->where(array('id_jenis_survei' => $where));
-        return $this->db->update('t_jenis_survei', $data);
+        $data = array(
+            'soal1_response' => $response['soal1_response'],
+            'soal2_response' => $response['soal2_response'],
+            'soal3_response' => $response['soal3_response'],
+            'user_id' => $this->session->userdata('user_id'),
+            'date_submitted' => date('Y-m-d H:i:s'),
+        );
+        $this->db->insert('survey_responses', $data);
     }
 }

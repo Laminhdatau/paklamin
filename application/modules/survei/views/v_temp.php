@@ -9,7 +9,7 @@
     <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Pengisian Kuisioner <small><?php var_dump($nama);die; ?></small></h2>
+                <h2>Pengisian Kuisioner <small> Apa?</small></h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -37,9 +37,9 @@
                         </li>
                     </ul>
 
-                    <div class="stepContainer" style="height: 383px;">
+                    <div class="stepContainer" style="height: 400px;">
                         <div id="step-1" class="content" style="display: block;">
-                            <h2 class="soal1"><?php echo $bagian1['bagian_soal']; ?></h2>
+                            <h2 class="soal1" style="background-color: #FFA600; color: #fff;width: 70%;height:5%;padding: 5px;"><b><?php echo $bagian1['bagian_soal']; ?></b></h2>
                             <form class="form-horizontal form-label-left">
                                 <!-- <form action="" method="post"> -->
                                 <table>
@@ -74,7 +74,7 @@
                             </form>
                         </div>
                         <div id="step-2" class="content" style="display: none;">
-                            <h2 class="soal2"><?php echo $bagian2['bagian_soal']; ?></h2>
+                            <h2 class="soal2" style="background-color: #FFA600; color: #fff;width: 70%;height:5%;padding: 5px;"><b><?php echo $bagian2['bagian_soal']; ?></b></h2>
                             <form class="form-horizontal form-label-left">
                                 <!-- <form action="" method="post"> -->
                                 <table>
@@ -109,7 +109,7 @@
                             </form>
                         </div>
                         <div id="step-3" class="content" style="display: none;">
-                            <h2 class="soal3"><?php echo $bagian3['bagian_soal']; ?></h2>
+                            <h2 class="soal3" style="background-color: #FFA600; color: #fff;width: 70%;height:5%;padding: 5px;"><b><?php echo $bagian3['bagian_soal']; ?></b></h2>
                             <form class="form-horizontal form-label-left">
                                 <!-- <form action="" method="post"> -->
                                 <table>
@@ -144,7 +144,7 @@
                             </form>
                         </div>
                         <div id="step-4" class="content" style="display: none;">
-                            <h2 class="kritiksaran">Kritik dan Saran</h2>
+                            <h2 class="kritiksaran" style="background-color: #FFA600; color: #fff;width: 70%;height:5%;padding: 5px;"><b>Kritik dan Saran</b></h2>
                             <!-- ===================================KRITIK Saran -->
 
 

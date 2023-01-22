@@ -52,4 +52,22 @@ class Survei extends MX_Controller
         $a['modules'] = 'survei';
         echo Modules::run('template/backend', $a);
     }
+
+
+    public function prosessSurvey()
+{
+    $response = $this->input->post();
+    $valid = true;
+    //validation process
+
+    if ($valid) {
+        //save response to db
+        $this->m_survei->simpanJawaban($response);
+        $this->session->set_flashdata('success', 'Survey has been submitted successfully');
+        redirect('survey/thankyou');
+    } else {
+        $this->session->set_flashdata('error', 'Validation errors occured. Please try again.');
+        redirect('survey');
+    }
+}
 }
