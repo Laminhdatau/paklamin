@@ -193,12 +193,16 @@
                                             <td><?php echo $i->jenis_survei; ?></td>
                                             <td>
                                                 <?php if ($i->status == 1) {
-                                                    echo '<div class="badge badge-success">Aktif</div>';
-                                                } else if ($i->status == 0) {
-                                                    echo '<div class="badge badge-danger">Tidak Aktif</div>';
+                                                    echo '<button class="btn btn-success">
+                                                    <i class="glyphicon glyphicon-ok"></i>
+                                                    </button>
+                                                    ';
                                                 } else {
-                                                    echo '<div class="badge badge-warning">Ambigu</div>';
-                                                }; ?>
+                                                    echo '<button class="btn btn-danger">
+                                                    <i class="glyphicon glyphicon-remove"></i>
+                                                    </button>
+                                                    ';
+                                                }  ?>
                                             </td>
 
                                             <?php if ($akun[0]->zp[2] == "1") { ?>

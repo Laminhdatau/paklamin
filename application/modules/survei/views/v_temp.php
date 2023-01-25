@@ -37,11 +37,11 @@
                         </li>
                     </ul>
 
-                    <form class="form-horizontal form-label-left" action="<?= base_url('survei/prosesSurvei'); ?>" method="post">
-                        <input type="hidden" name="survei">
-                        <input type="hidden" name="soal">
-                        <input type="hidden" name="option">
-
+                    <form class="form-horizontal form-label-left" action="<?= base_url('survei/prosesSurvei'); ?>" method="get">
+                        <input type="teks" name="id_answer">
+                        <input type="teks" name="survei">
+                        <input type="teks" name="soal">
+                        <input type="teks" name="option">
                         <div class="stepContainer" style="height: 400px;">
                             <div id="step-1" class="content" style="display: block;">
                                 <h2 class="soal1" style="background-color: #FFA600; color: #fff;width: 70%;height:5%;padding: 5px;"><b><?php echo $bagian1['bagian_soal']; ?></b></h2>
@@ -53,7 +53,7 @@
                                         $ns++; ?>
                                         <tr>
                                             <td width="100%">
-                                                <h2><?= $ns; ?>. <?= $s->soal_kepuasan; ?></h2>
+                                                <h2><input type="hidden" name="soal" value="<?= set_value($s->id_soal); ?>" readonly><?= $ns; ?>. <?= $s->soal_kepuasan; ?></h2>
                                             </td>
                                         </tr>
                                         <tr>
@@ -67,7 +67,7 @@
                                                             $no++; ?>
                                                             <h4>
                                                                 <!-- <input type="radio" name="option<?= $ns; ?>" id="option<= $no ?>" required> -->
-                                                                <input type="radio" name="option[<?= $ns; ?>]" id="option<?= $no ?>" required>
+                                                                <input type="radio" name="option[<?= $ns; ?>]" id="option<?= $no ?>" required readonly>
                                                                 <?= " " . $o->jawaban; ?>
                                                             </h4>
 
@@ -92,7 +92,7 @@
                                         $ns++; ?>
                                         <tr>
                                             <td width="100%">
-                                                <h2><?= $ns; ?>. <?= $s->soal_kepuasan; ?></h2>
+                                                <h2><input type="hidden" name="soal" value="<?= set_value($s->id_soal); ?>" readonly><?= $ns; ?>. <?= $s->soal_kepuasan; ?></h2>
                                             </td>
                                         </tr>
                                         <tr>
@@ -105,7 +105,7 @@
                                                         foreach ($option2 as $o) {
                                                             $no++; ?>
                                                             <h4>
-                                                                <!-- <input type="radio" name="option<= $ns; ?>" id="option<= $no ?>"> -->
+
                                                                 <input type="radio" name="option[<?= $ns; ?>]" id="option<?= $no ?>" required>
 
                                                                 <?= " " . $o->jawaban; ?>
@@ -128,7 +128,7 @@
                                         $ns++; ?>
                                         <tr>
                                             <td width="100%">
-                                                <h2><?= $ns; ?>. <?= $s->soal_kepuasan; ?></h2>
+                                                <h2><input type="hidden" name="soal" id="soal" value="<?= set_value($s->id_soal); ?>" readonly><?= $ns; ?>. <?= $s->soal_kepuasan; ?></h2>
                                             </td>
                                         </tr>
                                         <tr>
@@ -184,7 +184,7 @@
                                         </div>
                                     </div>
                                     <div id="editor-one" class="editor-wrapper placeholderText" contenteditable="true"></div>
-                                    <textarea name="descr" id="descr" style="display:none;"></textarea>
+                                    <textarea name="komentar" id="komentar" style="display:none;"></textarea>
 
                                 </div>
                                 <!-- ===========================END KRITIK SARAN -->
@@ -205,3 +205,14 @@
         </div>
     </div>
 </div>
+
+<script>
+    let radios = document.querySelectorAll("input[type='radio']");
+    radios.forEach(function(radio) {
+        radio.addEventListener("change", function() {
+            let step = document.querySelector("a[href='#step-" + this.name + "']");
+            step.classList.add("done");
+            console.log(step);
+        });
+    });
+</script>

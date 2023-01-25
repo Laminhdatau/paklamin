@@ -86,6 +86,8 @@
     <div class="body clearfix">
         <div class="x_panel col-sm-12">
             <div class="x_title">
+                <?php $this->session->flashdata('success'); ?>
+                <?php $this->session->flashdata('error'); ?>
                 <h2><small>Pg: </small><b> SURVEI KEPUASAN</b></h2>
                 <ul class="nav navbar-right">
                     <li><a class="close-link" href="<?php echo base_url('home'); ?>"><i class="fa fa-close"></i></a></li>
