@@ -4286,7 +4286,7 @@ function init_echarts() {
 
         var echartMiniPie = echarts.init(document.getElementById('echart_mini_pie'), theme);
 
-        echartMiniPie.setOption({
+         echartMiniPie.setOption({
             title: {
                 text: 'Chart #2',
                 subtext: 'From ExcelHome',

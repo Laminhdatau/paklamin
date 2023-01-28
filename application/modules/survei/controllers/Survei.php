@@ -13,9 +13,8 @@ class Survei extends MX_Controller
 
     public function index()
     {
-        // $nim = "20501049";
-        $nim = nim($this->session->userdata('security')->id_cession);
         
+        $nim = nim($this->session->userdata('security')->id_cession);
         $a['data'] = $this->m_survei->getData($nim);
         $a['layout'] = 'v_survei';
         $a['modules'] = 'survei';
@@ -28,6 +27,7 @@ class Survei extends MX_Controller
         $a['kd'] = $this->uri->segment(4);//kd_dosen
         $a['kd_mk'] = $this->uri->segment(5);//kd_matakuliah
         $a['nama'] = $this->uri->segment(6);//nama_dosen
+        // $string = str_replace("%20", " ", $a['nama']);
         $data1 = $this->m_survei->getSoalStep1($id);
         if (!empty($data1)) {
             $a['survei1'] = $data1['survei'];
@@ -54,7 +54,7 @@ class Survei extends MX_Controller
         }
         // print_r($a);die;
         
-        $a['layout'] = 'v_temp';
+        $a['layout'] = 'v_isisurvei';
         $a['modules'] = 'survei';
         echo Modules::run('template/backend', $a);
     }

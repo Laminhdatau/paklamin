@@ -4016,7 +4016,7 @@ function init_echarts() {
                 x: 170,
                 y: 45,
                 itemGap: 12,
-                data: ['68%Something #1', '29%Something #2', '3%Something #3'],
+                data: ['27%Something #1', '29%Something #2', '3%Something #3'],
             },
             toolbox: {
                 show: true,
@@ -4051,8 +4051,8 @@ function init_echarts() {
                 radius: [105, 130],
                 itemStyle: dataStyle,
                 data: [{
-                    value: 68,
-                    name: '68%Something #1'
+                    value: 27,
+                    name: '27%Something #1'
                 }, {
                     value: 32,
                     name: 'invisible',

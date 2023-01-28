@@ -24,6 +24,7 @@
                     <li><a href="<?php echo base_url('kuisdosen'); ?>">Kuis Dosen</a></li>
                     <li><a href="<?php echo base_url('kuismatakuliah'); ?>">Kuis Mata Kuliah</a></li>
                     <li><a href="<?php echo base_url('jenissurvei'); ?>">Jenis Survei</a></li>
+                    <li><a href="<?php echo base_url('grafik'); ?>">Hasil Survei</a></li>
                 </ul>
             </li>
 
