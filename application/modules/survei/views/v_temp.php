@@ -37,11 +37,11 @@
                         </li>
                     </ul>
 
-                    <form class="form-horizontal form-label-left" action="<?= base_url('survei/prosesSurvei'); ?>" method="get">
-                        <input type="teks" name="id_answer">
-                        <input type="teks" name="survei">
-                        <input type="teks" name="soal">
-                        <input type="teks" name="option">
+                    <form class="form-horizontal form-label-left" action="<?= base_url('survei/prosesSurvei'); ?>" id="kuesioner" method="post">
+                    <input type="hidden" value="<?= $id_jenis; ?>" name="id_jenis" id="id_jenis">
+                    <input type="hidden" value="<?= $kd; ?>" name="kd_dosen" id="kd_dosen">
+                    <input type="hidden" value="<?= $kd_mk; ?>" name="kd_mata_kuliah" id="kd_mata_kuliah">
+                        
                         <div class="stepContainer" style="height: 400px;">
                             <div id="step-1" class="content" style="display: block;">
                                 <h2 class="soal1" style="background-color: #FFA600; color: #fff;width: 70%;height:5%;padding: 5px;"><b><?php echo $bagian1['bagian_soal']; ?></b></h2>
@@ -53,7 +53,8 @@
                                         $ns++; ?>
                                         <tr>
                                             <td width="100%">
-                                                <h2><input type="hidden" name="soal" value="<?= set_value($s->id_soal); ?>" readonly><?= $ns; ?>. <?= $s->soal_kepuasan; ?></h2>
+                                                <h2><?= $ns; ?>. <?= $s->soal_kepuasan; ?></h2>
+                                                <input type="hidden" value="<?= $s->id_soal; ?>" name="soal1[<?= $ns; ?>]" id="soal1[<?= $ns; ?>]">
                                             </td>
                                         </tr>
                                         <tr>
@@ -62,17 +63,14 @@
 
                                                     <td width="15%"></td>
                                                     <td>
-                                                        <?php $no = 0;
+                                                        <?php 
                                                         foreach ($option1 as $o) {
-                                                            $no++; ?>
+                                                            ?>
                                                             <h4>
-                                                                <!-- <input type="radio" name="option<?= $ns; ?>" id="option<= $no ?>" required> -->
-                                                                <input type="radio" name="option[<?= $ns; ?>]" id="option<?= $no ?>" required readonly>
+                                                               
+                                                                <input type="radio" value="<?= $o->id_jawaban; ?>" name="option1[<?= $ns; ?>]"  id="option1[<?= $ns ?>]"  required>
                                                                 <?= " " . $o->jawaban; ?>
                                                             </h4>
-
-
-
                                                         <?php } ?>
                                                     </td>
                                                 </tr>
@@ -92,7 +90,8 @@
                                         $ns++; ?>
                                         <tr>
                                             <td width="100%">
-                                                <h2><input type="hidden" name="soal" value="<?= set_value($s->id_soal); ?>" readonly><?= $ns; ?>. <?= $s->soal_kepuasan; ?></h2>
+                                                <h2><?= $ns; ?>. <?= $s->soal_kepuasan; ?></h2>
+                                                <input type="hidden" value="<?= $s->id_soal; ?>" name="soal2[<?= $ns; ?>]" id="soal2[<?= $ns; ?>]">
                                             </td>
                                         </tr>
                                         <tr>
@@ -101,12 +100,11 @@
 
                                                     <td width="15%"></td>
                                                     <td>
-                                                        <?php $no = 0;
+                                                        <?php
                                                         foreach ($option2 as $o) {
-                                                            $no++; ?>
+                                                            ?>
                                                             <h4>
-
-                                                                <input type="radio" name="option[<?= $ns; ?>]" id="option<?= $no ?>" required>
+                                                                <input type="radio"  value="<?= $o->id_jawaban; ?>" name="option2[<?= $ns; ?>]"  id="option2[<?= $ns ?>]"  required>
 
                                                                 <?= " " . $o->jawaban; ?>
                                                             </h4>
@@ -128,7 +126,8 @@
                                         $ns++; ?>
                                         <tr>
                                             <td width="100%">
-                                                <h2><input type="hidden" name="soal" id="soal" value="<?= set_value($s->id_soal); ?>" readonly><?= $ns; ?>. <?= $s->soal_kepuasan; ?></h2>
+                                                <h2><?= $ns; ?>. <?= $s->soal_kepuasan; ?></h2>
+                                                <input type="hidden" value="<?= $s->id_soal; ?>" name="soal3[<?= $ns; ?>]" id="soal3[<?= $ns; ?>]">
                                             </td>
                                         </tr>
                                         <tr>
@@ -137,12 +136,11 @@
 
                                                     <td width="15%"></td>
                                                     <td>
-                                                        <?php $no = 0;
+                                                        <?php 
                                                         foreach ($option3 as $o) {
-                                                            $no++; ?>
+                                                            ?>
                                                             <h4>
-                                                                <!-- <input type="radio" name="option<= $ns; ?>" id="option<= $no ?>"> -->
-                                                                <input type="radio" name="option[<?= $ns; ?>]" id="option<?= $no ?>" required>
+                                                                <input type="radio" value="<?= $o->id_jawaban; ?>" name="option3[<?= $ns; ?>]"  id="option3[<?= $ns ?>]"  required>
                                                                 <?= " " . $o->jawaban; ?>
                                                             </h4>
                                                         <?php } ?>
@@ -183,8 +181,11 @@
                                             <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="fa fa-repeat"></i></a>
                                         </div>
                                     </div>
-                                    <div id="editor-one" class="editor-wrapper placeholderText" contenteditable="true"></div>
-                                    <textarea name="komentar" id="komentar" style="display:none;"></textarea>
+                                    <div id="editor-one" class="editor-wrapper placeholderText" contenteditable="true">
+                                        <textarea name="komentar" id="komentar"></textarea>
+                                    </div>
+
+                                    
 
                                 </div>
                                 <!-- ===========================END KRITIK SARAN -->
@@ -196,7 +197,8 @@
                         <br><br>
 
                         <div class="mt-5">
-                            <input type="submit" value="Submit" class="btn btn-success" onclick="prosesSurvei()">
+                            <button type="submit">simpan</button>
+                            <!-- <input type="submit" id="submit" name="submit" value="submit" class="btn btn-success" onclick="prosesSurvei()"> -->
                         </div>
 
                     </form>
@@ -206,13 +208,3 @@
     </div>
 </div>
 
-<script>
-    let radios = document.querySelectorAll("input[type='radio']");
-    radios.forEach(function(radio) {
-        radio.addEventListener("change", function() {
-            let step = document.querySelector("a[href='#step-" + this.name + "']");
-            step.classList.add("done");
-            console.log(step);
-        });
-    });
-</script>

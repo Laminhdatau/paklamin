@@ -49,6 +49,9 @@
   <link href="<?= base_url(); ?>assets/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
   <link href="<?= base_url(); ?>assets/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
+   <!-- jQuery -->
+   <script src="<?= base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
+   
 </head>
 
 
@@ -191,8 +194,10 @@
     </div>
   </div>
 
-  <!-- jQuery -->
-  <script src="<?= base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
+  <!-- ISI KUIS SMART WIZARD -->
+  <script src="<?= base_url(); ?>assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js" type="text/javascript"></script>
+
+ 
   <!-- Bootstrap -->
   <script src="<?= base_url(); ?>assets/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- FastClick -->
@@ -210,11 +215,11 @@
   <!-- Skycons -->
   <script src="<?= base_url(); ?>assets/vendors/skycons/skycons.js"></script>
   <!-- Flot -->
-  <script src="<?= base_url(); ?>assets/vendors/Flot/jquery.flot.js"></script>
-  <script src="<?= base_url(); ?>assets/vendors/Flot/jquery.flot.pie.js"></script>
-  <script src="<?= base_url(); ?>assets/vendors/Flot/jquery.flot.time.js"></script>
-  <script src="<?= base_url(); ?>assets/vendors/Flot/jquery.flot.stack.js"></script>
-  <script src="<?= base_url(); ?>assets/vendors/Flot/jquery.flot.resize.js"></script>
+  <script src="<?= base_url(); ?>assets/vendors/flot/jquery.flot.js"></script>
+  <script src="<?= base_url(); ?>assets/vendors/flot/jquery.flot.pie.js"></script>
+  <script src="<?= base_url(); ?>assets/vendors/flot/jquery.flot.time.js"></script>
+  <script src="<?= base_url(); ?>assets/vendors/flot/jquery.flot.stack.js"></script>
+  <script src="<?= base_url(); ?>assets/vendors/flot/jquery.flot.resize.js"></script>
   <!-- Flot plugins -->
   <script src="<?= base_url(); ?>assets/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
   <script src="<?= base_url(); ?>assets/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
@@ -249,8 +254,6 @@
   <!-- Custom Theme Scripts -->
   <script src="<?= base_url(); ?>assets/build/js/custom.min.js"></script>
 
-  <!-- ISI KUIS SMART WIZARD -->
-  <script src="<?= base_url(); ?>assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js" type="text/javascript"></script>
 
 </body>
 

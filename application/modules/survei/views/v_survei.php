@@ -86,8 +86,7 @@
     <div class="body clearfix">
         <div class="x_panel col-sm-12">
             <div class="x_title">
-                <?php $this->session->flashdata('success'); ?>
-                <?php $this->session->flashdata('error'); ?>
+                
                 <h2><small>Pg: </small><b> SURVEI KEPUASAN</b></h2>
                 <ul class="nav navbar-right">
                     <li><a class="close-link" href="<?php echo base_url('home'); ?>"><i class="fa fa-close"></i></a></li>
@@ -99,10 +98,13 @@
                     <div class="col-sm-12 justify-content-between">
                         <!-- =============================================== -->
                         <br />
-                        <table class="col-md-6 col-sm-6 table table-bordered">
+                        <table class="col-md-12 col-sm-12 table table-bordered">
                             <thead>
+                            <?php echo $this->session->flashdata('success'); ?>
+                            <?php echo $this->session->flashdata('error'); ?>
                                 <tr>
                                     <th>DOSEN</th>
+                                    <th>MATAKULIAH</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -110,13 +112,16 @@
                                 <?php foreach ($data as $dk) : ?>
                                     <tr>
                                         <td>
-                                            <a href="<?= base_url('survei/isisurvei/1/' . $dk->kd_dosen . '/' . $dk->nama_dosen); ?>" class="btn btn-danger"><?= $dk->nama_dosen; ?></a>
+                                            <a href="<?= base_url('survei/isisurvei/1/' . $dk->kd_dosen . '/' .$dk->kd_mata_kuliah . '/' . $dk->nama_dosen); ?>" class="btn btn-danger"><?= $dk->nama_dosen; ?></a>
+                                        </td>
+                                        <td>
+                                            <a href="<?= base_url('survei/isisurvei/2/' . $dk->kd_mata_kuliah . '/' . $dk->nama_mata_kuliah); ?>" class="btn btn-danger"><?= $dk->nama_mata_kuliah; ?></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
-                        <table class="col-md-6 col-sm-6 table table-bordered">
+                        <!-- <table class="col-md-6 col-sm-6 table table-bordered">
                             <thead>
                                 <tr>
                                     <th>MATAKULIAH</th>
@@ -131,7 +136,7 @@
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
-                        </table>
+                        </table> -->
                         <div class="ln_solid"></div>
                         <!-- ====================================================== -->
                     </div>
