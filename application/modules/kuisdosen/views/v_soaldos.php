@@ -55,16 +55,18 @@
             $("#btn-tmb").show("slow");
         }
 
-        function editData(id_soal, soal_kepuasan, id_jenis_survei, status, idbagsoal) {
+        function editData(id_soal, soal_kepuasan, id_jenis_survei, status, id_bagian_soal) {
             $("#id_soal").val(id_soal);
             $("#soal_kepuasan").val(soal_kepuasan);
             $("#id_jenis_survei").val(id_jenis_survei);
             $("#status").val(status);
-            $("#id_bagian_soal").val(idbagsoal);
+            $("#id_bagian_soal").val(id_bagian_soal);
             $("#title_addedit").html('<h2>Edit Data : Soal</h2>');
             $("#btn").html('Update');
             showForm(id_soal);
         }
+
+        
     </script>
 
 
@@ -118,13 +120,13 @@
                                         <label class="col-form-label col-md-2 col-sm-2 label-align">Bagian<span class="required"> *</span></label>
                                         <div class="col-md-8 col-sm-8">
                                             <select name="id_bagian_soal" id="id_bagian_soal" class="form-control">
-
                                                 <?php foreach ($bsoal as $bs) { ?>
                                                     <option value="<?= $bs->id_bagian_soal; ?>"><?= $bs->bagian_soal; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
                                     </div>
+                                   
                                     <div class="ln_solid">
                                         <div class="form-group">
                                             <!-- spacebar -->
@@ -191,47 +193,20 @@
                                             <td><?php echo $i->bagian_soal; ?></td>
                                             <td><?php echo $i->soal_kepuasan; ?></td>
                                             <td><?php echo $i->jenis_survei; ?></td>
-                                            <td>
-                                                <?php if ($i->status == 1) {
-                                                    echo '<button class="btn btn-success">
-                                                    <i class="glyphicon glyphicon-ok"></i>
-                                                    </button>
-                                                    ';
-                                                } else {
-                                                    echo '<button class="btn btn-danger">
-                                                    <i class="glyphicon glyphicon-remove"></i>
-                                                    </button>
-                                                    ';
-                                                }  ?>
-                                            </td>
-
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
-                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>','<?php echo $i->status; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                    <button type="button" <?= $i->ada; ?> class="btn btn-circle <?= $i->status_class; ?>"><?php if($i->status==1){echo "Hidup";}else{echo "Mati";}; ?></button>
+                                                </td>
+                                            <?php } ?>
+                                            <?php if ($akun[0]->zp[2] == "1") { ?>
+                                                <td>
+                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>','<?php echo $i->id_bagian_soal; ?>','<?php echo $i->status; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
                                                 </td>
                                             <?php } ?>
                                         </tr>
                                     <?php } ?>
                                     <!-- ================================ -->
-                                    <div class="row">
-                                        <div class="col-sm-5">
-                                            <div class="dataTables_info" id="datatable-responsive_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <div class="dataTables_paginate paging_simple_numbers" id="datatable-responsive_paginate">
-                                                <ul class="pagination">
-                                                    <li class="paginate_button previous disabled" id="datatable-responsive_previous"><a href="#" aria-controls="datatable-responsive" data-dt-idx="0" tabindex="0">Previous</a></li>
-                                                    <li class="paginate_button active"><a href="#" aria-controls="datatable-responsive" data-dt-idx="1" tabindex="0">1</a></li>
-                                                    <li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="2" tabindex="0">2</a></li>
-                                                    <li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="3" tabindex="0">3</a></li>
-                                                    <li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="4" tabindex="0">4</a></li>
-                                                    <li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="5" tabindex="0">5</a></li>
-                                                    <li class="paginate_button "><a href="#" aria-controls="datatable-responsive" data-dt-idx="6" tabindex="0">6</a></li>
-                                                    <li class="paginate_button next" id="datatable-responsive_next"><a href="#" aria-controls="datatable-responsive" data-dt-idx="7" tabindex="0">Next</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <!-- ================================== -->
                                     <h7><b>Total Record</b> : <?= $hitung->jumlah_soal; ?></h7>
                                 </tbody>
@@ -242,4 +217,6 @@
             </div>
         </div>
     </div>
+    
+    <!-- 
 <?php } ?>

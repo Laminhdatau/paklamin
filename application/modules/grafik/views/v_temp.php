@@ -10,21 +10,15 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <!-- <div id="echart_mini_pie" style="height:350px;"></div> -->
                                     <canvas id="myChart"></canvas>
 
                                 </div>
                             </div>
                         </div>
-                        <!-- <div id="echart_pie" style="height:350px;"></div> -->
 
                         
-    <script src="<?= base_url('assets/'); ?>vendors/echarts/dist/echarts.min.js"></script> -->
-
-
+    <script src="<?= base_url('assets/'); ?>vendors/echarts/dist/echarts.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-
-
     <script>
             var ctx = document.getElementById('myChart').getContext('2d');
             var myChart = new Chart(ctx, {
@@ -63,4 +57,4 @@
                 }
             }
         });
-</script>
+    </script>

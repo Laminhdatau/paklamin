@@ -13,15 +13,18 @@ class Kuisdosen extends MX_Controller
 
     public function index()
     {
-        $this->load->library('pagination');
-        $config['base_url']='kuisdosen/';
-        $config['row']=2;
-        $config['per_page']=2;
 
-        $this->pagination->initialize($config);
-        echo $this->pagination->create_links();
 
         $a['data'] = $this->m_kuisdosen->getData();
+        foreach ($a['data'] as $i) {
+            if ($i->status == 1) {
+                $i->status_class = 'btn-success';
+                $i->status_icon = 'glyphicon-ok';
+            } else {
+                $i->status_class = 'btn-danger';
+                $i->status_icon = 'glyphicon-remove';
+            }
+        }
         $a['bsoal'] = $this->m_kuisdosen->getBagianSoal();
         $a['hitung'] = $this->m_kuisdosen->hitung();
         $a['layout'] = 'v_soaldos';
@@ -35,7 +38,7 @@ class Kuisdosen extends MX_Controller
         $data['soal_kepuasan'] = $this->input->post('soal_kepuasan');
         $data['id_jenis_survei'] = '1';
         $data['id_bagian_soal'] = $this->input->post('id_bagian_soal');
-        $data['status'] = '0';
+        $data['status'] =  '0';
 
         if ($id == "") {
             $data['id_soal'] =  uuid_generator();
@@ -45,6 +48,14 @@ class Kuisdosen extends MX_Controller
         }
         redirect('id=' . md5('kuisdosen'));
     }
+
+    public function changeStatus($id, $status)
+    {
+        $data['status'] = $status;
+        $this->m_kuisdosen->update_data($id, $data);
+        redirect('id=' . md5('kuisdosen'));
+    }
+
 
     public function delete_data()
     {
