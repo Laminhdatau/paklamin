@@ -1,65 +1,6 @@
 <?php if ($akun[0]->zp[6] == "0") { ?>
 <?php } else { ?>
 
-    <script>
-        function cekit($idx) {
-            hideForm();
-            var sArr = $("#id_del_arr").val();
-            if (sArr != "") {
-                sArr = sArr.replace("]", "");
-                sArr = sArr.replace("[", "");
-            }
-            var gV = document.getElementById($idx);
-            if (gV.checked) {
-                if (sArr == "") {
-                    sArr = sArr + '"' + gV.value + '"';
-                    j = 1;
-                } else {
-                    sArr = sArr + ',"' + gV.value + '"';
-                }
-            } else {
-                sHp = '"' + gV.value + '"';
-                sArr = sArr.replace(sHp, "");
-            }
-            sArr = sArr.replace(",,", ",");
-            sArr = "[" + sArr + "]";
-            sArr = sArr.replace(",]", "]");
-            sArr = sArr.replace("[,", "[");
-            if (sArr.length <= 2) {
-                sArr = "";
-            }
-            var bCek = (sArr == "");
-            $("#id_del_arr").val(sArr);
-            document.getElementById("btnck").disabled = bCek;
-        }
-
-        function showForm(id = null) {
-            $("#pnladd").slideDown("slow");
-            $("#pnldata").slideDown("slow");
-            $("#btn-tmb").hide("slow");
-
-            if (id == null) {
-                $("#id_jenis_survei").val("");
-                $("#jenis_survei").val("");
-                $("#title_addedit").html('<h2>Tambah Data : Soal</h2>');
-                $("#btn").html('Simpan');
-            }
-        }
-
-        function hideForm() {
-            $("#pnladd").slideUp("slow");
-            $("#pnldata").slideUp("slow");
-            $("#btn-tmb").show("slow");
-        }
-
-        function editData(id_jenis_survei, jenis_survei) {
-            $("#id_jenis_survei").val(id_jenis_survei);
-            $("#jenis_survei").val(jenis_survei);
-            $("#title_addedit").html('<h2>Edit Data : Soal</h2>');
-            $("#btn").html('Update');
-            showForm(id);
-        }
-    </script>
 
     <style>
         #pnladd {
@@ -84,7 +25,7 @@
         </ul> </div> <div style="width: 100%; height:1px; border: inset purple;"></div> <div style="width: 100%; height:10px; border: 0px solid white;"></div> -->
 
     <div class="body clearfix">
-        <div class="x_panel col-sm-12">
+        <div class="x_panel col-sm-12 col-xs-10">
             <div class="x_title">
                 
                 <h2><small>Pg: </small><b> SURVEI KEPUASAN</b></h2>
@@ -95,13 +36,12 @@
             </div>
             <div class="x_content text-black">
                 <div class="row">
-                    <div class="col-sm-12 justify-content-between">
+                    <div class="col-sm-12 col-xs-12 justify-content-between">
                         <!-- =============================================== -->
                         <br />
-                        <table class="col-md-12 col-sm-12 table table-bordered">
+                        <table class="col-md-12 col-sm-12 col-xs-10 table table-bordered">
                             <thead>
-                            <?php echo $this->session->flashdata('success'); ?>
-                            <?php echo $this->session->flashdata('error'); ?>
+                            <?php echo $this->session->flashdata('message'); ?>
                                 <tr>
                                     <th>DOSEN</th>
                                     <th>MATAKULIAH</th>
@@ -112,7 +52,8 @@
                                 <?php foreach ($data as $dk) : ?>
                                     <tr>
                                         <td>
-                                            <a href="<?= base_url('survei/isisurvei/1/' . $dk->kd_dosen . '/' .$dk->kd_mata_kuliah . '/' . $dk->nama_dosen); ?>" class="btn btn-danger"><?= $dk->nama_dosen; ?></a>
+                                            
+                                            <a href="<?= base_url('survei/isisurvei/1/' . $dk->kd_dosen . '/' .$dk->kd_mata_kuliah . '/' . $dk->nama_dosen); ?>" class="btn btn-danger" ><?= $dk->nama_dosen; ?></a>
                                         </td>
                                         <td>
                                             <a href="<?= base_url('survei/isisurvei/2/' . $dk->kd_mata_kuliah . '/' . $dk->nama_mata_kuliah); ?>" class="btn btn-danger"><?= $dk->nama_mata_kuliah; ?></a>
@@ -121,24 +62,6 @@
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
-                        <!-- <table class="col-md-6 col-sm-6 table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>MATAKULIAH</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($data as $dm) : ?>
-                                    <tr>
-                                        <td>
-                                            <a href="<?= base_url('survei/isisurvei/2/' . $dm->kd_mata_kuliah . '/' . $dm->nama_mata_kuliah); ?>" class="btn btn-danger"><?= $dm->nama_mata_kuliah; ?></a>
-                                        </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table> -->
-                        <div class="ln_solid"></div>
-                        <!-- ====================================================== -->
                     </div>
                 </div>
             </div>

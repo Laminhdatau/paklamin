@@ -195,7 +195,7 @@
   </div>
 
   <!-- ISI KUIS SMART WIZARD -->
-  <script src="<?= base_url(); ?>assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js" type="text/javascript"></script>
+  <!-- <script src="<?= base_url(); ?>assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js" type="text/javascript"></script> -->
 
  
   <!-- Bootstrap -->

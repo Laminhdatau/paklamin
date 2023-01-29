@@ -13,10 +13,8 @@ class Grafik extends MX_Controller
 
     public function index()
     {
-        // $nim = "20501049";
-        $nim = nim($this->session->userdata('security')->id_cession);
         
-        $a['data'] = $this->m_grafik->getData($nim);
+        $a['data'] = $this->m_grafik->getData();
         $a['layout'] = 'v_temp';
         $a['modules'] = 'grafik';
         echo Modules::run('template/backend', $a);

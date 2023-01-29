@@ -13,7 +13,7 @@ class Survei extends MX_Controller
 
     public function index()
     {
-        
+
         $nim = nim($this->session->userdata('security')->id_cession);
         $a['data'] = $this->m_survei->getData($nim);
         $a['layout'] = 'v_survei';
@@ -22,12 +22,13 @@ class Survei extends MX_Controller
     }
     public function isisurvei()
     {
-        $id = $this->uri->segment(3);//id_jenis_survei
-        $a['id_jenis']=$id;
-        $a['kd'] = $this->uri->segment(4);//kd_dosen
-        $a['kd_mk'] = $this->uri->segment(5);//kd_matakuliah
-        $a['nama'] = $this->uri->segment(6);//nama_dosen
-        // $string = str_replace("%20", " ", $a['nama']);
+        $id = $this->uri->segment(3); //id_jenis_survei
+        $a['id_jenis'] = $id;
+        $a['kd'] = $this->uri->segment(4); //kd_dosen
+        $a['kd_mk'] = $this->uri->segment(5); //kd_matakuliah
+        $a['nama'] = $this->uri->segment(6); //nama_dosen
+
+
         $data1 = $this->m_survei->getSoalStep1($id);
         if (!empty($data1)) {
             $a['survei1'] = $data1['survei'];
@@ -53,7 +54,7 @@ class Survei extends MX_Controller
             $a['option3'] = $data3['option'];
         }
         // print_r($a);die;
-        
+
         $a['layout'] = 'v_isisurvei';
         $a['modules'] = 'survei';
         echo Modules::run('template/backend', $a);
@@ -63,7 +64,7 @@ class Survei extends MX_Controller
     public function prosesSurvei()
     {
         // ambil data dari form
-        $nim=nim($this->session->userdata('security')->id_cession);
+        $nim = nim($this->session->userdata('security')->id_cession);
         $id_jenis = $this->input->post('id_jenis');
         $kd = $this->input->post('kd_dosen');
         $kd_mk = $this->input->post('kd_mata_kuliah');
@@ -75,68 +76,71 @@ class Survei extends MX_Controller
         $option3 = $this->input->post('option3');
         $komentar = $this->input->post('komentar');
 
-        $kd_detail_krs=$this->m_survei->getData($nim,$kd,$kd_mk);
-        
+        $kd_detail_krs = $this->m_survei->getData($nim, $kd, $kd_mk);
+
         // validasi input
-        if (empty($kd_detail_krs) || empty($soal1) ||empty($soal2) ||empty($soal3) ||empty($option1) ||empty($option2) ||empty($option3) || empty($komentar)){
+        if (empty($kd_detail_krs) || empty($soal1) || empty($soal2) || empty($soal3) || empty($option1) || empty($option2) || empty($option3) || empty($komentar)) {
             // tampilkan pesan error jika data input tidak lengkap
-            $this->session->set_flashdata('error', 'Data tidak lengkap, silahkan isi kembali kuisioner');
-            redirect(base_url('survei/isisurvei'));
+            $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
+            Data tidak lengkap, silahkan isi kembali kuisioner.</div>');
+            redirect(base_url('survei'));
         }
-        $id_survei=uuid_generator();
+        $id_survei = uuid_generator();
         $survei = array(
-            'id_survei'=>$id_survei,
-            'kd_detail_krs'=>$kd_detail_krs[0]->kd_detail_krs,
-            'id_jenis_survei'=>$id_jenis,
-            'komentar'=>$komentar
+            'id_survei' => $id_survei,
+            'kd_detail_krs' => $kd_detail_krs[0]->kd_detail_krs,
+            'id_jenis_survei' => $id_jenis,
+            'komentar' => $komentar
 
         );
-        $b=$this->m_survei->simpanSurvei($survei);
-        // print_r($option1);die;
-        
-        if($b){
-            for ($i=1;$i <= count($soal1);$i++){
-                $id_soal=$soal1[$i];
-                $id_jawaban=$option1[$i];
-                $answer= array(
-                    'id_answer'=>uuid_generator(),
-                    'id_survei'=>$id_survei,
-                    'id_soal'=>$id_soal,
-                    'id_jawaban'=>$id_jawaban
+        $b = $this->m_survei->simpanSurvei($survei);
+
+        if ($b) {
+            for ($i = 1; $i <= count($soal1); $i++) {
+                $id_soal = $soal1[$i];
+                $id_jawaban = $option1[$i];
+                $answer = array(
+                    'id_answer' => uuid_generator(),
+                    'id_survei' => $id_survei,
+                    'id_soal' => $id_soal,
+                    'id_jawaban' => $id_jawaban
                 );
                 $this->m_survei->simpanAnswer($answer);
             }
-            for ($i=1;$i <= count($soal2);$i++){
-                $id_soal=$soal2[$i];
-                $id_jawaban=$option2[$i];
-                $answer= array(
-                    'id_answer'=>uuid_generator(),
-                    'id_survei'=>$id_survei,
-                    'id_soal'=>$id_soal,
-                    'id_jawaban'=>$id_jawaban
+            for ($i = 1; $i <= count($soal2); $i++) {
+                $id_soal = $soal2[$i];
+                $id_jawaban = $option2[$i];
+                $answer = array(
+                    'id_answer' => uuid_generator(),
+                    'id_survei' => $id_survei,
+                    'id_soal' => $id_soal,
+                    'id_jawaban' => $id_jawaban
                 );
                 $this->m_survei->simpanAnswer($answer);
             }
-            for ($i=1;$i <= count($soal3);$i++){
-                $id_soal=$soal3[$i];
-                $id_jawaban=$option3[$i];
-                $answer= array(
-                    'id_answer'=>uuid_generator(),
-                    'id_survei'=>$id_survei,
-                    'id_soal'=>$id_soal,
-                    'id_jawaban'=>$id_jawaban
+            for ($i = 1; $i <= count($soal3); $i++) {
+                $id_soal = $soal3[$i];
+                $id_jawaban = $option3[$i];
+                $answer = array(
+                    'id_answer' => uuid_generator(),
+                    'id_survei' => $id_survei,
+                    'id_soal' => $id_soal,
+                    'id_jawaban' => $id_jawaban
                 );
                 $this->m_survei->simpanAnswer($answer);
             }
         }
         // cek apakah data berhasil dimasukkan ke database
         if ($b) {
+
             // tampilkan pesan sukses jika insert data berhasil
-            $this->session->set_flashdata('success', '<div style="background-color:green;color=white;heigth:50%;" class="col-sm-12">Terima Kasih Telah Mengisi Kuisioner</div>');
+            $this->session->set_flashdata('message', '<div class="btn alert-success col-md-12">
+            <strong>Terima Kasih!</strong> Anda Telah Mengisi Kuisioner.</div>');
             redirect(base_url('survei'));
         } else {
             // tampilkan pesan error jika insert data gagal
-            $this->session->set_flashdata('error', 'Terjadi kesalahan saat mengisi kuisioner, silahkan coba lagi');
+            $this->session->set_flashdata('message', '<div class="btn alert-dangger col-md-12">
+            <strong>Maaf!</strong> Anda Tidak Boleh Mengisi Kuisioner Yang Sama.</div>');
             redirect(base_url('survei'));
         }
     }
