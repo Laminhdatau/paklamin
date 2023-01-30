@@ -15,7 +15,7 @@ class Grafik extends MX_Controller
     {
         
         $a['data'] = $this->m_grafik->getData();
-        $a['layout'] = 'v_temp';
+        $a['layout'] = 'v_grafik';
         $a['modules'] = 'grafik';
         echo Modules::run('template/backend', $a);
     }

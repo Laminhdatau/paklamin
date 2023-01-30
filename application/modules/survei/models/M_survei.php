@@ -6,10 +6,15 @@ class M_survei extends CI_Model
     public function getData($nim, $kd = null, $kd_mk = null)
     {
 
+        
         $wh = "";
-        if ($kd != null and $kd_mk != null) {
-            $wh = " and dp.kd_dosen='" . $kd . "'
-            and dp.kd_mata_kuliah='" . $kd_mk . "' ";
+        if ($kd != null) {
+            $wh = " and dp.kd_dosen='" . $kd . "' ";
+           
+        }
+        if ($kd_mk != null) {
+            $wh = " and dp.kd_mata_kuliah='" . $kd_mk . "' ";
+         
         }
         $s =',dp.kd_mata_kuliah
             ,d.kd_dosen

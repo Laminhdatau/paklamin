@@ -208,7 +208,7 @@
                                             </td>
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
-                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>','<?php echo $i->status; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>'),'<?php echo $i->status; ?>','<?php echo $i->id_bagian_soal; ?>';"><i class="glyphicon glyphicon-pencil"></i></button>
                                                 </td>
                                             <?php } ?>
                                         </tr>

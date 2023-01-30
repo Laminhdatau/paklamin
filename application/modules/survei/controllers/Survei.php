@@ -27,6 +27,10 @@ class Survei extends MX_Controller
         $a['kd'] = $this->uri->segment(4); //kd_dosen
         $a['kd_mk'] = $this->uri->segment(5); //kd_matakuliah
         $a['nama'] = $this->uri->segment(6); //nama_dosen
+        if($id==2){
+            $a['kd'] = ""; //kd_dosen
+            $a['kd_mk'] = $this->uri->segment(4); //kd_matakuliah
+        }
 
 
         $data1 = $this->m_survei->getSoalStep1($id);
@@ -75,10 +79,8 @@ class Survei extends MX_Controller
         $option2 = $this->input->post('option2');
         $option3 = $this->input->post('option3');
         $komentar = $this->input->post('komentar');
-
         $kd_detail_krs = $this->m_survei->getData($nim, $kd, $kd_mk);
 
-        // validasi input
         if (empty($kd_detail_krs) || empty($soal1) || empty($soal2) || empty($soal3) || empty($option1) || empty($option2) || empty($option3) || empty($komentar)) {
             // tampilkan pesan error jika data input tidak lengkap
             $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
@@ -91,7 +93,6 @@ class Survei extends MX_Controller
             'kd_detail_krs' => $kd_detail_krs[0]->kd_detail_krs,
             'id_jenis_survei' => $id_jenis,
             'komentar' => $komentar
-
         );
         $b = $this->m_survei->simpanSurvei($survei);
 
