@@ -38,7 +38,7 @@ class Kuisdosen extends MX_Controller
         $data['soal_kepuasan'] = $this->input->post('soal_kepuasan');
         $data['id_jenis_survei'] = '1';
         $data['id_bagian_soal'] = $this->input->post('id_bagian_soal');
-        $data['status'] =  '0';
+        $data['status'] =  $this->input->post('status');
 
         if ($id == "") {
             $data['id_soal'] =  uuid_generator();

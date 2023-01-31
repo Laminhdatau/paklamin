@@ -52,7 +52,7 @@
                                 <?php foreach ($data as $dk) : ?>
                                     <tr>
                                         <td>
-                                            
+                                        
                                             <a href="<?= base_url('survei/isisurvei/1/' . $dk->kd_dosen . '/' .$dk->kd_mata_kuliah . '/' . $dk->nama_dosen); ?>" class="btn btn-danger" ><?= $dk->nama_dosen; ?></a>
                                         </td>
                                         <td>
