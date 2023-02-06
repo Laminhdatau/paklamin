@@ -13,11 +13,10 @@ class Grafik extends MX_Controller
 
     public function index()
     {
-        
-        $a['data'] = $this->m_grafik->getData();
+        $kelas = nim($this->session->userdata('security')->id_cession);
+        $a['data'] = $this->m_grafik->getData($kelas);
         $a['layout'] = 'v_graptemp';
         $a['modules'] = 'grafik';
         echo Modules::run('template/backend', $a);
     }
-   
 }

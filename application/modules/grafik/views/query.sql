@@ -66,3 +66,24 @@ WHERE pp.kd_paket_perkuliahan=dk.kd_paket_perkuliahan
 AND dp.kd_mata_kuliah=pp.kd_mata_kuliah
 AND dp.id_periode_perkuliahan in (SELECT id_periode_perkuliahan FROM t_periode_perkuliahan WHERE status ="1")
 AND dk.kd_krs=(SELECT kd_krs FROM t_krs WHERE nim='20501049')
+
+
+
+
+-- HITUNG BERDASARKAN PRODI DAN DOSEN
+SELECT bs.bagian_soal, COUNT(DISTINCT su.id_survei) AS jumlah_survei 
+FROM t_answer_kuesioner ak 
+LEFT JOIN t_survei su ON (su.id_survei = ak.id_survei)
+JOIN t_detail_krs dk ON (dk.kd_detail_krs = su.kd_detail_krs)
+LEFT JOIN t_krs k ON (dk.kd_krs = k.kd_krs)
+LEFT JOIN t_paket_perkuliahan pp ON (dk.kd_paket_perkuliahan = pp.kd_paket_perkuliahan)
+LEFT JOIN t_kurikulum tk ON (tk.id_kurikulum = pp.id_kurikulum)
+LEFT JOIN t_prodi pr ON (pr.id_prodi = tk.id_prodi)
+LEFT JOIN t_soal s ON (s.id_soal = ak.id_soal)
+LEFT JOIN t_bagian_soal bs ON (bs.id_bagian_soal = s.id_bagian_soal)
+JOIN t_dosen d ON (d.kd_dosen = "f404461b-f89e-11ea-96f2-38b1dbb04e31")
+WHERE bs.bagian_soal IS NOT NULL
+and pr.id_prodi="3"
+GROUP BY bs.bagian_soal
+ORDER BY jumlah_survei DESC
+LIMIT 0, 25

@@ -27,8 +27,8 @@
                             </li>
                         </ul>
                     </td>
-                    <td class="project_progress">
-                        <canvas id="myChart" style="width: 400px;display: block;height: 200px;"></canvas>
+                    <td class="project_progress col-md-6">
+                        <canvas id="myChart"></canvas>
                     </td>
                 </tr>
                 <tr>
@@ -69,7 +69,7 @@
         datasets: [{
             data: [
                 <?php foreach ($data as $d) :
-                    echo "'  $d->jumlah_survei ' ,";
+                    echo "'  $d->jumlah ' ,";
                 endforeach; ?>
             ],
             backgroundColor: [

@@ -15,6 +15,7 @@ class Survei extends MX_Controller
     {
 
         $nim = nim($this->session->userdata('security')->id_cession);
+        
         $a['data'] = $this->m_survei->getData($nim);
         $a['layout'] = 'v_survei';
         $a['modules'] = 'survei';

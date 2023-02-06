@@ -66,3 +66,29 @@ WHERE pp.kd_paket_perkuliahan=dk.kd_paket_perkuliahan
 AND dp.kd_mata_kuliah=pp.kd_mata_kuliah
 AND dp.id_periode_perkuliahan in (SELECT id_periode_perkuliahan FROM t_periode_perkuliahan WHERE status ="1")
 AND dk.kd_krs=(SELECT kd_krs FROM t_krs WHERE nim='20501049')
+
+
+
+
+-- grafik
+
+ SELECT dp.kd_dosen_pengampu,bs.bagian_soal,so.id_bagian_soal,sum(DISTINCT(j.bobot)) as jumlah
+        FROM t_answer_kuesioner ak
+            ,t_survei s
+            ,t_detail_krs dk
+            ,t_jawaban j
+            ,t_paket_perkuliahan pp
+            ,t_dosen_pengampu dp
+            ,t_soal so
+            ,t_bagian_soal bs
+                where s.id_survei=ak.id_survei
+                and so.id_soal=ak.id_soal
+                and j.id_jawaban=ak.id_jawaban
+                and dk.kd_detail_krs=s.kd_detail_krs
+                and pp.kd_paket_perkuliahan=dk.kd_paket_perkuliahan
+                and dp.kd_mata_kuliah=pp.kd_mata_kuliah
+                and bs.id_bagian_soal=so.id_bagian_soal
+                and s.id_jenis_survei=1
+                and dp.id_kelas=2
+            GROUP BY dp.kd_dosen_pengampu,so.id_bagian_soal
+            ORDER by bs.bagian_soal

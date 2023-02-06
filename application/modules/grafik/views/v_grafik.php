@@ -32,7 +32,7 @@
         datasets: [{
             data: [
                 <?php foreach ($data as $d) :
-                    echo "'  $d->jumlah_survei ' ,";
+                    echo "'  $d->jumlah ' ,";
                 endforeach; ?>
             ],
             backgroundColor: [
