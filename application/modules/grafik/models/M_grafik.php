@@ -39,6 +39,7 @@ class M_grafik extends CI_Model
             dp.kd_mata_kuliah = mk.kd_mata_kuliah AND dp.id_periode_perkuliahan = ks.id_periode_perkulihan
         ) AND d.kd_dosen = dp.kd_dosen 
         AND ks.id_periode_perkulihan IN(SELECT id_periode_perkuliahan FROM t_periode_perkuliahan WHERE STATUS = '1') 
+        and s.id_jenis_survei='1'
         AND dp.id_kelas = kp.id_kelas
         ".$wn."
     GROUP BY

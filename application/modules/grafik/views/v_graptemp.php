@@ -3,8 +3,7 @@
         <h2>Grafik Hasil Survei</h2>
     </div>
     <div class="x_content">
-        <p>Simple table with project listing with progress and editing options</p>
-
+        
         <?php $no=0; $k=0; $s=""; 
                     $dt=[];
                     $bagian=[];
@@ -60,7 +59,7 @@ $jumlah[$k]=$g->jumlah;
                     <td><img style="width: 50px;height: 70px;" src="<?= base_url('file/images/pasphoto/').$dt[$i]['foto']?>" alt=""></td>
                     <td>
                         
-                        <canvas id="myChart[<?= $i; ?>]"></canvas>
+                        <canvas style="width: 50px;height: 20px;" id="myChart[<?= $i; ?>]"></canvas>
                     </td>
                 </tr>
                     <?php } ?>
@@ -74,14 +73,9 @@ $jumlah[$k]=$g->jumlah;
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script>
 <?php for($j=1;$j<=count($dt);$j++){?>
-
-
     var myChart = document.getElementById("myChart[<?= $j; ?>]");
-
-
     Chart.defaults.global.defaultFontFamily = "Lato";
     Chart.defaults.global.defaultFontSize = 10;
-
     var dataKu = {
         labels: [
             <?php foreach($dt[$j]['bagian'] as $b) { ?>
@@ -89,22 +83,29 @@ $jumlah[$k]=$g->jumlah;
             <?php } ?>
         ],
         datasets: [{
+            label:"Hasil",
             data: [
                 <?php foreach($dt[$j]['jumlah'] as $m) { ?>
                 "<?= $m; ?>",
             <?php } ?>
             ],
             backgroundColor: [
-                "purple",
-                "orange",
-                "yellow"
-            ]
+                                'purple',
+                                'orange',
+                                'yellow'
+                            ],
+            borderColor: [
+                                'purple',
+                                'orange',
+                                'yellow'
+                        ],
+    borderWidth: 1
         }]
     };
     // console.log(dataKu);
 
     var myChart = new Chart(myChart, {
-        type: 'pie',
+        type: 'bar',
         data: dataKu
     });
     <?php } ?>
