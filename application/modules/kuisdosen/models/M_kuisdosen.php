@@ -31,4 +31,9 @@ class M_kuisdosen extends CI_Model
         $this->db->where(array('id_soal' => $where));
         return $this->db->update('t_soal', $data);
     }
+    public function updateStatus($id, $data)
+    {
+        $this->db->where('id_soal',$id);
+        return $this->db->update('t_soal', $data);
+    }
 }

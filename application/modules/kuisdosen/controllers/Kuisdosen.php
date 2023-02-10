@@ -1,5 +1,4 @@
 <?php
-
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Kuisdosen extends MX_Controller
@@ -49,11 +48,13 @@ class Kuisdosen extends MX_Controller
         redirect('id=' . md5('kuisdosen'));
     }
 
-    public function changeStatus($id, $status)
-    {
-        $data['status'] = $status;
-        $this->m_kuisdosen->update_data($id, $data);
-        redirect('id=' . md5('kuisdosen'));
+    public function updateStatus($id,$data){
+        $id = $this->input->post('id_soal');
+        $status = $this->input->post('status');
+        $data=[
+            "status"=>$status
+        ];
+        $this->m_kuisdosen->update_data($id,$data);
     }
 
 

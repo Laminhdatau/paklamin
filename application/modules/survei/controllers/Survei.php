@@ -86,7 +86,9 @@ class Survei extends MX_Controller
             // tampilkan pesan error jika data input tidak lengkap
             $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
             Data tidak lengkap, silahkan isi kembali kuisioner.</div>');
-            redirect(base_url('survei'));
+            // redirect(base_url('survei'));
+
+            redirect('id=' . md5('survei'));
         }
         $id_survei = uuid_generator();
         $survei = array(
@@ -138,12 +140,14 @@ class Survei extends MX_Controller
             // tampilkan pesan sukses jika insert data berhasil
             $this->session->set_flashdata('message', '<div class="btn alert-success col-md-12">
             <strong>Terima Kasih!</strong> Anda Telah Mengisi Kuisioner.</div>');
-            redirect(base_url('survei'));
+            // redirect(base_url('survei'));
+            redirect('id=' . md5('survei'));
         } else {
             // tampilkan pesan error jika insert data gagal
             $this->session->set_flashdata('message', '<div class="btn alert-dangger col-md-12">
             <strong>Maaf!</strong> Anda Tidak Boleh Mengisi Kuisioner Yang Sama.</div>');
-            redirect(base_url('survei'));
+            // redirect(base_url('survei'));
+            redirect('id=' . md5('survei'));
         }
     }
 }

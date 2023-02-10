@@ -21,6 +21,7 @@ $route['id=35465649f969f56eca07e9c526278c16']    = 'jenissurvei';
 
 // isi survei
 $route['survei/isisurvei/(:any)/(:any)'] = 'survei/isisurvei';
+$route['id=3b6526beb6deaee9cc4bfbaca02e66d7']='survei';
 
 /*Url dispose Browser*/
 $route['login']               = '404_override';
