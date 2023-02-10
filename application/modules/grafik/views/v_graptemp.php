@@ -5,6 +5,43 @@
     <div class="x_content">
         <p>Simple table with project listing with progress and editing options</p>
 
+        <?php $no=0; $k=0; $s=""; 
+                    $dt=[];
+                    $bagian=[];
+                    $jumlah=[];
+                    foreach($data as $g){ 
+                        // print_r($g->nama_lengkap);
+                        if($s!=$g->nama_lengkap){
+if($no>0){
+    $dt[$no]['bagian']=$bagian;
+    $dt[$no]['jumlah']=$jumlah;
+
+}
+                            $no++;
+
+$dt[$no]=array(
+    "nama"=>$g->nama_lengkap,
+    "foto"=>$g->kd_dosen.'.jpeg',
+);
+$s=$g->nama_lengkap;
+$k=0;
+$bagian=[];
+$jumlah=[];
+                        }
+$k++;
+$bagian[$k]=$g->bagian_soal;
+$jumlah[$k]=$g->jumlah;
+
+
+
+                    }
+                    if($no>0){
+                        $dt[$no]['bagian']=$bagian;
+                        $dt[$no]['jumlah']=$jumlah;
+                    
+                    }
+                     ?>
+                    <textarea hidden id="dataGrafik"><?php echo json_encode($dt); ?></textarea>
         <table class="table table-striped projects">
             <thead>
                 <tr>
@@ -15,38 +52,18 @@
                 </tr>
             </thead>
             <tbody>
+               <?php for($i=1;$i<=count($dt);$i++){?>
                 <tr>
-                    <td>1</td>
+  
+                    <td><?= $i; ?></td>
+                    <td><?= $dt[$i]['nama']; ?></td>
+                    <td><img style="width: 50px;height: 70px;" src="<?= base_url('file/images/pasphoto/').$dt[$i]['foto']?>" alt=""></td>
                     <td>
-                        <a>Saiful Bahri Musa</a>
-                    </td>
-                    <td>
-                        <ul class="list-inline">
-                            <li>
-                                <img src="<?= base_url(); ?>/file/images/pasphoto/pria.png" class="avatar" alt="Avatar">
-                            </li>
-                        </ul>
-                    </td>
-                    <td class="project_progress col-md-6">
-                        <canvas id="myChart"></canvas>
+                        
+                        <canvas id="myChart[<?= $i; ?>]"></canvas>
                     </td>
                 </tr>
-                <tr>
-                    <td>1</td>
-                    <td>
-                        <a>Saiful Bahri Musa</a>
-                    </td>
-                    <td>
-                        <ul class="list-inline">
-                            <li>
-                                <img src="<?= base_url(); ?>/file/images/pasphoto/pria.png" class="avatar" alt="Avatar">
-                            </li>
-                        </ul>
-                    </td>
-                    <td class="project_progress">
-                        <canvas id="myChart" style="width: 400px;display: block;height: 200px;"></canvas>
-                    </td>
-                </tr>
+                    <?php } ?>
             </tbody>
         </table>
     </div>
@@ -56,21 +73,26 @@
 <script src="<?= base_url('assets/'); ?>vendors/echarts/dist/echarts.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 <script>
-    var myChart = document.getElementById("myChart");
+<?php for($j=1;$j<=count($dt);$j++){?>
+
+
+    var myChart = document.getElementById("myChart[<?= $j; ?>]");
+
 
     Chart.defaults.global.defaultFontFamily = "Lato";
     Chart.defaults.global.defaultFontSize = 10;
+
     var dataKu = {
         labels: [
-            <?php foreach ($data as $d) :
-                echo "'  $d->bagian_soal ' ,";
-            endforeach; ?>
+            <?php foreach($dt[$j]['bagian'] as $b) { ?>
+                "<?= $b; ?>",
+            <?php } ?>
         ],
         datasets: [{
             data: [
-                <?php foreach ($data as $d) :
-                    echo "'  $d->jumlah ' ,";
-                endforeach; ?>
+                <?php foreach($dt[$j]['jumlah'] as $m) { ?>
+                "<?= $m; ?>",
+            <?php } ?>
             ],
             backgroundColor: [
                 "purple",
@@ -79,10 +101,12 @@
             ]
         }]
     };
+    // console.log(dataKu);
 
     var myChart = new Chart(myChart, {
         type: 'pie',
         data: dataKu
     });
+    <?php } ?>
     console.log(dataKu);
 </script>

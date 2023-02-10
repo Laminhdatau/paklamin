@@ -170,7 +170,7 @@ if (!function_exists("prodi")) {
         $CI = & get_instance();
         $get = $CI->db->query("SELECT r.id_prodi FROM t_lokasi_kerja lk 
         JOIN m_ruangan r ON lk.id_ruangan=r.id_ruangan
-        WHERE lk.id_jabatan !='4' AND md5(lk.nik)='$kd'")->row();
+        WHERE md5(lk.nik)='$kd'")->row();
         if(!empty($get->id_prodi)){
             return $get->id_prodi;
         }else{
