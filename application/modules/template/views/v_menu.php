@@ -17,8 +17,9 @@
                         <ul class="nav child_menu" style="display: block;">
                             <li class="sub_menu"></li>
                             <li><a href="<?php echo base_url('grafik'); ?>">Prodi TI</a></li>
-                            <li><a href="<?php echo base_url('grafik'); ?>">Prodi THP</a></li>
-                            <li><a href="<?php echo base_url('grafik'); ?>">Prodi MPP</a></li>
+                            <li><a href="<?php echo base_url('grafik/getTHP'); ?>">Prodi THP</a></li>
+                            <li><a href="<?php echo base_url('grafik/getMPP'); ?>">Prodi MPP</a></li>
+                            <li><a href="<?php echo base_url('grafik/getTRP'); ?>">Prodi TRP</a></li>
 
                         </ul>
                     </li>
