@@ -228,6 +228,17 @@
                                 <tbody>
                                     <?php $no = 0;
                                     foreach ($data as $i) {
+
+                                        
+                                        if($i->status=='0'){
+                                        $status= "<a href='kuisdosen/statusAktif/$i->id_soal' class='btn btn-success btn-sm' data-popup='tooltip' data-placement='top' title='OK'><i class='fa fa-check' aria-hidden='true'></i></a>";
+                                        }
+                                        
+                                        else{
+                                            $status="<a href='kuisdosen/statusTidakAktif/$i->id_soal' class='btn btn-success btn-sm' data-popup='tooltip' data-placement='top' title='OK'><i class='fa fa-close' aria-hidden='true'></i></a>";}
+
+                                        // ==================end
+
                                         $no++; ?>
                                         <tr>
                                             <?php if ($akun[0]->zp[4] == "1") { ?>
@@ -240,9 +251,7 @@
                                             <td><?php echo $i->bagian_soal; ?></td>
                                             <td><?php echo $i->soal_kepuasan; ?></td>
                                             <td><?php echo $i->jenis_survei; ?></td>
-                                            <td>
-                                                 <button type="button" <?= $i->ada; ?> class="btn <?= $i->status_class ?> btn-circle" onclick="editStatus('<?php echo $i->id_soal; ?>','<?php echo $i->status; ?>';"><i class="glyphicon <?= $i->status_icon ?>"></i></button>
-                                            </td>
+                                            <td><?php echo $status; ?></td>
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
                                                     <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>'),'<?php echo $i->status; ?>','<?php echo $i->id_bagian_soal; ?>';"><i class="glyphicon glyphicon-pencil"></i></button>

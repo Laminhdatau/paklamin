@@ -8,7 +8,7 @@
                     $dt=[];
                     $bagian=[];
                     $jumlah=[];
-                    foreach($data as $g){ 
+                    foreach($datampp as $g){ 
                         // print_r($g->nama_lengkap);
                         if($s!=$g->nama_lengkap){
 if($no>0){

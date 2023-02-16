@@ -49,17 +49,39 @@
                             </thead>
                             <tbody>
 
-                                <?php foreach ($data as $dk) : ?>
+                                <?php $lamin=""; $lamin1 = ""; foreach ($data as $dk) { ?>
+                                    
                                     <tr>
+                                    <td>
+                                        <?php if($lamin==$dk->kd_mata_kuliah){ ?>
+                                            <span></span>
+                                        <?php }else{ 
+                                            $lamin=$dk->kd_mata_kuliah;
+                                            $ul = "#"; 
+                                            
+                                            if($dk->ada_mk != ""){ $ul = base_url($dk->ada_mk); }  
+                                            ?> 
+                                           
+                                            <a href="<?= $ul; ?>" class="btn btn-danger" ><?= $dk->nama_mata_kuliah; ?></a>
+                                            
+                                            
+                                        <?php }?>
+
+                                        </td>
                                         <td>
+                                        <?php if($lamin1==$dk->kd_dosen){ ?>
+                                            <span></span>
+                                        <?php }else{ 
+                                            $lamin1=$dk->kd_dosen;
+                                            $ul = "#"; 
+                                             if($dk->ada_dosen != ""){ $ul = base_url($dk->ada_dosen);  }  
+                                            ?> 
+                                            <a href="<?= $ul; ?>" class="btn btn-danger" ><?= $dk->nama_dosen; ?></a>
+                                            <?php } ?>
+                                        </td>
                                         
-                                            <a href="<?= base_url('survei/isisurvei/1/' . $dk->kd_dosen . '/' .$dk->kd_mata_kuliah . '/' . $dk->nama_dosen); ?>" class="btn btn-danger" ><?= $dk->nama_dosen; ?></a>
-                                        </td>
-                                        <td>
-                                            <a href="<?= base_url('survei/isisurvei/2/' . $dk->kd_mata_kuliah . '/' . $dk->nama_mata_kuliah); ?>" class="btn btn-danger"><?= $dk->nama_mata_kuliah; ?></a>
-                                        </td>
                                     </tr>
-                                <?php endforeach; ?>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>

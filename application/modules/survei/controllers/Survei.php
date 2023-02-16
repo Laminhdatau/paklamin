@@ -29,7 +29,7 @@ class Survei extends MX_Controller
         $a['kd_mk'] = $this->uri->segment(5); //kd_matakuliah
         $a['nama'] = $this->uri->segment(6); //nama_dosen
         if($id==2){
-            $a['kd'] = ""; //kd_dosen
+            $a['kd'] = "0"; //kd_dosen
             $a['kd_mk'] = $this->uri->segment(4); //kd_matakuliah
         }
 
@@ -94,6 +94,7 @@ class Survei extends MX_Controller
         $survei = array(
             'id_survei' => $id_survei,
             'kd_detail_krs' => $kd_detail_krs[0]->kd_detail_krs,
+            'kd_dosen'=>$kd,
             'id_jenis_survei' => $id_jenis,
             'komentar' => $komentar
         );

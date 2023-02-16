@@ -37,6 +37,18 @@ class Kuismatakuliah extends MX_Controller
         }
         redirect('id=' . md5('kuismatakuliah'));
     }
+    public function statusAktif($id)
+    {
+        $sql = $this->db->query("UPDATE t_soal set status='1' where id_soal='$id'");
+        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert" > Sementara Aktif<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+        redirect('id=' . md5('kuismatakuliah'));
+    }
+    public function statusTidakAKtif($id)
+    {
+        $sql = $this->db->query("UPDATE t_soal set status='0' where id_soal='$id'");
+        $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert" > Tidak Aktif<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+        redirect('id=' . md5('kuismatakuliah'));
+    }
 
 
     public function delete_data()

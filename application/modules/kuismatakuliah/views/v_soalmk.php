@@ -185,7 +185,17 @@
                                 <tbody>
                                     <?php $no = 0;
                                     foreach ($data as $i) {
+                                        
+                                        if($i->status=='0'){
+                                            $status= "<a href='kuismatakuliah/statusAktif/$i->id_soal' class='btn btn-warning btn-sm' data-popup='tooltip' data-placement='top' title='OK'><i class='fa fa-check' aria-hidden='true'></i></a>";
+                                            }
+                                            
+                                            else{
+                                                $status="<a href='kuismatakuliah/statusTidakAktif/$i->id_soal' class='btn btn-danger btn-sm' data-popup='tooltip' data-placement='top' title='OK'><i class='fa fa-close' aria-hidden='true'></i></a>";}
+    
+                                            // ==================end
                                         $no++; ?>
+
                                         <tr>
                                             <?php if ($akun[0]->zp[4] == "1") { ?>
                                                 <td>
@@ -197,15 +207,7 @@
                                             <td><?php echo $i->bagian_soal; ?></td>
                                             <td><?php echo $i->soal_kepuasan; ?></td>
                                             <td><?php echo $i->jenis_survei; ?></td>
-                                            <td>
-                                                <?php if ($i->status == 1) {
-                                                    echo '<div class="badge badge-success">Aktif</div>';
-                                                } else if ($i->status == 0) {
-                                                    echo '<div class="badge badge-danger">Tidak Aktif</div>';
-                                                } else {
-                                                    echo '<div class="badge badge-warning">Ambigu</div>';
-                                                }; ?>
-                                            </td>
+                                            <td><?php echo $status; ?></td>
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
                                                     <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>'),'<?php echo $i->status; ?>','<?php echo $i->id_bagian_soal; ?>';"><i class="glyphicon glyphicon-pencil"></i></button>
