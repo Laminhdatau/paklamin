@@ -24,7 +24,7 @@
                 $no++;
 
                 $dt[$no] = array(
-                    
+
                     "nama" => $g->nama_lengkap,
                     "foto" => $g->kd_dosen . '.jpeg',
                 );
@@ -75,7 +75,7 @@
                         <td><?= $i; ?></td>
                         <td><?= $dt[$i]['nama']; ?></td>
                         <td><img style="width: 50px;height: 70px;" src="<?= base_url('file/images/pasphoto/') . $dt[$i]['foto'] ?>" alt=""></td>
-                       
+
                         <td>
                             <canvas style="width: 50px;height: 20px;" id="myChart1[<?= $i; ?>]"></canvas>
                         </td>
@@ -99,16 +99,15 @@
         Chart.defaults.global.defaultFontSize = 10;
         var dataKu = {
             labels: [
-                <?php foreach ($dt[$j]['bagian']as $b) { ?> 
-                    
+                <?php foreach ($dt[$j]['bagian'] as $b) { ?>
+
                     "<?= $b; ?>",
                 <?php } ?>
             ],
             datasets: [{
                 label: "Hasil",
                 data: [
-                    <?php foreach ($dt[$j]['persentase'] as $m) { ?> 
-                        "<?= $m; ?>",
+                    <?php foreach ($dt[$j]['persentase'] as $m) { ?> "<?= $m; ?>",
                     <?php } ?>
                 ],
                 backgroundColor: [
@@ -140,15 +139,13 @@
         Chart.defaults.global.defaultFontSize = 10;
         var dataKu = {
             labels: [
-                <?php foreach ($dt[$j]['jawaban']as $b) { ?> 
-                    "<?= $b; ?>",
+                <?php foreach ($dt[$j]['jawaban'] as $b) { ?> "<?= $b; ?>",
                 <?php } ?>
             ],
             datasets: [{
                 label: "Hasil",
                 data: [
-                    <?php foreach ($dt[$j]['persentasebot'] as $m) { ?> 
-                        "<?= $m; ?>",
+                    <?php foreach ($dt[$j]['persentasebot'] as $m) { ?> "<?= $m; ?>",
                     <?php } ?>
                 ],
                 backgroundColor: [

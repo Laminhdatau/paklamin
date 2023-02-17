@@ -1,0 +1,52 @@
+SELECT
+    dp.kd_dosen,
+    s.id_jenis_survei,
+    so.id_bagian_soal,
+    bs.bagian_soal,j.id_jawaban,
+    SUM(j.bobot) AS jumlah,
+    
+    COUNT(kp.nim) AS total_respon,
+    ROUND((
+        SUM(j.bobot) / (1 * COUNT(kp.nim))  ) 
+    ) AS persentase,
+    
+    bk.nama_lengkap
+FROM
+    t_survei s,
+    t_answer_kuesioner ak,
+    t_jawaban j,
+    t_soal so
+LEFT JOIN t_bagian_soal bs ON
+    (
+        bs.id_bagian_soal = so.id_bagian_soal
+    ),
+    t_detail_krs dk,
+    t_krs ks,
+    t_kelas_perkuliahan kp,
+    t_paket_perkuliahan pp,
+    t_mata_kuliah mk,
+    t_dosen_pengampu dp,
+    t_dosen d
+LEFT JOIN t_biodata_karyawan bk ON
+    (bk.nik = d.nik)
+WHERE
+    ak.id_survei = s.id_survei AND j.id_jawaban = ak.id_jawaban AND(
+        so.id_soal = ak.id_soal AND s.id_jenis_survei = so.id_jenis_survei
+    ) AND dk.kd_detail_krs = s.kd_detail_krs AND ks.kd_krs = dk.kd_krs AND kp.nim = ks.nim AND kp.id_periode_perkuliahan = ks.id_periode_perkulihan AND pp.kd_paket_perkuliahan = dk.kd_paket_perkuliahan AND pp.kd_mata_kuliah = mk.kd_mata_kuliah AND(
+        dp.kd_mata_kuliah = mk.kd_mata_kuliah AND dp.id_periode_perkuliahan = ks.id_periode_perkulihan
+    ) AND d.kd_dosen = dp.kd_dosen AND ks.id_periode_perkulihan IN(
+    SELECT
+        id_periode_perkuliahan
+    FROM
+        t_periode_perkuliahan
+    WHERE
+STATUS
+    = '1'
+) AND s.id_jenis_survei = '1' AND dp.id_kelas = kp.id_kelas and d.kd_dosen="76e54172-3885-11e9-92cd-f41587687309"
+GROUP BY
+    dp.kd_dosen,
+    s.id_jenis_survei,
+    so.id_bagian_soal,j.id_jawaban
+ORDER BY
+    dp.kd_dosen,
+    s.id_jenis_survei,so.id_bagian_soal,j.id_jawaban

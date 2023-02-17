@@ -51,13 +51,13 @@ class Kuisdosen extends MX_Controller
     public function statusAktif($id)
     {
         $sql = $this->db->query("UPDATE t_soal set status='1' where id_soal='$id'");
-        $this->session->set_flashdata('message','<div class="alert alert-success" role="alert" > OK<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert" > OK<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
         redirect('id=' . md5('kuisdosen'));
     }
     public function statusTidakAKtif($id)
     {
         $sql = $this->db->query("UPDATE t_soal set status='0' where id_soal='$id'");
-        $this->session->set_flashdata('message','<div class="alert alert-danger" role="alert" > NO<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert" > NO<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
         redirect('id=' . md5('kuisdosen'));
     }
 

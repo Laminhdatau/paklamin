@@ -254,6 +254,3 @@ if (!function_exists("jobdesc")) {
     }
 
 }
-
-
-?>
