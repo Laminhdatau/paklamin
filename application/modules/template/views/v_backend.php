@@ -13,7 +13,8 @@
 
   <?php if ($modules == "kurikulum") { ?>
     <link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" />
-    <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <!-- <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js">
     </script>
 
@@ -49,8 +50,8 @@
   <link href="<?= base_url(); ?>assets/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
   <link href="<?= base_url(); ?>assets/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
-   <!-- jQuery -->
-   <script src="<?= base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
+  <!-- jQuery -->
+  <script src="<?= base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
 
 </head>
 
@@ -151,7 +152,7 @@
       <!-- /top navigation -->
 
       <!-- page content -->
-      <div class="right_col" role="main">
+      <div class="right_col" role="main" style="min-height: 1000px;">
         <!--          <div class="">
             <div class="page-title">
               <div class="title_left"> -->
@@ -193,11 +194,12 @@
       </footer>
     </div>
   </div>
+  
 
   <!-- ISI KUIS SMART WIZARD -->
   <!-- <script src="<?= base_url(); ?>assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js" type="text/javascript"></script> -->
 
- 
+
   <!-- Bootstrap -->
   <script src="<?= base_url(); ?>assets/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- FastClick -->

@@ -4,14 +4,15 @@
         background: #FFA600;
         color: #fff;
     }
+
     .wizard_verticle ul.wizard_steps {
-    display: table;
-    list-style: none;
-    position: relative;
-    width: 20%;
-    float: left;
-    margin: 0 0 20px;
-}
+        display: table;
+        list-style: none;
+        position: relative;
+        width: 20%;
+        float: left;
+        margin: 0 0 20px;
+    }
 </style>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -190,6 +191,7 @@
     </div>
 </div>
 
+
 <script>
     /*
      * SmartWizard 3.3.1 plugin
@@ -211,7 +213,7 @@
         this.steps = $(target).children("ul").children("li").children("a"); // Get all anchors
         this.contentWidth = 0;
         // this.msgBox = $('<div class="msgBox"><div class="content"></div><a href="#" class="close">X</a></div>');
-        this.elmStepContainer = $('<div></div>').addClass("stepContainer").attr("style","height: 400px;");
+        this.elmStepContainer = $('<div></div>').addClass("stepContainer").attr("style", "height: 400px;");
         this.buttons = {
             next: $('<button>' + options.labelNext + '</button>').addClass("buttonNext"),
             previous: $('<button>' + options.labelPrevious + '</button>').addClass("buttonPrevious"),
@@ -247,9 +249,9 @@
             $this.elmStepContainer.append(allDivs);
             elmActionBar.append($this.loader);
             $this.target.append($this.elmStepContainer);
-            elmActionBar.append($this.buttons.finish)
+            elmActionBar.append($this.buttons.previous)
                 .append($this.buttons.next)
-                .append($this.buttons.previous);
+                .append($this.buttons.finish);
             $this.target.append(elmActionBar);
             this.contentWidth = $this.elmStepContainer.width();
 
@@ -646,8 +648,8 @@
             enableFinishButton: false, // make finish button enabled always
             hideButtonsOnDisabled: false, // when the previous/next/finish buttons are disabled, hide them instead?
             errorSteps: [], // Array Steps with errors
-            labelNext: 'Lanjut',
             labelPrevious: 'Kembali',
+            labelNext: 'Next',
             labelFinish: 'Simpan',
             noForwardJumping: false,
             onLeaveStep: null, // triggers when leaving a step
@@ -656,4 +658,58 @@
         };
 
     })(jQuery);
+</script>
+
+
+<script>
+    $('a[data-edit="bold"]').click(function(e) {
+        e.preventDefault();
+        document.execCommand('bold', false, null);
+    });
+</script>
+<script>
+    $('a[data-edit="italic"]').click(function(e) {
+        e.preventDefault();
+        document.execCommand('italic', false, null);
+    });
+    $('a[data-edit="insertunorderedlist"]').click(function(e) {
+        e.preventDefault();
+        document.execCommand('insertunorderedlist', false, null);
+    });
+    $('a[data-edit="insertorderedlist"]').click(function(e) {
+        e.preventDefault();
+        document.execCommand('insertorderedlist', false, null);
+    });
+    $('a[data-edit="outdent"]').click(function(e) {
+        e.preventDefault();
+        document.execCommand('outdent', false, null);
+    });
+    $('a[data-edit="indent"]').click(function(e) {
+        e.preventDefault();
+        document.execCommand('indent', false, null);
+    });
+    $('a[data-edit="justifyleft"]').click(function(e) {
+        e.preventDefault();
+        document.execCommand('justifyleft', false, null);
+    });
+    $('a[data-edit="justifycenter"]').click(function(e) {
+        e.preventDefault();
+        document.execCommand('justifycenter', false, null);
+    });
+    $('a[data-edit="justifyright"]').click(function(e) {
+        e.preventDefault();
+        document.execCommand('justifyright', false, null);
+    });
+    $('a[data-edit="justifyfull"]').click(function(e) {
+        e.preventDefault();
+        document.execCommand('justifyfull', false, null);
+    });
+    $('a[data-edit="undo"]').click(function(e) {
+        e.preventDefault();
+        document.execCommand('undo', false, null);
+    });
+    $('a[data-edit="redo"]').click(function(e) {
+        e.preventDefault();
+        document.execCommand('redo', false, null);
+    });
 </script>

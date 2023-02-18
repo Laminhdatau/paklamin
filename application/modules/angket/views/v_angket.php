@@ -33,23 +33,18 @@
             document.getElementById("btnck").disabled = bCek;
         }
 
-
-
         function showForm(id = null) {
             $("#pnladd").slideDown("slow");
             $("#pnldata").slideDown("slow");
             $("#btn-tmb").hide("slow");
 
             if (id == null) {
-                $("#id_soal").val("");
-                $("#soal_kepuasan").val("");
-                $("#id_jenis_survei").val("");
-                $("id_bagian_soal").val("");
-                $("#title_addedit").html('<h2>Tambah Data : Soal</h2>');
+                $("#id_jawaban").val("");
+                $("#jawaban").val("");
+                $("#title_addedit").html('<h2>Tambah Data : Hari</h2>');
                 $("#btn").html('Simpan');
             }
         }
-
 
         function hideForm() {
             $("#pnladd").slideUp("slow");
@@ -57,14 +52,12 @@
             $("#btn-tmb").show("slow");
         }
 
-        function editData(id_soal, soal_kepuasan, id_jenis_survei, id_bagian_soal) {
-            $("#id_soal").val(id_soal);
-            $("#soal_kepuasan").val(soal_kepuasan);
-            $("#id_jenis_survei").val(id_jenis_survei);
-            $("#id_bagian_soal").val(id_bagian_soal);
-            $("#title_addedit").html('<h2>Edit Data : Soal</h2>');
+        function editData(id, jawaban) {
+            $("#id_jawaban").val(id);
+            $("#jawaban").val(jawaban);
+            $("#title_addedit").html('<h2>Edit Data : Hari</h2>');
             $("#btn").html('Update');
-            showForm(id_soal);
+            showForm(id);
         }
     </script>
 
@@ -78,10 +71,6 @@
         }
     </style>
 
-
-
-
-
     <!--  <div id='breadcrumb'>
         <ul>
             <li><a href="<?php echo site_url('home') ?>" onclick="ga('send', 'event', 'Breadcrumbs', 'Level 1', 'trycss_height_width_intro')">Home</a></li>
@@ -93,7 +82,7 @@
     <div class="body clearfix">
         <div class="x_panel col-sm-12">
             <div class="x_title">
-                <h2><small>Pg: </small><b>Daftar Soal Kuis Dosen</b></h2>
+                <h2><small>Pg: </small><b>Daftar Hari</b></h2>
                 <ul class="nav navbar-right">
                     <li><a class="close-link" href="<?php echo base_url('home'); ?>"><i class="fa fa-close"></i></a></li>
                 </ul>
@@ -104,27 +93,15 @@
                     <?php if (($akun[0]->zp[0] == "1") || ($akun[0]->zp[2] == "1")) { ?>
                         <div class="col-sm-12" id="pnladd">
                             <div class="col-sm-12" style="background: #D3D3D3;">
-                                <form class="" action="<?php echo base_url() . 'kuisdosen/simpan_data'; ?>" method="post" novalidate="">
+                                <form class="" action="<?php echo base_url() . 'angket/simpan_data'; ?>" method="post" novalidate="">
                                     <!-- spacebar -->
                                     <div style="width: 100%; height:7px; border: 0px solid white;"></div>
-                                    <span class="section" id="title_addedit">Data Soal</span>
+                                    <span class="section" id="title_addedit">Data Hari</span>
                                     <div class="field item form-group">
-                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Soal<span class="required"> *</span></label>
+                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Hari<span class="required"> *</span></label>
                                         <div class="col-md-8 col-sm-8">
-                                            <input class="form-control" data-validate-length-range="4" data-validate-words="2" id="soal_kepuasan" name="soal_kepuasan" placeholder="Pertanyaan" required="required">
-                                            <input type="hidden" id="id_soal" name="id_soal">
-
-                                        </div>
-                                    </div>
-
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Bagian<span class="required"> *</span></label>
-                                        <div class="col-md-8 col-sm-8">
-                                            <select name="id_bagian_soal" id="id_bagian_soal" class="form-control">
-                                                <?php foreach ($bsoal as $bs) { ?>
-                                                    <option value="<?= $bs->id_bagian_soal; ?>"><?= $bs->bagian_soal; ?></option>
-                                                <?php } ?>
-                                            </select>
+                                            <input class="form-control" data-validate-length-range="4" data-validate-words="2" id="jawaban" name="jawaban" placeholder="ex. minggu" required="required">
+                                            <input type="hidden" id="id_jawaban" name="id_jawaban">
                                         </div>
                                     </div>
                                     <div class="ln_solid">
@@ -144,7 +121,6 @@
                         <div id="pnldata" style="width: 100%; height:20px; border: 0px solid white;"></div>
                     <?php } ?>
 
-
                     <div class="col-sm-12">
                         <div class="card-box table-responsive">
                             <?php if ($akun[0]->zp[0] == "1" && $akun[0]->zp[2] == "0") { ?>
@@ -152,10 +128,8 @@
                                     <button type="button" id="btn-tmb" class="btn btn-primary btn-circle" onclick="showForm();"><i class="glyphicon glyphicon-plus"></i>Tambah</button>
                                 </td>
                             <?php } ?>
-                            <?php echo form_open('kuisdosen/delete_data'); ?>
+                            <?php echo form_open('angket/delete_data'); ?>
                             <input type="hidden" id="id_del_arr" name="id_del_arr" value="">
-
-
 
                             <table id="listdata" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
@@ -163,22 +137,13 @@
                                         <?php if ($akun[0]->zp[4] == "1") { ?>
                                             <td width="3%">
                                                 <button type="submit" id="btnck" disabled="disabled" class="btn btn-danger btn-circle" onclick="return confirm('Anda Yakin')"><i class="glyphicon glyphicon-trash"></i></button>
-
-
                                             </td>
                                         <?php } ?>
                                         <td width="3%"><b>No</b></td>
-                                        <td width="30%"><b>Bagian Soal</b></td>
-                                        <td width="50%"><b>Pertanyaan</b></td>
-                                        <td width="5%"><b>Jenis Survei</b></td>
-                                        <td><b>Status</b></td>
-
-
-
+                                        <td><b>Hari</b></td>
                                         <?php if ($akun[0]->zp[2] == "1") { ?>
                                             <?php if ($akun[0]->zp[0] == "1") { ?>
-
-                                                <td width="10%">
+                                                <td width="3%">
                                                     <button type="button" id="btn-tmb" class="btn btn-primary btn-circle" onclick="showForm();"><i class="glyphicon glyphicon-plus"></i></button>
                                                 </td>
                                             <?php } else { ?>
@@ -188,47 +153,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    <?php
-
-                                    $no = 1;
+                                    <?php $no = 0;
                                     foreach ($data as $i) {
-                                        if ($i->status == '0') {
-                                            $status = "<a href='kuisdosen/statusAktif/$i->id_soal' class='btn btn-warning btn-sm' data-popup='tooltip' data-placement='top' title='Hidupkan'><i class='fa fa-check' aria-hidden='true'></i></a>";
-                                        } else {
-                                            $status = "<a href='kuisdosen/statusTidakAktif/$i->id_soal' class='btn btn-danger btn-sm' data-popup='tooltip' data-placement='top' title='Matikan'><i class='fa fa-close' aria-hidden='true'></i></a>";
-                                        } ?>
-
-
-
-
-
+                                        $no++; ?>
                                         <tr>
                                             <?php if ($akun[0]->zp[4] == "1") { ?>
                                                 <td>
-                                                    <input type="checkbox" <?= $i->ada; ?> class="chkCheckBoxId filled-in chk-col-red" value="<?php echo $i->id_soal; ?>" name="idsoal[]" id="<?php echo $no; ?>" onclick="cekit(<?php echo $no; ?>)" />
+                                                    <input type="checkbox" <?= $i->ada; ?> class="chkCheckBoxId filled-in chk-col-red" value="<?php echo $i->id_jawaban; ?>" name="idjawaban[]" id="<?php echo $no; ?>" onclick="cekit(<?php echo $no; ?>)" />
                                                     <label for="<?php echo $no; ?>"></label>
                                                 </td>
                                             <?php } ?>
                                             <td><?php echo $no; ?></td>
-                                            <td><?php echo $i->bagian_soal; ?></td>
-                                            <td><?php echo $i->soal_kepuasan; ?></td>
-                                            <td><?php echo $i->jenis_survei; ?></td>
-                                            <td>
-                                                <?= $status; ?>
-                                            </td>
-                                            <!-- ================== -->
-
+                                            <td><?php echo $i->jawaban; ?></td>
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
-                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>'),'<?php echo $i->id_bagian_soal; ?>','<?php echo $i->bagian_soal; ?>';"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData(<?php echo $i->id_jawaban; ?>,'<?php echo $i->jawaban; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
                                                 </td>
                                             <?php } ?>
-
                                         </tr>
-                                    <?php $i++;
-                                    } ?>
-                                    <h7><b>Total Record</b> : <?= $hitung->jumlah_soal; ?></h7>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -237,6 +180,4 @@
             </div>
         </div>
     </div>
-
-
 <?php } ?>

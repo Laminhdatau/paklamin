@@ -15,7 +15,7 @@ class Survei extends MX_Controller
     {
 
         $nim = nim($this->session->userdata('security')->id_cession);
-        
+
         $a['data'] = $this->m_survei->getData($nim);
         $a['layout'] = 'v_survei';
         $a['modules'] = 'survei';
@@ -28,7 +28,7 @@ class Survei extends MX_Controller
         $a['kd'] = $this->uri->segment(4); //kd_dosen
         $a['kd_mk'] = $this->uri->segment(5); //kd_matakuliah
         $a['nama'] = $this->uri->segment(6); //nama_dosen
-        if($id==2){
+        if ($id == 2) {
             $a['kd'] = "0"; //kd_dosen
             $a['kd_mk'] = $this->uri->segment(4); //kd_matakuliah
         }
@@ -82,7 +82,7 @@ class Survei extends MX_Controller
         $komentar = $this->input->post('komentar');
         $kd_detail_krs = $this->m_survei->getData($nim, $kd, $kd_mk);
 
-        if (empty($kd_detail_krs) || empty($soal1) || empty($soal2) || empty($soal3) || empty($option1) || empty($option2) || empty($option3) || empty($komentar)) {
+        if (empty($kd_detail_krs) || empty($soal1) || empty($soal2) || empty($soal3) || empty($option1) || empty($option2) || empty($option3)) {
             // tampilkan pesan error jika data input tidak lengkap
             $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
             Data tidak lengkap, silahkan isi kembali kuisioner.</div>');
@@ -94,7 +94,7 @@ class Survei extends MX_Controller
         $survei = array(
             'id_survei' => $id_survei,
             'kd_detail_krs' => $kd_detail_krs[0]->kd_detail_krs,
-            'kd_dosen'=>$kd,
+            'kd_dosen' => $kd,
             'id_jenis_survei' => $id_jenis,
             'komentar' => $komentar
         );
@@ -150,5 +150,7 @@ class Survei extends MX_Controller
             // redirect(base_url('survei'));
             redirect('id=' . md5('survei'));
         }
+
+        
     }
 }

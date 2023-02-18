@@ -23,10 +23,23 @@ class Grafik extends MX_Controller
         $a['modules'] = 'grafik';
         echo Modules::run('template/backend', $a);
     }
+
+    public function detailGrafik()
+    {
+        $prodi = prodi($this->session->userdata('security')->id_cession);
+        if ($prodi == '') {
+            $prodi = null;
+        }
+        $a['data'] = $this->m_grafik->getDetail();
+        $a['datadosen'] = $this->m_grafik->getAllDosen($prodi);
+        // $a['grafik'] = $this->m_grafik->getData();
+        $a['layout'] = 'v_detailgrafik';
+        $a['modules'] = 'grafik';
+        echo Modules::run('template/backend', $a);
+    }
     public function getGrafik()
     {
         $kd = $this->input->post('dosen');
-
         $dosen = $this->m_grafik->getData($kd);
         echo json_encode($dosen);
     }

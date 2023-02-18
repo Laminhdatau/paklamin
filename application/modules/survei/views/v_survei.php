@@ -27,7 +27,7 @@
     <div class="body clearfix">
         <div class="x_panel col-sm-12 col-xs-10">
             <div class="x_title">
-                
+
                 <h2><small>Pg: </small><b> SURVEI KEPUASAN</b></h2>
                 <ul class="nav navbar-right">
                     <li><a class="close-link" href="<?php echo base_url('home'); ?>"><i class="fa fa-close"></i></a></li>
@@ -41,45 +41,66 @@
                         <br />
                         <table class="col-md-12 col-sm-12 col-xs-10 table table-bordered">
                             <thead>
-                            <?php echo $this->session->flashdata('message'); ?>
+                                <?php echo $this->session->flashdata('message'); ?>
                                 <tr>
-                                    <th>DOSEN</th>
                                     <th>MATAKULIAH</th>
+                                    <th>DOSEN</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                <?php $lamin=""; $lamin1 = ""; foreach ($data as $dk) { ?>
+                                <?php $lamin = "";
+                                $lamin1 = "";
+                                foreach ($data as $dk) {
+
+
+                                    if ($dk->ada_mk) {
+                                        $button1 = "warning";
+                                    } else {
+                                        $button1 = "secondary";
+                                    }
+                                    if ($dk->ada_dosen) {
+                                        $button2 = "warning";
+                                    } else {
+                                        $button2 = "secondary";
+                                    }
                                     
+
+                                ?>
+
                                     <tr>
-                                    <td>
-                                        <?php if($lamin==$dk->kd_mata_kuliah){ ?>
-                                            <span></span>
-                                        <?php }else{ 
-                                            $lamin=$dk->kd_mata_kuliah;
-                                            $ul = "#"; 
-                                            
-                                            if($dk->ada_mk != ""){ $ul = base_url($dk->ada_mk); }  
-                                            ?> 
-                                           
-                                            <a href="<?= $ul; ?>" class="btn btn-danger" ><?= $dk->nama_mata_kuliah; ?></a>
-                                            
-                                            
-                                        <?php }?>
+                                        <td  >
+                                            <?php if ($lamin == $dk->kd_mata_kuliah) { ?>
+                                                <span></span>
+                                            <?php } else {
+                                                $lamin = $dk->kd_mata_kuliah;
+                                                $ul = "#";
+
+                                                if ($dk->ada_mk != "") {
+                                                    $ul = base_url($dk->ada_mk);
+                                                }
+                                            ?>
+
+                                                <a href="<?= $ul; ?>" class="btn btn-round alert-<?= $button1; ?>"><?= $dk->nama_mata_kuliah; ?></a>
+
+
+                                            <?php } ?>
 
                                         </td>
-                                        <td>
-                                        <?php if($lamin1==$dk->kd_dosen){ ?>
-                                            <span></span>
-                                        <?php }else{ 
-                                            $lamin1=$dk->kd_dosen;
-                                            $ul = "#"; 
-                                             if($dk->ada_dosen != ""){ $ul = base_url($dk->ada_dosen);  }  
-                                            ?> 
-                                            <a href="<?= $ul; ?>" class="btn btn-danger" ><?= $dk->nama_dosen; ?></a>
+                                        <td  >
+                                            <?php if ($lamin1 == $dk->kd_dosen) { ?>
+                                                <span></span>
+                                            <?php } else {
+                                                $lamin1 = $dk->kd_dosen;
+                                                $ul = "#";
+                                                if ($dk->ada_dosen != "") {
+                                                    $ul = base_url($dk->ada_dosen);
+                                                }
+                                            ?>
+                                                <a href="<?= $ul; ?>" class="btn btn-round alert-<?= $button2; ?>"><?= $dk->nama_dosen; ?></a>
                                             <?php } ?>
                                         </td>
-                                        
+
                                     </tr>
                                 <?php } ?>
                             </tbody>

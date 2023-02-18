@@ -14,8 +14,8 @@ class M_survei extends CI_Model
         if ($kd_mk != null) {
             $wh = " and dp.kd_mata_kuliah='" . $kd_mk . "' ";
         }
-        $s = ',IF((! ISNULL(s1.id_survei)),"",concat("survei/isisurvei/2/", dp.kd_mata_kuliah , "/",mk.nama_mata_kuliah)) AS ada_mk,
-        IF((! ISNULL(s2.id_survei)),"",concat("survei/isisurvei/1/" , d.kd_dosen , "/" ,dp.kd_mata_kuliah , "/" , bk.nama_lengkap)) AS ada_dosen,dp.kd_mata_kuliah
+        $s = ',IF((! ISNULL(s2.id_survei)),"",concat("survei/isisurvei/2/", dp.kd_mata_kuliah , "/",mk.nama_mata_kuliah)) AS ada_mk,
+        IF((! ISNULL(s1.id_survei)),"",concat("survei/isisurvei/1/" , d.kd_dosen , "/" ,dp.kd_mata_kuliah , "/" , bk.nama_lengkap)) AS ada_dosen,dp.kd_mata_kuliah
             ,d.kd_dosen
             ,bk.nama_lengkap as nama_dosen
             ,mk.nama_mata_kuliah';

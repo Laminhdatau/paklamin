@@ -11,16 +11,14 @@
                 <ul class="nav child_menu">
                     <li><a href="<?php echo base_url('kuisdosen'); ?>">Kuis Dosen</a></li>
                     <li><a href="<?php echo base_url('kuismatakuliah'); ?>">Kuis Mata Kuliah</a></li>
+                    <li><a href="<?php echo base_url('angket'); ?>">Option Jawaban</a></li>
                     <li><a href="<?php echo base_url('jenissurvei'); ?>">Jenis Survei</a></li>
 
                     <li><a>Grafik Hasil Survei <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu" style="display: block;">
                             <li class="sub_menu"></li>
-                            <li><a href="<?php echo base_url('grafik'); ?>">Prodi TI</a></li>
-                            <li><a href="<?php echo base_url('grafik/getTHP'); ?>">Prodi THP</a></li>
-                            <li><a href="<?php echo base_url('grafik/getMPP'); ?>">Prodi MPP</a></li>
-                            <li><a href="<?php echo base_url('grafik/getTRP'); ?>">Prodi TRP</a></li>
-
+                            <li><a href="<?php echo base_url('grafik'); ?>">Grafik Dosen</a></li>
+                            <!-- <li><a href="<?php echo base_url('grafik'); ?>">Grafik Matakuliah</a></li> -->
                         </ul>
                     </li>
                 </ul>
@@ -31,6 +29,7 @@
                     <li><a href="<?php echo base_url('survei'); ?>">Kuisioner</a></li>
                 </ul>
             </li>
+        
         </ul>
     </div>
 </div>
