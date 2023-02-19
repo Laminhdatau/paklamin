@@ -15,7 +15,7 @@ class Survei extends MX_Controller
     {
 
         $nim = nim($this->session->userdata('security')->id_cession);
-
+        $data['active_periods'] = $this->m_survei->get_active_periods();
         $a['data'] = $this->m_survei->getData($nim);
         $a['layout'] = 'v_survei';
         $a['modules'] = 'survei';
@@ -150,11 +150,9 @@ class Survei extends MX_Controller
             // redirect(base_url('survei'));
             redirect('id=' . md5('survei'));
         }
-
-        
     }
-
-
-
-    
+    public function get_active_periods()
+    {
+        $this->m_survei->get_active_periods();
+    }
 }

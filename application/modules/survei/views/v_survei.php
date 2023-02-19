@@ -36,10 +36,17 @@
             </div>
             <div class="x_content text-black">
                 <div class="row">
+                    <button id="buttonmulai" class="btn btn-circle btn-success mx-auto" onclick="startCountdown()">Mulai Isi Kuisioner</button>
                     <div class="col-sm-12 col-xs-12 justify-content-between">
                         <!-- =============================================== -->
                         <br />
-                        <table class="col-md-12 col-sm-12 col-xs-10 table table-bordered">
+
+                        <span><b>
+                                <p class="text-center text-danger" id="countdown"></p>
+                            </b></span>
+
+                        <table id="formkuis" class="col-md-12 col-sm-12 col-xs-10 table table-bordered">
+
                             <thead>
                                 <?php echo $this->session->flashdata('message'); ?>
                                 <tr>
@@ -64,12 +71,12 @@
                                     } else {
                                         $button2 = "secondary";
                                     }
-                                    
+
 
                                 ?>
 
                                     <tr>
-                                        <td  >
+                                        <td>
                                             <?php if ($lamin == $dk->kd_mata_kuliah) { ?>
                                                 <span></span>
                                             <?php } else {
@@ -87,7 +94,7 @@
                                             <?php } ?>
 
                                         </td>
-                                        <td  >
+                                        <td>
                                             <?php if ($lamin1 == $dk->kd_dosen) { ?>
                                                 <span></span>
                                             <?php } else {
@@ -111,3 +118,58 @@
         </div>
     </div>
 <?php } ?>
+
+
+
+<script>
+    $(document).ready(function() {
+        // Fetch the active periods from the controller using AJAX
+        $.ajax({
+            url: "<?php echo base_url('survei/get_active_periods'); ?>",
+            dataType: "json",
+            success: function(data) {
+                // Check if there are any active records
+                if (data.length > 0) {
+                    // Set the countdown timer to the end of the first active record
+                    var waktu_selesai = new Date(data[0].waktu_selesai).getTime();
+                    countDownDate = waktu_selesai;
+
+                    // Enable the start button
+                    $("#buttonmulai").prop("disabled", false);
+                } else {
+                    // Disable the start button
+                    $("#buttonmulai").prop("disabled", true);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+
+        // setInterval for countdown timer
+        var countDownDate = new Date().getTime() + 60000; // 60 seconds from now
+
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the countdown timer
+            $("#countdown-timer").html(minutes + "m " + seconds + "s ");
+
+            // If the countdown is finished, display "EXPIRED" and disable the button
+            if (distance < 0) {
+                clearInterval(x);
+                $("#countdown-timer").html("EXPIRED");
+                $("#buttonmulai").prop("disabled", true);
+            }
+        }, 1000);
+
+        // Click event for the start button
+        $("#buttonmulai").on("click", function() {
+            // Redirect to the questionnaire page
+            window.location = "<?php echo base_url('survei'); ?>";
+        });
+    });
+</script>

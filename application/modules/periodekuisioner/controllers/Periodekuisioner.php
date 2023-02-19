@@ -22,14 +22,12 @@ class Periodekuisioner extends MX_Controller
     public function simpan_data()
     {
         $id = $this->input->post('id_pkuisioner');
-        $data['periode_perkuiahan'] = $this->input->post('periode_perkuiahan');
-        $data['periodekuisioner'] = $this->input->post('periodekuisioner');
         $data['id_periode_perkuliahan'] = $this->input->post('id_periode_perkuliahan');
         $data['tmt'] = $this->input->post('tmt');
         $data['tst'] = $this->input->post('tst');
 
         if ($id == "") {
-            $data['id_pkuisioner'] = uuid_generator();
+            $data['id_pkuesioner'] = uuid_generator();
             $this->m_periodekuisioner->save_periodekuisioner($data);
         } else {
             $this->m_periodekuisioner->update_data($id, $data);

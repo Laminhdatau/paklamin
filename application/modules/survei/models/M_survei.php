@@ -132,4 +132,14 @@ class M_survei extends CI_Model
         and kp.nim='20501049'
         and date(now()) BETWEEN date(tk.tmt) and date(tk.tst)")->result();
     }
+
+    public function get_active_periods()
+    {
+        $now = date('Y-m-d H:i:s');
+        $query = $this->db->where('waktu_mulai <=', $now)
+            ->where('waktu_selesai >=', $now)
+            ->get('v_counterwaktu');
+
+        return $query->result();
+    }
 }

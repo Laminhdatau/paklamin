@@ -2,7 +2,7 @@
     <div class="menu_section">
 
         <?php
-        for ($i = 1; $i <= 7; $i++) {
+        for ($i = 1; $i <= 9; $i++) {
 
             $mn[$i] = 0;
         }
@@ -17,6 +17,7 @@
                 $mn[2] = 1;
                 $mn[3] = 1;
                 $mn[4] = 1;
+                $mn[8] = 1;
             case 4:
                 $mn[5] = 1;
                 $mn[6] = 1;
@@ -54,6 +55,9 @@
                         <?php } ?>
                         <?php if ($mn[4]) { ?>
                             <li><a href="<?php echo base_url('jenissurvei'); ?>">Jenis Survei</a></li>
+                        <?php } ?>
+                        <?php if ($mn[8]) { ?>
+                            <li><a href="<?php echo base_url('periodekuisioner'); ?>">Periode Kuisioner</a></li>
                         <?php } ?>
 
 
