@@ -53,6 +53,10 @@
   <!-- jQuery -->
   <script src="<?= base_url(); ?>assets/vendors/jquery/dist/jquery.min.js"></script>
 
+
+  <!-- LIBRARY CKEDITOR UNTUK TEXTAREA -->
+  <script src="<?= base_url(); ?>assets/ckeditor/ckeditor.js"></script>
+
 </head>
 
 
@@ -174,7 +178,6 @@
             </div>
           </div> -->
       </div>
-
       <footer>
         <style>
           .footer {
@@ -194,11 +197,9 @@
       </footer>
     </div>
   </div>
-  
+
 
   <!-- ISI KUIS SMART WIZARD -->
-  <!-- <script src="<?= base_url(); ?>assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js" type="text/javascript"></script> -->
-
 
   <!-- Bootstrap -->
   <script src="<?= base_url(); ?>assets/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

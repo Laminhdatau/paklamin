@@ -50,3 +50,20 @@ GROUP BY
 ORDER BY
     dp.kd_dosen,
     s.id_jenis_survei,so.id_bagian_soal,j.id_jawaban
+
+
+
+
+
+
+
+
+    =======================Kuisioner
+
+    SELECT * 
+FROM t_periode_kuesioner tk
+,t_kelas_perkuliahan kp
+where tk.id_periode_perkuliahan=kp.id_periode_perkuliahan
+and kp.id_periode_perkuliahan in(SELECT id_periode_perkuliahan from t_periode_perkuliahan where status='1')
+and kp.nim='20501049'
+and date(now()) BETWEEN date(tk.tmt) and date(tk.tst)

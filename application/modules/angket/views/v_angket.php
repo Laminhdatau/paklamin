@@ -41,7 +41,8 @@
             if (id == null) {
                 $("#id_jawaban").val("");
                 $("#jawaban").val("");
-                $("#title_addedit").html('<h2>Tambah Data : Hari</h2>');
+                $("#bobot").val("");
+                $("#title_addedit").html('<h2>Tambah Data : Jawaban</h2>');
                 $("#btn").html('Simpan');
             }
         }
@@ -52,10 +53,11 @@
             $("#btn-tmb").show("slow");
         }
 
-        function editData(id, jawaban) {
+        function editData(id, jawaban,bobot) {
             $("#id_jawaban").val(id);
             $("#jawaban").val(jawaban);
-            $("#title_addedit").html('<h2>Edit Data : Hari</h2>');
+            $("#bobot").val(bobot);
+            $("#title_addedit").html('<h2>Edit Data : Jawaban</h2>');
             $("#btn").html('Update');
             showForm(id);
         }
@@ -82,7 +84,7 @@
     <div class="body clearfix">
         <div class="x_panel col-sm-12">
             <div class="x_title">
-                <h2><small>Pg: </small><b>Daftar Hari</b></h2>
+                <h2><small>Pg: </small><b>Daftar Jawaban</b></h2>
                 <ul class="nav navbar-right">
                     <li><a class="close-link" href="<?php echo base_url('home'); ?>"><i class="fa fa-close"></i></a></li>
                 </ul>
@@ -96,12 +98,20 @@
                                 <form class="" action="<?php echo base_url() . 'angket/simpan_data'; ?>" method="post" novalidate="">
                                     <!-- spacebar -->
                                     <div style="width: 100%; height:7px; border: 0px solid white;"></div>
-                                    <span class="section" id="title_addedit">Data Hari</span>
+                                    <span class="section" id="title_addedit">Data Jawaban</span>
                                     <div class="field item form-group">
-                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Hari<span class="required"> *</span></label>
+                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Jawaban<span class="required"> *</span></label>
                                         <div class="col-md-8 col-sm-8">
                                             <input class="form-control" data-validate-length-range="4" data-validate-words="2" id="jawaban" name="jawaban" placeholder="ex. minggu" required="required">
                                             <input type="hidden" id="id_jawaban" name="id_jawaban">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="field item form-group">
+                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Bobot<span class="required"> *</span></label>
+                                        <div class="col-md-8 col-sm-8">
+                                            <input class="form-control" data-validate-length-range="4" data-validate-words="2" id="bobot" name="bobot" placeholder="ex. 5" required="required">
+                                            
                                         </div>
                                     </div>
                                     <div class="ln_solid">
@@ -140,7 +150,8 @@
                                             </td>
                                         <?php } ?>
                                         <td width="3%"><b>No</b></td>
-                                        <td><b>Hari</b></td>
+                                        <td><b>Jawaban</b></td>
+                                        <td><b>Bobot</b></td>
                                         <?php if ($akun[0]->zp[2] == "1") { ?>
                                             <?php if ($akun[0]->zp[0] == "1") { ?>
                                                 <td width="3%">
@@ -165,9 +176,10 @@
                                             <?php } ?>
                                             <td><?php echo $no; ?></td>
                                             <td><?php echo $i->jawaban; ?></td>
+                                            <td><?php echo $i->bobot; ?></td>
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
-                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData(<?php echo $i->id_jawaban; ?>,'<?php echo $i->jawaban; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData(<?php echo $i->id_jawaban; ?>,'<?php echo $i->jawaban; ?>','<?php echo $i->bobot; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
                                                 </td>
                                             <?php } ?>
                                         </tr>

@@ -5,7 +5,7 @@ class M_angket extends CI_Model
     //put your code here
     public function getData()
     {
-        return $this->db->query('SELECT * , if((!isnull(id_jawaban))," "," ") as ada FROM t_jawaban where id_jawaban != 0 group by id_jawaban order by id_jawaban asc')->result();
+        return $this->db->query('SELECT id_jawaban,jawaban,bobot , if((!isnull(id_jawaban))," "," ") as ada FROM t_jawaban where id_jawaban != 0 group by id_jawaban order by id_jawaban asc')->result();
     }
     public function save_jawaban($data = array())
     {

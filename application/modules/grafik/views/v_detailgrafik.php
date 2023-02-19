@@ -10,13 +10,15 @@
         $dt = [];
         $bagian = [];
         $jumlah = [];
-        $persentase = [];
+        $persentasebot = [];
+        
         foreach ($data as $g) {
             if ($s != $g->nama_lengkap) {
                 if ($no > 0) {
                     $dt[$no]['bagian'] = $bagian;
                     $dt[$no]['jumlah'] = $jumlah;
-                    $dt[$no]['persentase'] = $persentase;
+                    $dt[$no]['persentasebot'] = $persentasebot;
+                   
                 }
                 $no++;
 
@@ -24,33 +26,30 @@
 
                     "nama" => $g->nama_lengkap,
                     "foto" => $g->kd_dosen . '.jpeg',
+                    "persentase" => $g->persentase
                 );
                 $s = $g->nama_lengkap;
                 $k = 0;
                 $bagian = [];
                 $jumlah = [];
-                $persentase = [];
+                $persentasebot = [];
+               
             }
             $k++;
             $bagian[$k] = $g->bagian_soal;
             $jumlah[$k] = $g->jumlah;
-            $persentase[$k] = $g->persentase;
+            $persentasebot[$k] = $g->persentase;
+            
         }
         if ($no > 0) {
             $dt[$no]['bagian'] = $bagian;
             $dt[$no]['jumlah'] = $jumlah;
-            $dt[$no]['persentase'] = $persentase;
+            $dt[$no]['persentasebot'] = $persentasebot;
+            
         }
         ?>
         <textarea hidden id="dataGrafik"><?php echo json_encode($dt); ?></textarea>
-        <div class="form-floating">
-            <select class="form-control selectpicker" data-live-search="true">
-                <?php foreach ($datadosen as $dd) { ?>
-                    <option value=""><?= $dd->nama_lengkap; ?></option>
-                <?php } ?>
 
-            </select>
-        </div>
         <br>
         <table class="table table-striped projects">
             <thead>
@@ -69,13 +68,7 @@
                         <td><?= $i; ?></td>
                         <td><?= $dt[$i]['nama']; ?></td>
                         <td><img style="width: 50px;height: 70px;" src="<?= base_url('file/images/pasphoto/') . $dt[$i]['foto'] ?>" alt=""></td>
-                        <td>
-                            <?php for ($j = 1; $j <= count($dt); $j++) { ?>
-                                <?php foreach ($dt[$j]['persentase'] as $p) { ?>
-                                    <?= $p; ?>
-                                <?php } ?>
-                            <?php } ?>
-                        </td>
+                        <td><?= $dt[$i]['persentase']; ?></td>
                         <td>
                             <canvas style="width: 50px;height: 20px;" id="myChart1[<?= $i; ?>]"></canvas>
                         </td>
