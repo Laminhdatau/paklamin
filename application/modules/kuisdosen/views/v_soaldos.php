@@ -109,15 +109,6 @@
                                     <div style="width: 100%; height:7px; border: 0px solid white;"></div>
                                     <span class="section" id="title_addedit">Data Soal</span>
                                     <div class="field item form-group">
-                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Soal<span class="required"> *</span></label>
-                                        <div class="col-md-8 col-sm-8">
-                                            <input class="form-control" data-validate-length-range="4" data-validate-words="2" id="soal_kepuasan" name="soal_kepuasan" placeholder="Pertanyaan" required="required">
-                                            <input type="hidden" id="id_soal" name="id_soal">
-
-                                        </div>
-                                    </div>
-
-                                    <div class="field item form-group">
                                         <label class="col-form-label col-md-2 col-sm-2 label-align">Bagian<span class="required"> *</span></label>
                                         <div class="col-md-8 col-sm-8">
                                             <select name="id_bagian_soal" id="id_bagian_soal" class="form-control">
@@ -125,6 +116,14 @@
                                                     <option value="<?= $bs->id_bagian_soal; ?>"><?= $bs->bagian_soal; ?></option>
                                                 <?php } ?>
                                             </select>
+                                        </div>
+                                    </div>
+                                    <div class="field item form-group">
+                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Soal<span class="required"> *</span></label>
+                                        <div class="col-md-8 col-sm-8">
+                                            <input class="form-control" data-validate-length-range="4" data-validate-words="2" id="soal_kepuasan" name="soal_kepuasan" placeholder="Pertanyaan" required="required">
+                                            <input type="hidden" id="id_soal" name="id_soal">
+
                                         </div>
                                     </div>
                                     <div class="ln_solid">

@@ -1,38 +1,32 @@
 <div class="main_content">
-
-
     <div class="x_panel">
         <div class="x_title">
             <h2>Grafik Hasil Survei</h2>
         </div>
         <div class="x_content">
-            <div class="form-floating col-md-6 col-sm-6">
+            <div class="form-floating col-md-12 col-sm-12">
                 <select name="mk" id="mk" class="form-control">
                     <?php foreach ($datamk as $mm) { ?>
                         <option value="<?= $mm->kd_mata_kuliah; ?>"><?= $mm->nama_mata_kuliah; ?></option>
                     <?php } ?>
                 </select>
-
             </div>
-            <div class="form-floating col-md-6 col-sm-6">
+            <!-- <div class="form-floating col-md-6 col-sm-6">
                 <a class="btn btn-info" href="<?= base_url('grafik/detailGrafik'); ?>">LIHAT DETAIL GRAFIK</a>
-            </div>
+            </div> -->
+            <div class="clearfix"></div>
         </div>
-
     </div>
-
-    <div class="col-md-12 col-sm-12" id="lamin">
+    <div class="x_panel col-md-12 col-sm-12" id="lamin">
         <div class="col-md-4 col-sm-6">
             <div class="x_panel">
                 <div class="x_title">
                     <h2>A. Kegiatan Awal Pembelajaran</h2>
                     <ul class="nav navbar-right panel_toolbox">
-
                     </ul>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-
                     <canvas id="grafika"></canvas>
                 </div>
             </div>
@@ -67,20 +61,51 @@
         </div>
     </div>
 
+    <!-- ==================================================GRAFIK KHUSUS PANTAUAN MAHASISWA DAN KELAS -->
+
+   
+
+
+    <div id="laminket" class="col-md-12 col-sm-12">
+        <?php
+
+        foreach ($opt as $o) {
+
+
+            switch ($o->id_jawaban) {
+                case 1:
+                    $color = 'purple';
+                    break;
+                case 2:
+                    $color = 'orange';
+                    break;
+                case 3:
+                    $color = 'yellow';
+                    break;
+                case 4:
+                    $color =  'green';
+                    break;
+                case 5:
+                    $color =  'blue';
+                    break;
+                default:
+                    $color = 'white';
+            }
+        ?>
+            <h2> <button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </h2>
+        <?php } ?>
+    </div>
+
 
 </div>
 
-
-
-
 <script src="<?= base_url('assets/'); ?>vendors/echarts/dist/echarts.min.js"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script> -->
-
 <script type="text/javascript">
     $('#lamin').hide();
+    $('#laminket').hide();
     $('#mk').change(function() {
         $('#lamin').show();
-
+        $('#laminket').show();
 
         var mk = $(this).val();
         $.ajax({
@@ -95,9 +120,6 @@
                 myChart[3] = document.getElementById("grafikc");
                 Chart.defaults.global.defaultFontFamily = "Lato";
                 Chart.defaults.global.defaultFontSize = 15;
-
-
-
                 let lbl = [];
                 let dt = [];
                 const a = [];
@@ -157,14 +179,19 @@
 
                 myChart1 = new Chart(myChart[1], {
                     type: 'pie',
+
                     data: dataKu[0]
+
                 });
                 myChart2 = new Chart(myChart[2], {
                     type: 'pie',
+
+
                     data: dataKu[1]
                 });
                 myChart3 = new Chart(myChart[3], {
                     type: 'pie',
+
                     data: dataKu[2]
                 });
 
@@ -172,7 +199,8 @@
 
 
         });
-       
+
+
 
 
     });

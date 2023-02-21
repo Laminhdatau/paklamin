@@ -57,7 +57,7 @@
             $("#btn-tmb").show("slow");
         }
 
-        function editData(id_soal, soal_kepuasan, id_jenis_survei, status,id_bagian_soal) {
+        function editData(id_soal, soal_kepuasan, id_jenis_survei, status, id_bagian_soal) {
             $("#id_soal").val(id_soal);
             $("#soal_kepuasan").val(soal_kepuasan);
             $("#id_jenis_survei").val(id_jenis_survei);
@@ -105,25 +105,27 @@
                                     <!-- spacebar -->
                                     <div style="width: 100%; height:7px; border: 0px solid white;"></div>
                                     <span class="section" id="title_addedit">Data Soal</span>
+
+                                    <div class="field item form-group">
+                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Bagian<span class="required"> *</span></label>
+                                        <div class="col-md-8 col-sm-8">
+                                            <select name="id_bagian_soal" id="id_bagian_soal" class="form-control">
+
+                                                <?php foreach ($bsoal as $bs) { ?>
+                                                    <option value="<?= $bs->id_bagian_soal; ?>"><?= $bs->bagian_soal; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="field item form-group">
                                         <label class="col-form-label col-md-2 col-sm-2 label-align">Soal<span class="required"> *</span></label>
                                         <div class="col-md-8 col-sm-8">
                                             <input class="form-control" data-validate-length-range="4" data-validate-words="2" id="soal_kepuasan" name="soal_kepuasan" placeholder="Pertanyaan" required="required">
                                             <input type="hidden" id="id_soal" name="id_soal">
-                                            
+
                                         </div>
                                     </div>
 
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Bagian<span class="required"> *</span></label>
-                                        <div class="col-md-8 col-sm-8">
-                                        <select name="id_bagian_soal" id="id_bagian_soal" class="form-control">
-
-                                            <?php foreach ($bsoal as $bs) { ?>
-                                                <option value="<?= $bs->id_bagian_soal; ?>"><?= $bs->bagian_soal; ?></option>
-                                            <?php } ?>
-                                        </select></div>
-                                    </div>
                                     <div class="ln_solid">
                                         <div class="form-group">
                                             <!-- spacebar -->
@@ -185,15 +187,14 @@
                                 <tbody>
                                     <?php $no = 0;
                                     foreach ($data as $i) {
-                                        
-                                        if($i->status=='0'){
-                                            $status= "<a href='kuismatakuliah/statusAktif/$i->id_soal' class='btn btn-warning btn-sm' data-popup='tooltip' data-placement='top' title='OK'><i class='fa fa-check' aria-hidden='true'></i></a>";
-                                            }
-                                            
-                                            else{
-                                                $status="<a href='kuismatakuliah/statusTidakAktif/$i->id_soal' class='btn btn-danger btn-sm' data-popup='tooltip' data-placement='top' title='OK'><i class='fa fa-close' aria-hidden='true'></i></a>";}
-    
-                                            // ==================end
+
+                                        if ($i->status == '0') {
+                                            $status = "<a href='kuismatakuliah/statusAktif/$i->id_soal' class='btn btn-warning btn-sm' data-popup='tooltip' data-placement='top' title='OK'><i class='fa fa-check' aria-hidden='true'></i></a>";
+                                        } else {
+                                            $status = "<a href='kuismatakuliah/statusTidakAktif/$i->id_soal' class='btn btn-danger btn-sm' data-popup='tooltip' data-placement='top' title='OK'><i class='fa fa-close' aria-hidden='true'></i></a>";
+                                        }
+
+                                        // ==================end
                                         $no++; ?>
 
                                         <tr>

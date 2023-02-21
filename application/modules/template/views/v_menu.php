@@ -10,23 +10,25 @@
 
         switch ($level) {
             case 8:
-                $mn[7] = 1;
+                $mn[8] = 1;
                 break;
             case 13:
                 $mn[1] = 1;
                 $mn[2] = 1;
                 $mn[3] = 1;
                 $mn[4] = 1;
-                $mn[8] = 1;
+                $mn[6] = 1;
+                $mn[7] = 1;
+                break;
             case 4:
-                $mn[5] = 1;
                 $mn[6] = 1;
-            case 1:
-                $mn[5] = 1;
-                $mn[6] = 1;
+                $mn[7] = 1;
+                break;
             case 2:
                 $mn[5] = 1;
+            case 1:
                 $mn[6] = 1;
+                $mn[7] = 1;
                 break;
         }
 
@@ -56,7 +58,7 @@
                         <?php if ($mn[4]) { ?>
                             <li><a href="<?php echo base_url('jenissurvei'); ?>">Jenis Survei</a></li>
                         <?php } ?>
-                        <?php if ($mn[8]) { ?>
+                        <?php if ($mn[5]) { ?>
                             <li><a href="<?php echo base_url('periodekuisioner'); ?>">Periode Kuisioner</a></li>
                         <?php } ?>
 
@@ -65,10 +67,10 @@
                             <ul class="nav child_menu" style="display: block;">
 
                                 <li class="sub_menu"></li>
-                                <?php if ($mn[5]) { ?>
+                                <?php if ($mn[6]) { ?>
                                     <li><a href="<?php echo base_url('grafik'); ?>">Grafik Dosen</a></li>
                                 <?php } ?>
-                                <?php if ($mn[6]) { ?>
+                                <?php if ($mn[7]) { ?>
                                     <li><a href="<?php echo base_url('grafik/index2'); ?>">Grafik Matakuliah</a></li>
                                 <?php } ?>
                             </ul>
@@ -78,7 +80,7 @@
             <?php } else {
 
             ?>
-                <?php if ($mn[7]) { ?>
+                <?php if ($mn[8]) { ?>
                     <li><a><i class="fa fa-book"></i> Kuisioner <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
 

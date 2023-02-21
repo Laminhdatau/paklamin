@@ -3,10 +3,11 @@
 
     <div class="x_panel">
         <div class="x_title">
-            <h2>Grafik Hasil Survei</h2>
+            <br>
+            <h2>Grafik Hasil Survei Dosen</h2>
         </div>
         <div class="x_content">
-            <div class="form-floating col-md-6 col-sm-6">
+            <div class="form-floating col-md-12 col-sm-12">
                 <select name="dosen" id="dosen" class="form-control">
                     <?php foreach ($datadosen as $dd) { ?>
                         <option value="<?= $dd->kd_dosen; ?>"><?= $dd->nama_lengkap; ?></option>
@@ -14,9 +15,9 @@
                 </select>
 
             </div>
-            <div class="form-floating col-md-6 col-sm-6">
+            <!-- <div class="form-floating col-md-6 col-sm-6">
                 <a class="btn btn-info" href="<?= base_url('grafik/detailGrafik'); ?>">LIHAT DETAIL GRAFIK</a>
-            </div>
+            </div> -->
         </div>
 
     </div>
@@ -67,7 +68,66 @@
         </div>
     </div>
 
+    <div id="laminket" class="col-md-12 col-sm-12">
+        <div class="col-md-4 col-sm-6">
+            <div class="x_panel">
+                <?php
 
+                foreach ($opt as $o) {
+
+
+                    switch ($o->id_jawaban) {
+                        case 1:
+                            $color = 'purple';
+                            break;
+                        case 2:
+                            $color = 'orange';
+                            break;
+                        case 3:
+                            $color = 'yellow';
+                            break;
+                        case 4:
+                            $color =  'green';
+                            break;
+                        case 5:
+                            $color =  'blue';
+                            break;
+                        default:
+                            $color = 'white';
+                    }
+                ?>
+                    <h2> <button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </h2>
+                <?php } ?>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 ">
+            <div class="x_panel">
+                <div class="x_content">
+                    <div class="flex">
+                        <ul class="list-inline text-center">
+                            <li>
+                                <span>TOTAL RESPON MAHASISWA</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="flex">
+                        <ul class="list-inline text-center">
+                            <li>
+                                <h3>123</h3>
+                                <span>Articles</span>
+                            </li>
+                            <li></li>
+                            <li>
+                                <h3>1234</h3>
+                                <span>Followers</span>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -78,8 +138,10 @@
 
 <script type="text/javascript">
     $('#lamin').hide();
+    $('#laminket').hide();
     $('#dosen').change(function() {
         $('#lamin').show();
+        $('#laminket').show();
 
 
         var dosen = $(this).val();
@@ -152,8 +214,6 @@
                         }]
                     };
                 }
-                //
-
 
                 myChart1 = new Chart(myChart[1], {
                     type: 'pie',
@@ -172,8 +232,5 @@
 
 
         });
-       
-
-
     });
 </script>

@@ -14,6 +14,7 @@ class Periodekuisioner extends MX_Controller
     public function index()
     {
         $a['data'] = $this->m_periodekuisioner->getData();
+        $a['periode'] = $this->m_periodekuisioner->getPeriode();
         $a['layout'] = 'v_periodekuisioner';
         $a['modules'] = 'periodekuisioner';
         echo Modules::run('template/backend', $a);
@@ -21,7 +22,7 @@ class Periodekuisioner extends MX_Controller
 
     public function simpan_data()
     {
-        $id = $this->input->post('id_pkuisioner');
+        $id = $this->input->post('id_pkuesioner');
         $data['id_periode_perkuliahan'] = $this->input->post('id_periode_perkuliahan');
         $data['tmt'] = $this->input->post('tmt');
         $data['tst'] = $this->input->post('tst');

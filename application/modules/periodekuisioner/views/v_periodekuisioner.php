@@ -39,7 +39,7 @@
             $("#btn-tmb").hide("slow");
 
             if (id == null) {
-                $("#id_periode_kuisioner").val("");
+                $("#id_pkuesioner").val("");
                 $("#tmt").val("");
                 $("#tst").val("");
                 $("#id_periode_perkuliahan").val("");
@@ -55,7 +55,7 @@
         }
 
         function editData(id, tst, tmt, id_periode_perkuliahan) {
-            $("#id_periode_kuisioner").val(id);
+            $("#id_pkuesioner").val(id);
             $("#tst").val(tst);
             $("#tmt").val(tmt);
             $("#id_periode_perkuliahan").val(id_periode_perkuliahan);
@@ -105,8 +105,8 @@
                                         <label class="col-form-label col-md-2 col-sm-2 label-align">Bagian<span class="required"> *</span></label>
                                         <div class="col-md-8 col-sm-8">
                                             <select name="id_periode_perkuliahan" id="id_periode_perkuliahan" class="form-control">
-                                                <?php foreach ($data as $d) { ?>
-                                                    <option value="<?= $d->id_periode_perkuliahan; ?>"><?= $d->daritahun; ?>/<?= $d->sampaitahun; ?></option>
+                                                <?php foreach ($periode as $d) { ?>
+                                                    <option value="<?= $d->id_periode_perkuliahan; ?>"><?= $d->daritahun; ?>/<?= $d->sampaitahun; ?> - <?= $d->semester ; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -115,7 +115,7 @@
                                         <label class="col-form-label col-md-2 col-sm-2 label-align">Mulai Tanggal<span class="required"> *</span></label>
                                         <div class="col-md-8 col-sm-8">
                                             <input type="date" class="form-control" data-validate-length-range="4" data-validate-words="2" id="tmt" name="tmt" required="required">
-                                            <input type="hidden" id="id_periode_kuisioner" name="id_periode_kuisioner">
+                                            <input type="hidden" id="id_pkuesioner" name="id_pkuesioner">
                                         </div>
                                     </div>
                                     <div class="field item form-group">
@@ -183,7 +183,7 @@
                                         <tr>
                                             <?php if ($akun[0]->zp[4] == "1") { ?>
                                                 <td>
-                                                    <input type="checkbox" <?= $i->ada; ?> class="chkCheckBoxId filled-in chk-col-red" value="<?php echo $i->id_pkuesioner; ?>" name="id_periode_kuisioner[]" id="<?php echo $no; ?>" onclick="cekit(<?php echo $no; ?>)" />
+                                                    <input type="checkbox" <?= $i->ada; ?> class="chkCheckBoxId filled-in chk-col-red" value="<?php echo $i->id_pkuesioner; ?>" name="id_pkuesioner[]" id="<?php echo $no; ?>" onclick="cekit(<?php echo $no; ?>)" />
                                                     <label for="<?php echo $no; ?>"></label>
                                                 </td>
                                             <?php } ?>
@@ -191,7 +191,7 @@
                                             <td><?php echo $i->tmt; ?></td>
                                             <td><?php echo $i->tst; ?></td>
                                             <td><?php echo $i->daritahun; ?>/<?php echo $i->sampaitahun; ?></td>
-                                            <td><?php echo $i->id_semester; ?></td>
+                                            <td><?php echo $i->semester; ?></td>
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
                                                     <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData(<?php echo $i->id_pkuesioner; ?>,'<?php echo $i->tmt; ?>','<?php echo $i->tst; ?>','<?php echo $i->id_periode_perkuliahan; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>

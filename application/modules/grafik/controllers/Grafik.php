@@ -17,6 +17,7 @@ class Grafik extends MX_Controller
         if ($prodi == '') {
             $prodi = null;
         }
+        $a['opt'] = $this->m_grafik->getOption();
         $a['datadosen'] = $this->m_grafik->getAllDosen($prodi);
         $a['layout'] = 'v_grafik';
         $a['modules'] = 'grafik';
@@ -28,6 +29,7 @@ class Grafik extends MX_Controller
         if ($prodi == '') {
             $prodi = null;
         }
+        $a['opt'] = $this->m_grafik->getOption();
         $a['datamk'] = $this->m_grafik->getAllMk($prodi);
         $a['layout'] = 'v_grafikmk';
         $a['modules'] = 'grafik';

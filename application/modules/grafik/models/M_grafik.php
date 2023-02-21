@@ -9,11 +9,20 @@ class M_grafik extends CI_Model
         if ($kd != null || $kd != "") {
 
 
-            $sql = "SELECT 1 as id_bagian_soal, j.id_jawaban, j.jawaban,bs.bagian_soal, COALESCE(ROUND( ( vg.jumlahsoal /(vtd.total_soal * vmd.ttl_mhs) ) * 100, 0 ),0) AS persentase FROM t_jawaban j LEFT JOIN v_grafik vg ON(vg.id_jawaban = j.id_jawaban AND vg.kd_dosen = '" . $kd . "' and vg.id_bagian_soal=1) LEFT JOIN t_bagian_soal bs ON(vg.id_bagian_soal = bs.id_bagian_soal) LEFT JOIN v_ttl_soal_dosen vtd ON(vtd.id_bagian_soal = vg.id_bagian_soal) LEFT JOIN v_total_mhs_dosen vmd ON(vmd.id_bagian_soal = vg.id_bagian_soal AND vg.kd_dosen = vmd.kd_dosen ) WHERE j.id_jawaban > 0 
+            $sql = "SELECT 1 as id_bagian_soal, j.id_jawaban, j.jawaban,bs.bagian_soal, COALESCE(ROUND( ( vg.jumlahsoal /(vtd.total_soal * vmd.total_mhs) ) * 100, 0 ),0) AS persentase FROM t_jawaban j LEFT JOIN v_grafik vg ON(vg.id_jawaban = j.id_jawaban AND vg.kd_dosen = '".$kd."' and vg.id_bagian_soal=1) 
+            LEFT JOIN t_bagian_soal bs ON(vg.id_bagian_soal = bs.id_bagian_soal) 
+            LEFT JOIN v_ttl_soal_dosen vtd ON(vtd.id_bagian_soal = vg.id_bagian_soal) 
+            LEFT JOIN v_total_mhs_dosen vmd ON(vg.kd_dosen = vmd.kd_dosen ) WHERE j.id_jawaban > 0
             UNION
-            SELECT 2 as id_bagian_soal, j.id_jawaban, j.jawaban,bs.bagian_soal, COALESCE(ROUND( ( vg.jumlahsoal /(vtd.total_soal * vmd.ttl_mhs) ) * 100, 0 ),0) AS persentase FROM t_jawaban j LEFT JOIN v_grafik vg ON(vg.id_jawaban = j.id_jawaban AND vg.kd_dosen = '" . $kd . "' and vg.id_bagian_soal=2) LEFT JOIN t_bagian_soal bs ON(vg.id_bagian_soal = bs.id_bagian_soal) LEFT JOIN v_ttl_soal_dosen vtd ON(vtd.id_bagian_soal = vg.id_bagian_soal) LEFT JOIN v_total_mhs_dosen vmd ON(vmd.id_bagian_soal = vg.id_bagian_soal AND vg.kd_dosen = vmd.kd_dosen ) WHERE j.id_jawaban > 0 
+            SELECT 2 as id_bagian_soal, j.id_jawaban, j.jawaban,bs.bagian_soal, COALESCE(ROUND( ( vg.jumlahsoal /(vtd.total_soal * vmd.total_mhs) ) * 100, 0 ),0) AS persentase FROM t_jawaban j LEFT JOIN v_grafik vg ON(vg.id_jawaban = j.id_jawaban AND vg.kd_dosen = '".$kd."' and vg.id_bagian_soal=2) 
+            LEFT JOIN t_bagian_soal bs ON(vg.id_bagian_soal = bs.id_bagian_soal) 
+            LEFT JOIN v_ttl_soal_dosen vtd ON(vtd.id_bagian_soal = vg.id_bagian_soal) 
+            LEFT JOIN v_total_mhs_dosen vmd ON(vg.kd_dosen = vmd.kd_dosen ) WHERE j.id_jawaban > 0
             UNION
-            SELECT 3 as id_bagian_soal, j.id_jawaban, j.jawaban,bs.bagian_soal, COALESCE(ROUND( ( vg.jumlahsoal /(vtd.total_soal * vmd.ttl_mhs) ) * 100, 0 ),0) AS persentase FROM t_jawaban j LEFT JOIN v_grafik vg ON(vg.id_jawaban = j.id_jawaban AND vg.kd_dosen = '" . $kd . "' and vg.id_bagian_soal=3) LEFT JOIN t_bagian_soal bs ON(vg.id_bagian_soal = bs.id_bagian_soal) LEFT JOIN v_ttl_soal_dosen vtd ON(vtd.id_bagian_soal = vg.id_bagian_soal) LEFT JOIN v_total_mhs_dosen vmd ON(vmd.id_bagian_soal = vg.id_bagian_soal AND vg.kd_dosen = vmd.kd_dosen ) WHERE j.id_jawaban > 0";
+            SELECT 3 as id_bagian_soal, j.id_jawaban, j.jawaban,bs.bagian_soal, COALESCE(ROUND( ( vg.jumlahsoal /(vtd.total_soal * vmd.total_mhs) ) * 100, 0 ),0) AS persentase FROM t_jawaban j LEFT JOIN v_grafik vg ON(vg.id_jawaban = j.id_jawaban AND vg.kd_dosen = '".$kd."' and vg.id_bagian_soal=3) 
+            LEFT JOIN t_bagian_soal bs ON(vg.id_bagian_soal = bs.id_bagian_soal) 
+            LEFT JOIN v_ttl_soal_dosen vtd ON(vtd.id_bagian_soal = vg.id_bagian_soal) 
+            LEFT JOIN v_total_mhs_dosen vmd ON(vg.kd_dosen = vmd.kd_dosen ) WHERE j.id_jawaban > 0";
             $hasil = $this->db->query($sql);
         }
         if ($hasil) {
@@ -28,62 +37,50 @@ class M_grafik extends CI_Model
         if ($kd != null || $kd != "") {
 
 
-            $sql = "SELECT 1 AS id_bagian_soal,
+            $sql = "SELECT
+            1 AS id_bagian_soal,
             j.id_jawaban,
             j.jawaban,
-            bs.bagian_soal,
             vgm.jumlahsoal,
-            COALESCE(ROUND(( vgm.jumlahsoal /(vtd.total_soal * vmd.ttl_mhs) ) * 100,  0 ),0) AS persentase
+            COALESCE( ROUND( ( vgm.jumlahsoal /(vtm.total_soal * vmk.ttl_mhs)) * 100, 0 ),0) AS persentase
         FROM t_jawaban j
         LEFT JOIN v_grafik_mk vgm ON
-                (vgm.id_jawaban = j.id_jawaban 
-                AND vgm.kd_mata_kuliah='" . $kd . "' 
-                AND vgm.id_bagian_soal = 1)
-        LEFT JOIN t_bagian_soal bs ON(vgm.id_bagian_soal = bs.id_bagian_soal)
-        LEFT JOIN v_total_soal_mk vtd ON(vtd.id_bagian_soal = vgm.id_bagian_soal)
-        LEFT JOIN v_total_mhs_mk vmd ON(vmd.id_bagian_soal = vgm.id_bagian_soal 
-                                        AND vgm.kd_mata_kuliah= vmd.kd_mata_kuliah)
-        WHERE
-            j.id_jawaban > 0
-        
+            (vgm.id_jawaban = j.id_jawaban 
+                AND vgm.kd_mata_kuliah = '".$kd."' 
+                AND vgm.id_bagian_soal = 1  )
+        LEFT JOIN v_total_soal_mk vtm ON(vtm.id_bagian_soal = vgm.id_bagian_soal)
+        LEFT JOIN v_total_mhs_mk vmk ON(vgm.kd_mata_kuliah = vmk.kd_mata_kuliah)
+        WHERE j.id_jawaban > 0
         UNION
-        
-        SELECT 2 AS id_bagian_soal,
+        SELECT
+            2 AS id_bagian_soal,
             j.id_jawaban,
             j.jawaban,
-            bs.bagian_soal,
             vgm.jumlahsoal,
-            COALESCE(ROUND(( vgm.jumlahsoal /(vtd.total_soal * vmd.ttl_mhs) ) * 100,  0 ),0) AS persentase
+            COALESCE( ROUND( ( vgm.jumlahsoal /(vtm.total_soal * vmk.ttl_mhs)) * 100, 0 ),0) AS persentase
         FROM t_jawaban j
         LEFT JOIN v_grafik_mk vgm ON
-                (vgm.id_jawaban = j.id_jawaban 
-                AND vgm.kd_mata_kuliah='" . $kd . "'  
-                AND vgm.id_bagian_soal = 2)
-        LEFT JOIN t_bagian_soal bs ON(vgm.id_bagian_soal = bs.id_bagian_soal)
-        LEFT JOIN v_total_soal_mk vtd ON(vtd.id_bagian_soal = vgm.id_bagian_soal)
-        LEFT JOIN v_total_mhs_mk vmd ON(vmd.id_bagian_soal = vgm.id_bagian_soal 
-                                        AND vgm.kd_mata_kuliah= vmd.kd_mata_kuliah)
-        WHERE
-            j.id_jawaban > 0
+            (vgm.id_jawaban = j.id_jawaban 
+                AND vgm.kd_mata_kuliah = '".$kd."'
+                AND vgm.id_bagian_soal = 2  )
+        LEFT JOIN v_total_soal_mk vtm ON(vtm.id_bagian_soal = vgm.id_bagian_soal)
+        LEFT JOIN v_total_mhs_mk vmk ON(vgm.kd_mata_kuliah = vmk.kd_mata_kuliah)
+        WHERE j.id_jawaban > 0
         UNION
-        
-        SELECT 3 AS id_bagian_soal,
+        SELECT
+            3 AS id_bagian_soal,
             j.id_jawaban,
             j.jawaban,
-            bs.bagian_soal,
             vgm.jumlahsoal,
-            COALESCE(ROUND(( vgm.jumlahsoal /(vtd.total_soal * vmd.ttl_mhs) ) * 100,  0 ),0) AS persentase
+            COALESCE( ROUND( ( vgm.jumlahsoal /(vtm.total_soal * vmk.ttl_mhs)) * 100, 0 ),0) AS persentase
         FROM t_jawaban j
         LEFT JOIN v_grafik_mk vgm ON
-                (vgm.id_jawaban = j.id_jawaban 
-                AND vgm.kd_mata_kuliah='" . $kd . "'  
-                AND vgm.id_bagian_soal = 3)
-        LEFT JOIN t_bagian_soal bs ON(vgm.id_bagian_soal = bs.id_bagian_soal)
-        LEFT JOIN v_total_soal_mk vtd ON(vtd.id_bagian_soal = vgm.id_bagian_soal)
-        LEFT JOIN v_total_mhs_mk vmd ON(vmd.id_bagian_soal = vgm.id_bagian_soal 
-                                        AND vgm.kd_mata_kuliah= vmd.kd_mata_kuliah)
-        WHERE
-            j.id_jawaban > 0";
+            (vgm.id_jawaban = j.id_jawaban 
+                AND vgm.kd_mata_kuliah = '".$kd."' 
+                AND vgm.id_bagian_soal = 3  )
+        LEFT JOIN v_total_soal_mk vtm ON(vtm.id_bagian_soal = vgm.id_bagian_soal)
+        LEFT JOIN v_total_mhs_mk vmk ON(vgm.kd_mata_kuliah = vmk.kd_mata_kuliah)
+        WHERE j.id_jawaban > 0";
             $hasil = $this->db->query($sql);
         }
         if ($hasil) {
@@ -168,7 +165,7 @@ class M_grafik extends CI_Model
         order by d.id_prodi,bk.nama_lengkap")->result();
     }
 
-    function getAllMk($idp=null)
+    function getAllMk($idp = null)
     {
         $w = "";
         if ($idp != null) {
@@ -196,5 +193,9 @@ class M_grafik extends CI_Model
     {
         $this->db->where('id_survei', $id1);
         return $this->db->delete('t_survei');
+    }
+
+    public function getOption(){
+        return $this->db->query("select * from t_jawaban where id_jawaban !=0 order by id_jawaban")->result();
     }
 }

@@ -118,58 +118,25 @@
         </div>
     </div>
 <?php } ?>
-
-
-
 <script>
+    $('#formkuis').hide();
     $(document).ready(function() {
-        // Fetch the active periods from the controller using AJAX
-        $.ajax({
-            url: "<?php echo base_url('survei/get_active_periods'); ?>",
-            dataType: "json",
-            success: function(data) {
-                // Check if there are any active records
-                if (data.length > 0) {
-                    // Set the countdown timer to the end of the first active record
-                    var waktu_selesai = new Date(data[0].waktu_selesai).getTime();
-                    countDownDate = waktu_selesai;
-
-                    // Enable the start button
-                    $("#buttonmulai").prop("disabled", false);
-                } else {
-                    // Disable the start button
-                    $("#buttonmulai").prop("disabled", true);
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
-        });
-
-        // setInterval for countdown timer
-        var countDownDate = new Date().getTime() + 60000; // 60 seconds from now
-
-        var x = setInterval(function() {
-            var now = new Date().getTime();
-            var distance = countDownDate - now;
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Display the countdown timer
-            $("#countdown-timer").html(minutes + "m " + seconds + "s ");
-
-            // If the countdown is finished, display "EXPIRED" and disable the button
-            if (distance < 0) {
-                clearInterval(x);
-                $("#countdown-timer").html("EXPIRED");
-                $("#buttonmulai").prop("disabled", true);
-            }
-        }, 1000);
-
-        // Click event for the start button
-        $("#buttonmulai").on("click", function() {
-            // Redirect to the questionnaire page
-            window.location = "<?php echo base_url('survei'); ?>";
+        $('#buttonmulai').click(function() {
+            startCountdown();
+            $('#formkuis').show();
+            $('#formkuis').slideDown();
+            $('#buttonmulai').hide();
         });
     });
+    function startCountdown() {
+        var interval = setInterval(function() {
+            $.ajax({
+                url: '<?php echo base_url('survei/get_active_periods'); ?>',
+                type: 'GET',
+                success: function(result) {
+                    $('#countdown').text(result);
+                }
+            });
+        }, 2000, $('#formkuis').hide());
+    }
 </script>
