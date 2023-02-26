@@ -9,15 +9,16 @@ class Survei extends MX_Controller
     {
         parent::__construct();
         $this->load->model('m_survei');
+        $this->load->library('form_validation');
     }
 
     public function index()
     {
 
         $nim = nim($this->session->userdata('security')->id_cession);
-        $data['active_periods'] = $this->m_survei->get_active_periods();
+        // $data['active_periods'] = $this->m_survei->get_active_periods();
         $a['data'] = $this->m_survei->getData($nim);
-        
+
         $a['layout'] = 'v_survei';
         $a['modules'] = 'survei';
         echo Modules::run('template/backend', $a);
@@ -152,10 +153,10 @@ class Survei extends MX_Controller
             redirect('id=' . md5('survei'));
         }
     }
-    public function get_active_periods()
-    {
-        $data = $this->m_survei->get_active_periods();
+    // public function get_active_periods()
+    // {
+    //     $data = $this->m_survei->get_active_periods();
 
-        echo json_encode($data);
-    }
+    //     echo json_encode($data);
+    // }
 }

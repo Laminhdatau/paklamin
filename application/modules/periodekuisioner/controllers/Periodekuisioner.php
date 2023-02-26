@@ -23,17 +23,29 @@ class Periodekuisioner extends MX_Controller
     public function simpan_data()
     {
         $id = $this->input->post('id_pkuesioner');
-        $data['id_periode_perkuliahan'] = $this->input->post('id_periode_perkuliahan');
         $data['tmt'] = $this->input->post('tmt');
         $data['tst'] = $this->input->post('tst');
-
+        $data['id_periode_perkuliahan'] = $this->input->post('id_periode_perkuliahan');
         if ($id == "") {
             $data['id_pkuesioner'] = uuid_generator();
-            $this->m_periodekuisioner->save_periodekuisioner($data);
+            if ($this->m_periodekuisioner->save_periodekuisioner($data)) {
+                $this->session->set_flashdata('message', '<div class="alert" style="background-color:green;color:white;weight:bold;" role="alert">Berhasil Simpan<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+                redirect('id=' . md5('periodekuisioner'));
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Simpan<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+                redirect('id=' . md5('periodekuisioner'));
+            };
+            redirect('id=' . md5('periodekuisioner'));
         } else {
-            $this->m_periodekuisioner->update_data($id, $data);
+            if ($this->m_periodekuisioner->update_data($id, $data)) {
+                $this->session->set_flashdata('message', '<div class="alert" style="background-color:orange;color:black;weight:bold;" role="alert">Berhasil Update<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+                redirect('id=' . md5('periodekuisioner'));
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Update<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+                redirect('id=' . md5('periodekuisioner'));
+            };
+            redirect('id=' . md5('periodekuisioner'));
         }
-        redirect('id=' . md5('periodekuisioner'));
     }
 
     public function delete_data()
@@ -42,6 +54,16 @@ class Periodekuisioner extends MX_Controller
         foreach ($dtdel as $id) {
             $this->m_periodekuisioner->hapus_data($id);
         }
+        redirect('id=' . md5('periodekuisioner'));
+    }
+    public function aktifkan($id)
+    {
+        $this->m_periodekuisioner->updateStatus1($id);
+        redirect('id=' . md5('periodekuisioner'));
+    }
+    public function matikan($id)
+    {
+        $this->m_periodekuisioner->updateStatus0($id);
         redirect('id=' . md5('periodekuisioner'));
     }
 }

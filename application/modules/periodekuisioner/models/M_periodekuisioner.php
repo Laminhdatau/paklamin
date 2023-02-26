@@ -13,12 +13,13 @@ class M_periodekuisioner extends CI_Model
         ta.tmt_tahun_ajaran AS daritahun,
         ta.tst_tahun_ajaran AS sampaitahun,
         m.semester,
+        pku.status,
         pp.status AS status_semester,
         IF(
             (
                 ! ISNULL(pp.id_periode_perkuliahan)
             ),
-            " ",
+            "disabled=\"disabled\" ",
             " "
         ) AS ada
     FROM
@@ -27,7 +28,9 @@ class M_periodekuisioner extends CI_Model
         t_periode_perkuliahan pp
         ,m_semester m
     WHERE
-        ta.id_tahun_ajaran = pp.id_tahun_ajaran AND pp.id_periode_perkuliahan = pku.id_periode_perkuliahan AND pku.id_pkuesioner != 0 AND m.id_semester=pp.id_semester
+        ta.id_tahun_ajaran = pp.id_tahun_ajaran 
+        AND pp.id_periode_perkuliahan = pku.id_periode_perkuliahan 
+        AND m.id_semester=pp.id_semester
     GROUP BY
         pku.id_pkuesioner,
         pp.id_periode_perkuliahan
@@ -36,13 +39,27 @@ class M_periodekuisioner extends CI_Model
     }
     function getPeriode()
     {
-        return $this->db->query("SELECT pp.id_periode_perkuliahan,m.semester,ta.tmt_tahun_ajaran as daritahun,ta.tst_tahun_ajaran as sampaitahun,ta.status_tahun_ajaran
-        FROM t_periode_perkuliahan pp
-        ,t_tahun_ajaran ta
-        ,m_semester m where
-         pp.status='1'
-        and ta.id_tahun_ajaran=pp.id_tahun_ajaran
-        and m.id_semester=pp.id_semester")->result();
+        return $this->db->query("SELECT
+        pp.id_periode_perkuliahan,
+        pp.status,
+        m.semester,
+        ta.tmt_tahun_ajaran AS daritahun,
+        ta.tst_tahun_ajaran AS sampaitahun,
+        ta.status_tahun_ajaran
+    FROM
+        t_periode_perkuliahan pp,
+        t_tahun_ajaran ta,
+        m_semester m
+    WHERE
+         pp.id_periode_perkuliahan not IN(
+        SELECT
+            pp.id_periode_perkuliahan
+        FROM
+            t_periode_kuesioner pk 
+             where pp.id_periode_perkuliahan=pk.id_periode_perkuliahan 
+    ) AND m.id_semester=pp.id_semester 
+    and pp.id_tahun_ajaran=ta.id_tahun_ajaran
+    and pp.status='1'")->result();
     }
     public function save_periodekuisioner($data = array())
     {
@@ -57,5 +74,16 @@ class M_periodekuisioner extends CI_Model
     {
         $this->db->where(array('id_pkuesioner' => $where));
         return $this->db->update('t_periode_kuesioner', $data);
+    }
+
+    public function updateStatus1($id){
+        $this->db->where('id_pkuesioner',$id);
+        $this->db->set('status','1');
+        $this->db->update('t_periode_kuesioner');
+    }
+    public function updateStatus0($id){
+        $this->db->where('id_pkuesioner',$id);
+        $this->db->set('status','0');
+        $this->db->update('t_periode_kuesioner');
     }
 }

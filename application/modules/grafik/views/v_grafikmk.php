@@ -1,3 +1,4 @@
+
 <div class="main_content">
     <div class="x_panel">
         <div class="x_title">
@@ -63,7 +64,7 @@
 
     <!-- ==================================================GRAFIK KHUSUS PANTAUAN MAHASISWA DAN KELAS -->
 
-   
+
 
 
     <div id="laminket" class="col-md-12 col-sm-12">

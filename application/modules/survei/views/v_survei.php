@@ -28,22 +28,27 @@
         <div class="x_panel col-sm-12 col-xs-10">
             <div class="x_title">
 
-                <h2><small>Pg: </small><b> SURVEI KEPUASAN</b></h2>
+                <h2><small>Pg: </small><b> Survei Kepuasan</b></h2>
                 <ul class="nav navbar-right">
                     <li><a class="close-link" href="<?php echo base_url('home'); ?>"><i class="fa fa-close"></i></a></li>
                 </ul>
+
                 <div class="clearfix"></div>
             </div>
             <div class="x_content text-black">
+                <h6 class="text-center">Silahkan Isi Kuisioner Dosen dan Matakuliah dibawah ini sesuai dengan pendapat anda..!!</h6>
+                <h6>Ket: </h6>
+                <h6><button class="btn alert-warning"></button>   : Belum Terisi</h6>
+                <h6><button class="btn alert-secondary"></button> : Sudah Terisi</h6>
                 <div class="row">
-                    <button id="buttonmulai" class="btn btn-circle btn-success mx-auto" onclick="startCountdown()">Mulai Isi Kuisioner</button>
                     <div class="col-sm-12 col-xs-12 justify-content-between">
                         <!-- =============================================== -->
-                        <br />
+
 
                         <span><b>
                                 <p class="text-center text-danger" id="countdown"></p>
-                            </b></span>
+                            </b>
+                        </span>
 
                         <table id="formkuis" class="col-md-12 col-sm-12 col-xs-10 table table-bordered">
 
@@ -118,25 +123,3 @@
         </div>
     </div>
 <?php } ?>
-<script>
-    $('#formkuis').hide();
-    $(document).ready(function() {
-        $('#buttonmulai').click(function() {
-            startCountdown();
-            $('#formkuis').show();
-            $('#formkuis').slideDown();
-            $('#buttonmulai').hide();
-        });
-    });
-    function startCountdown() {
-        var interval = setInterval(function() {
-            $.ajax({
-                url: '<?php echo base_url('survei/get_active_periods'); ?>',
-                type: 'GET',
-                success: function(result) {
-                    $('#countdown').text(result);
-                }
-            });
-        }, 2000, $('#formkuis').hide());
-    }
-</script>

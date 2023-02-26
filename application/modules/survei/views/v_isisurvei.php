@@ -153,13 +153,11 @@
                                 <?php } ?>
                             </table>
                         </div>
-                        <div id="step-4" class="content" style="display: none;">
-                            <h2 class="kritiksaran" style="background-color: #FFA600; color: #fff;width: 95%;height:5%;padding: 5px;"><b>Kritik dan Saran</b></h2>
+                        <div id="step-4" class="content" style="display: none;" style="max-height: 40px;">
+                            <h2 class=" kritiksaran" style="background-color: #FFA600; color: #fff;width: 95%;height:5%;padding: 5px;"><b>Kritik dan Saran</b></h2>
                             <div class="x_content">
                                 <div id="alerts">Silahkan Deskripsikan/Berikan Masukan Anda</div>
-                                
-                                <textarea name="komentar" id="komentar" class="editor-wrapper placeholderText col-md-8" contenteditable="true"></textarea>
-
+                                <textarea name="komentar" id="komentar" class="editor-wrapper placeholderText col-md-4" contenteditable="true"></textarea>
                             </div>
                         </div>
                     </div>
@@ -170,10 +168,8 @@
 </div>
 
 <script>
-                // Replace the <textarea id="editor1"> with a CKEditor 4
-                // instance, using default configuration.
-                CKEDITOR.replace( 'komentar' );
-            </script>
+    CKEDITOR.replace('komentar');
+</script>
 
 
 <script>
@@ -427,11 +423,9 @@
         var _setupStep = function($this, curStep, selStep) {
             $(curStep, $this.target).removeClass("selected");
             $(curStep, $this.target).addClass("done");
-
             $(selStep, $this.target).removeClass("disabled");
             $(selStep, $this.target).removeClass("done");
             $(selStep, $this.target).addClass("selected");
-
             $(selStep, $this.target).attr("isDone", 1);
 
             _adjustButton($this);

@@ -17,6 +17,7 @@ class Grafik extends MX_Controller
         if ($prodi == '') {
             $prodi = null;
         }
+        $kd = $this->input->post('dosen');
         $a['opt'] = $this->m_grafik->getOption();
         $a['datadosen'] = $this->m_grafik->getAllDosen($prodi);
         $a['layout'] = 'v_grafik';
@@ -50,7 +51,7 @@ class Grafik extends MX_Controller
         echo Modules::run('template/backend', $a);
     }
 
-    
+
     public function getGrafik()
     {
         $kd = $this->input->post('dosen');
@@ -62,5 +63,11 @@ class Grafik extends MX_Controller
         $kd = $this->input->post('mk');
         $mk = $this->m_grafik->getData2($kd);
         echo json_encode($mk);
+    }
+    public function getSeluruh()
+    {
+        $kd = $this->input->post('dosen');
+        $semua = $this->m_grafik->getSeluruh($kd);
+        echo json_encode($semua);
     }
 }

@@ -9,17 +9,17 @@ class M_grafik extends CI_Model
         if ($kd != null || $kd != "") {
 
 
-            $sql = "SELECT 1 as id_bagian_soal, j.id_jawaban, j.jawaban,bs.bagian_soal, COALESCE(ROUND( ( vg.jumlahsoal /(vtd.total_soal * vmd.total_mhs) ) * 100, 0 ),0) AS persentase FROM t_jawaban j LEFT JOIN v_grafik vg ON(vg.id_jawaban = j.id_jawaban AND vg.kd_dosen = '".$kd."' and vg.id_bagian_soal=1) 
+            $sql = "SELECT 1 as id_bagian_soal, j.id_jawaban, j.jawaban,bs.bagian_soal, COALESCE(ROUND( ( vg.jumlahsoal /(vtd.total_soal * vmd.total_mhs) ) * 100, 0 ),0) AS persentase FROM t_jawaban j LEFT JOIN v_grafik vg ON(vg.id_jawaban = j.id_jawaban AND vg.kd_dosen = '" . $kd . "' and vg.id_bagian_soal=1) 
             LEFT JOIN t_bagian_soal bs ON(vg.id_bagian_soal = bs.id_bagian_soal) 
             LEFT JOIN v_ttl_soal_dosen vtd ON(vtd.id_bagian_soal = vg.id_bagian_soal) 
             LEFT JOIN v_total_mhs_dosen vmd ON(vg.kd_dosen = vmd.kd_dosen ) WHERE j.id_jawaban > 0
             UNION
-            SELECT 2 as id_bagian_soal, j.id_jawaban, j.jawaban,bs.bagian_soal, COALESCE(ROUND( ( vg.jumlahsoal /(vtd.total_soal * vmd.total_mhs) ) * 100, 0 ),0) AS persentase FROM t_jawaban j LEFT JOIN v_grafik vg ON(vg.id_jawaban = j.id_jawaban AND vg.kd_dosen = '".$kd."' and vg.id_bagian_soal=2) 
+            SELECT 2 as id_bagian_soal, j.id_jawaban, j.jawaban,bs.bagian_soal, COALESCE(ROUND( ( vg.jumlahsoal /(vtd.total_soal * vmd.total_mhs) ) * 100, 0 ),0) AS persentase FROM t_jawaban j LEFT JOIN v_grafik vg ON(vg.id_jawaban = j.id_jawaban AND vg.kd_dosen = '" . $kd . "' and vg.id_bagian_soal=2) 
             LEFT JOIN t_bagian_soal bs ON(vg.id_bagian_soal = bs.id_bagian_soal) 
             LEFT JOIN v_ttl_soal_dosen vtd ON(vtd.id_bagian_soal = vg.id_bagian_soal) 
             LEFT JOIN v_total_mhs_dosen vmd ON(vg.kd_dosen = vmd.kd_dosen ) WHERE j.id_jawaban > 0
             UNION
-            SELECT 3 as id_bagian_soal, j.id_jawaban, j.jawaban,bs.bagian_soal, COALESCE(ROUND( ( vg.jumlahsoal /(vtd.total_soal * vmd.total_mhs) ) * 100, 0 ),0) AS persentase FROM t_jawaban j LEFT JOIN v_grafik vg ON(vg.id_jawaban = j.id_jawaban AND vg.kd_dosen = '".$kd."' and vg.id_bagian_soal=3) 
+            SELECT 3 as id_bagian_soal, j.id_jawaban, j.jawaban,bs.bagian_soal, COALESCE(ROUND( ( vg.jumlahsoal /(vtd.total_soal * vmd.total_mhs) ) * 100, 0 ),0) AS persentase FROM t_jawaban j LEFT JOIN v_grafik vg ON(vg.id_jawaban = j.id_jawaban AND vg.kd_dosen = '" . $kd . "' and vg.id_bagian_soal=3) 
             LEFT JOIN t_bagian_soal bs ON(vg.id_bagian_soal = bs.id_bagian_soal) 
             LEFT JOIN v_ttl_soal_dosen vtd ON(vtd.id_bagian_soal = vg.id_bagian_soal) 
             LEFT JOIN v_total_mhs_dosen vmd ON(vg.kd_dosen = vmd.kd_dosen ) WHERE j.id_jawaban > 0";
@@ -46,7 +46,7 @@ class M_grafik extends CI_Model
         FROM t_jawaban j
         LEFT JOIN v_grafik_mk vgm ON
             (vgm.id_jawaban = j.id_jawaban 
-                AND vgm.kd_mata_kuliah = '".$kd."' 
+                AND vgm.kd_mata_kuliah = '" . $kd . "' 
                 AND vgm.id_bagian_soal = 1  )
         LEFT JOIN v_total_soal_mk vtm ON(vtm.id_bagian_soal = vgm.id_bagian_soal)
         LEFT JOIN v_total_mhs_mk vmk ON(vgm.kd_mata_kuliah = vmk.kd_mata_kuliah)
@@ -61,7 +61,7 @@ class M_grafik extends CI_Model
         FROM t_jawaban j
         LEFT JOIN v_grafik_mk vgm ON
             (vgm.id_jawaban = j.id_jawaban 
-                AND vgm.kd_mata_kuliah = '".$kd."'
+                AND vgm.kd_mata_kuliah = '" . $kd . "'
                 AND vgm.id_bagian_soal = 2  )
         LEFT JOIN v_total_soal_mk vtm ON(vtm.id_bagian_soal = vgm.id_bagian_soal)
         LEFT JOIN v_total_mhs_mk vmk ON(vgm.kd_mata_kuliah = vmk.kd_mata_kuliah)
@@ -76,7 +76,7 @@ class M_grafik extends CI_Model
         FROM t_jawaban j
         LEFT JOIN v_grafik_mk vgm ON
             (vgm.id_jawaban = j.id_jawaban 
-                AND vgm.kd_mata_kuliah = '".$kd."' 
+                AND vgm.kd_mata_kuliah = '" . $kd . "' 
                 AND vgm.id_bagian_soal = 3  )
         LEFT JOIN v_total_soal_mk vtm ON(vtm.id_bagian_soal = vgm.id_bagian_soal)
         LEFT JOIN v_total_mhs_mk vmk ON(vgm.kd_mata_kuliah = vmk.kd_mata_kuliah)
@@ -195,7 +195,44 @@ class M_grafik extends CI_Model
         return $this->db->delete('t_survei');
     }
 
-    public function getOption(){
+    public function getOption()
+    {
         return $this->db->query("select * from t_jawaban where id_jawaban !=0 order by id_jawaban")->result();
+    }
+    public function getSeluruh($kd = null)
+    {
+        $semua = $this->db->query("SELECT dp.kd_dosen,count(distinct(kp.nim)) as jumlah_seluruh FROM t_dosen_pengampu dp
+        ,t_kelas_perkuliahan kp
+        where dp.kd_dosen='" . $kd . "'
+        and dp.id_periode_perkuliahan in (select id_periode_perkuliahan from t_periode_perkuliahan WHERE status='1')
+        and kp.id_kelas=dp.id_kelas
+        and kp.id_periode_perkuliahan=dp.id_periode_perkuliahan")->result();
+        $partisipan = $this->db->query("select * from v_total_mhs_dosen where kd_dosen='" . $kd . "'")->result();
+
+        $kelas = $this->db->query("SELECT dp.kd_dosen,count(distinct(kp.id_kelas)) as jumlah_kelas FROM t_dosen_pengampu dp
+        ,t_kelas_perkuliahan kp
+        where dp.kd_dosen='" . $kd . "'
+        and dp.id_periode_perkuliahan in (select id_periode_perkuliahan from t_periode_perkuliahan WHERE status='1')
+        and kp.id_kelas=dp.id_kelas
+        and kp.id_periode_perkuliahan=dp.id_periode_perkuliahan")->result();
+        $listmk
+            = $this->db->query("SELECT dp.kd_dosen,mk.kd_mata_kuliah,mk.nama_mata_kuliah,COUNT(DISTINCT(mk.kd_mata_kuliah)) as total_mk FROM t_dosen_pengampu dp
+        ,t_kelas_perkuliahan kp
+        ,t_mata_kuliah mk
+        where dp.kd_dosen='" . $kd . "'
+        and dp.id_periode_perkuliahan in (select id_periode_perkuliahan from t_periode_perkuliahan WHERE status='1')
+        and kp.id_kelas=dp.id_kelas
+        and mk.kd_mata_kuliah=dp.kd_mata_kuliah
+        and kp.id_periode_perkuliahan=dp.id_periode_perkuliahan
+        GROUP by dp.kd_dosen,mk.kd_mata_kuliah
+        order by kd_mata_kuliah")->result();
+
+        $responden = array(
+            "1" => $partisipan,
+            "2" => $semua,
+            "3" => $kelas,
+            "4" => $listmk
+        );
+        return $responden;
     }
 }

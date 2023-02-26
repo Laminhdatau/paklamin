@@ -86,7 +86,7 @@
     <div class="body clearfix">
         <div class="x_panel col-sm-12">
             <div class="x_title">
-                <h2><small>Pg: </small><b>Daftar tmt</b></h2>
+                <h2><small>Pg: </small><b>Periode Kuesioner</b></h2>
                 <ul class="nav navbar-right">
                     <li><a class="close-link" href="<?php echo base_url('home'); ?>"><i class="fa fa-close"></i></a></li>
                 </ul>
@@ -99,42 +99,65 @@
                             <div class="col-sm-12" style="background: #D3D3D3;">
                                 <form class="" action="<?php echo base_url() . 'periodekuisioner/simpan_data'; ?>" method="post" novalidate="">
                                     <!-- spacebar -->
-                                    <div style="width: 100%; height:7px; border: 0px solid white;"></div>
-                                    <span class="section" id="title_addedit">Data Periode Kuisioner</span>
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Bagian<span class="required"> *</span></label>
-                                        <div class="col-md-8 col-sm-8">
-                                            <select name="id_periode_perkuliahan" id="id_periode_perkuliahan" class="form-control">
-                                                <?php foreach ($periode as $d) { ?>
-                                                    <option value="<?= $d->id_periode_perkuliahan; ?>"><?= $d->daritahun; ?>/<?= $d->sampaitahun; ?> - <?= $d->semester ; ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Mulai Tanggal<span class="required"> *</span></label>
-                                        <div class="col-md-8 col-sm-8">
-                                            <input type="date" class="form-control" data-validate-length-range="4" data-validate-words="2" id="tmt" name="tmt" required="required">
-                                            <input type="hidden" id="id_pkuesioner" name="id_pkuesioner">
-                                        </div>
-                                    </div>
-                                    <div class="field item form-group">
-                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Selesai Tanggal<span class="required"> *</span></label>
-                                        <div class="col-md-8 col-sm-8">
-                                            <input type="date" class="form-control" data-validate-length-range="4" data-validate-words="2" id="tst" name="tst" required="required">
 
-                                        </div>
-                                    </div>
-                                    <div class="ln_solid">
-                                        <div class="form-group">
-                                            <!-- spacebar -->
-                                            <div style="width: 100%; height:10px; border: 0px solid white;"></div>
-                                            <div class="col-md-6 offset-md-2">
-                                                <button type="submit" class="btn btn-primary">Submit</button>
-                                                <button type="reset" onclick="hideForm();" class="btn btn-danger">Batal</button>
+                                    <?php if (!empty($periode)) { ?>
+
+
+                                        <div style="width: 100%; height:7px; border: 0px solid white;"></div>
+                                        <span class="section" id="title_addedit">Data Periode Kuisioner</span>
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-2 col-sm-2 label-align">Bagian<span class="required"> *</span></label>
+                                            <div class="col-md-8 col-sm-8">
+                                                <select name="id_periode_perkuliahan" id="id_periode_perkuliahan" class="form-control">
+                                                    <?php foreach ($periode as $d) { ?>
+                                                        <option value="<?= $d->id_periode_perkuliahan; ?>"><?= $d->daritahun; ?>/<?= $d->sampaitahun; ?> - <?= $d->semester; ?></option>
+                                                    <?php } ?>
+                                                </select>
                                             </div>
                                         </div>
-                                    </div>
+
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-2 col-sm-2 label-align">Mulai Tanggal<span class="required"> *</span></label>
+                                            <div class="col-md-8 col-sm-8">
+                                                <input type="datetime-local" class="form-control" data-validate-length-range="4" data-validate-words="2" id="tmt" name="tmt" required="required" required>
+                                                <input type="hidden" id="id_pkuesioner" name="id_pkuesioner">
+                                            </div>
+                                        </div>
+                                        <div class="field item form-group">
+                                            <label class="col-form-label col-md-2 col-sm-2 label-align">Selesai Tanggal<span class="required"> *</span></label>
+                                            <div class="col-md-8 col-sm-8">
+                                                <input type="datetime-local" class="form-control" data-validate-length-range="4" data-validate-words="2" id="tst" name="tst" required="required" required>
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid">
+                                            <div class="form-group">
+                                                <!-- spacebar -->
+                                                <div style="width: 100%; height:10px; border: 0px solid white;"></div>
+                                                <div class="col-md-6 offset-md-2">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <button type="reset" onclick="hideForm();" class="btn btn-danger">Batal</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } else { ?>
+                                        <div class="ln_solid">
+                                            <div class="form-group">
+                                                <!-- spacebar -->
+                                                <div style="width: 100%; height:10px; border: 0px solid white;"></div>
+                                                <div class="x_panel" style="background-color: #D3D3D3;">
+
+                                                    <div class="x_content text-center text-success">
+                                                        <h2><b>Periode Kuisioner Sudah Diaktifkan</b></h2>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 offset-md-5">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                    <button type="reset" onclick="hideForm();" class="btn btn-danger">Batal</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
                                 </form>
                             </div>
                         </div>
@@ -149,6 +172,7 @@
                                     <button type="button" id="btn-tmb" class="btn btn-primary btn-circle" onclick="showForm();"><i class="glyphicon glyphicon-plus"></i>Tambah</button>
                                 </td>
                             <?php } ?>
+                            <?= $this->session->flashdata('message'); ?>
                             <?php echo form_open('periodekuisioner/delete_data'); ?>
                             <input type="hidden" id="id_del_arr" name="id_del_arr" value="">
 
@@ -165,6 +189,7 @@
                                         <td><b>Tanggal Selesai</b></td>
                                         <td><b>Tahun Ajaran</b></td>
                                         <td><b>Semester</b></td>
+                                        <td><b>Status</b></td>
                                         <?php if ($akun[0]->zp[2] == "1") { ?>
                                             <?php if ($akun[0]->zp[0] == "1") { ?>
                                                 <td width="3%">
@@ -183,7 +208,7 @@
                                         <tr>
                                             <?php if ($akun[0]->zp[4] == "1") { ?>
                                                 <td>
-                                                    <input type="checkbox" <?= $i->ada; ?> class="chkCheckBoxId filled-in chk-col-red" value="<?php echo $i->id_pkuesioner; ?>" name="id_pkuesioner[]" id="<?php echo $no; ?>" onclick="cekit(<?php echo $no; ?>)" />
+                                                    <input <?= $i->ada ?> type="checkbox" class="chkCheckBoxId filled-in chk-col-red" value="<?php echo $i->id_pkuesioner; ?>" name="id_pkuesioner[]" id="<?php echo $no; ?>" onclick="cekit(<?php echo $no; ?>)" />
                                                     <label for="<?php echo $no; ?>"></label>
                                                 </td>
                                             <?php } ?>
@@ -192,9 +217,18 @@
                                             <td><?php echo $i->tst; ?></td>
                                             <td><?php echo $i->daritahun; ?>/<?php echo $i->sampaitahun; ?></td>
                                             <td><?php echo $i->semester; ?></td>
+                                            <td>
+                                                <?php if ($i->status == '1') { ?>
+                                                    <a href="<?= base_url('periodekuisioner/matikan/' . $i->id_pkuesioner); ?>" class="btn " style="background-color: orange;"><i class="glyphicon glyphicon-ok"></i></a>
+                                                <?php } elseif ($i->status == '0') { ?>
+                                                    <a href="<?= base_url('periodekuisioner/aktifkan/' . $i->id_pkuesioner); ?>" class="btn btn-danger"><i class="glyphicon glyphicon-off"></i></a>
+                                                <?php } else {
+                                                } ?>
+
+                                            </td>
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
-                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData(<?php echo $i->id_pkuesioner; ?>,'<?php echo $i->tmt; ?>','<?php echo $i->tst; ?>','<?php echo $i->id_periode_perkuliahan; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                    <button <?= $i->ada ?> type="button" class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_pkuesioner; ?>','<?php echo $i->tmt; ?>','<?php echo $i->tst; ?>','<?php echo $i->id_periode_perkuliahan; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
                                                 </td>
                                             <?php } ?>
                                         </tr>
