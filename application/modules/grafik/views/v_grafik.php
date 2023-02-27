@@ -15,14 +15,16 @@
                 </select>
 
             </div>
-            <div class="form-floating col-md-2 col-sm-2">
-                <img id="foto" src="" width="70%" height="90%" alt="">
-            </div>
             <!-- <div class="form-floating col-md-6 col-sm-6">
                 <a class="btn btn-info" href="<?= base_url('grafik/detailGrafik'); ?>">LIHAT DETAIL GRAFIK</a>
             </div> -->
         </div>
 
+    </div>
+    <div class="col-md-12 col-sm-12">
+    <div class="col-md-4 col-sm-6">
+                <img id="foto" src="" width="70%" height="90%" alt="">
+            </div>
     </div>
 
     <div class="col-md-12 col-sm-12" id="lamin">
@@ -124,6 +126,7 @@
 
                     <div class="clearfix"></div>
                 </div>
+           
                 <div class="x_content">
 
 
