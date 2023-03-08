@@ -1,154 +1,156 @@
 <div class="main_content">
-
-
-    <div class="x_panel">
-        <div class="">
-            <h2>Grafik Hasil Survei Dosen</h2>
-        </div>
-        <div class="x_content text-center">
-            <div class="form-floating col-md-12 col-sm-12">
-                <select name="dosen" id="dosen" class="form-control">
-
-                    <?php foreach ($datadosen as $dd) { ?>
-                        <option value="<?= $dd->kd_dosen; ?>"><?= $dd->nama_lengkap; ?></option>
-                    <?php } ?>
-                </select>
-
+    <div class="container-fluid">
+        <div class="x_panel">
+            <div class="">
+                <h2>Grafik Hasil Survei Dosen</h2>
             </div>
-            <!-- <div class="form-floating col-md-6 col-sm-6">
+            <div class="x_content text-center">
+                <div class="form-floating col-md-12 col-sm-12">
+                    <select name="dosen" id="dosen" class="form-control">
+
+                        <?php foreach ($datadosen as $dd) { ?>
+                            <option value="<?= $dd->kd_dosen; ?>"><?= $dd->nama_lengkap; ?></option>
+                        <?php } ?>
+                    </select>
+
+                </div>
+                <!-- <div class="form-floating col-md-6 col-sm-6">
                 <a class="btn btn-info" href="<?= base_url('grafik/detailGrafik'); ?>">LIHAT DETAIL GRAFIK</a>
             </div> -->
-        </div>
-    </div>
-
-    <div class="col-md-4 col-sm-4 " id="listfoto">
-        <div class="x_panel tile fixed_height_320 overflow_hidden">
-            <div class="x_title">
-                <h2>Dosen</h2>
-
-                <div class="clearfix"></div>
             </div>
-            <div class="x_content">
-                <table class="" style="width:100%">
-                    <tr>
-                        <th style="width:50%;">
-                            <p>Foto Dosen</p>
-                        </th>
-                        <th>
-                            <div class="col-lg-7 col-md-7 col-sm-7 ">
-                                <p class="">Matakuliah Diampuh</p>
-                            </div>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img id="foto" src="" width="50%" height="70%" alt="">
-                            <div class=""></div>
-                        </td>
-                        <td>
-                            <h6 class="text-left" id="listMK"></h6>
-                        </td>
+        </div>
 
-                    </tr>
+        <div class="col-md-4 col-sm-4 " id="listfoto">
+            <div class="x_panel tile fixed_height_320 overflow_hidden">
+                <div class="x_title">
+                    <h2>Dosen</h2>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <table class="w-100">
+                        <tr>
+                            <th>
+                                <div class="col-lg-4 col-md-4 col-sm-4 ">
+                                    <p class="">Dosen</p>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="col-lg-7 col-md-7 col-sm-7 text-left">
+                                    <p class="">Matakuliah Diampuh</p>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img class="img-circle mx-auto w-25 h-25" id="foto" src="" alt="">
+                                <div class=""></div>
+                            </td>
+                            <td>
+                                <h6 class="text-left" id="listMK"></h6>
+                            </td>
+
+                        </tr>
+                        <br>
+                    </table>
                     <br>
-                </table>
-                <br>
+                </div>
             </div>
         </div>
+
+        <div class="col-md-12 col-sm-12" id="lamin">
+            <div class="col-md-4 col-sm-6">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>A. Kegiatan Awal Pembelajaran</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+
+                        <canvas id="grafika"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>B. Pelaksanaan Pembelajaran</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <canvas id="grafikb"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>C. Penilaian Hasil Belajar</h2>
+                        <ul class="nav navbar-right panel_toolbox">
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <canvas id="grafikc"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="laminket" class="col-md-12 col-sm-12">
+            <div class="col-md-4 col-sm-6">
+                <div class="x_panel">
+                    <h2>Keterangan :</h2>
+                    <?php
+                    foreach ($opt as $o) {
+                        switch ($o->id_jawaban) {
+                            case 1:
+                                $color = 'purple';
+                                break;
+                            case 2:
+                                $color = 'orange';
+                                break;
+                            case 3:
+                                $color = 'yellow';
+                                break;
+                            case 4:
+                                $color =  'green';
+                                break;
+                            case 5:
+                                $color =  'blue';
+                                break;
+                            default:
+                                $color = 'white';
+                        }
+                    ?>
+                        <h2> <button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </h2>
+                    <?php } ?>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 ">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Penilai</h2>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content text-left">
+                        <h5 id="semua"></h5> <br>
+                        <h5 id="semuakelas"></h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
-
-    <div class="col-md-12 col-sm-12" id="lamin">
-        <div class="col-md-4 col-sm-6">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>A. Kegiatan Awal Pembelajaran</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-
-                    <canvas id="grafika"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>B. Pelaksanaan Pembelajaran</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <canvas id="grafikb"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>C. Penilaian Hasil Belajar</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-
-                    </ul>
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content">
-                    <canvas id="grafikc"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="laminket" class="col-md-12 col-sm-12">
-        <div class="col-md-4 col-sm-6">
-            <div class="x_panel">
-                <h2>Keterangan :</h2>
-                <?php
-                foreach ($opt as $o) {
-                    switch ($o->id_jawaban) {
-                        case 1:
-                            $color = 'purple';
-                            break;
-                        case 2:
-                            $color = 'orange';
-                            break;
-                        case 3:
-                            $color = 'yellow';
-                            break;
-                        case 4:
-                            $color =  'green';
-                            break;
-                        case 5:
-                            $color =  'blue';
-                            break;
-                        default:
-                            $color = 'white';
-                    }
-                ?>
-                    <h2> <button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </h2>
-                <?php } ?>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-4 ">
-            <div class="x_panel">
-                <div class="x_title">
-                    <h2>Penilai</h2>
-
-                    <div class="clearfix"></div>
-                </div>
-                <div class="x_content text-left">
-                    <h5 id="semua"></h5> <br>
-                    <h5 id="semuakelas"></h5>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
 </div>
 
 
