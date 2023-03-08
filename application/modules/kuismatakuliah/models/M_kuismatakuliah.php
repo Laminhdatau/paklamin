@@ -32,11 +32,12 @@ class M_kuismatakuliah extends CI_Model
         return $this->db->update('t_soal', $data);
     }
 
-    public function getId($id)
+    public function getIdm($id)
     {
-        return  $this->db->get_where('t_soal', array('id_soal' => $id))->row_array();
+        return  $this->db->get_where('t_soal', array('id_soal' => $id))->row();
     }
-    public function updateStatus($newStatus, $id)
+    
+    public function updateStatusm($newStatus, $id)
     {
         $this->db->update('t_soal', array('status' => $newStatus), array('id_soal' => $id));
     }

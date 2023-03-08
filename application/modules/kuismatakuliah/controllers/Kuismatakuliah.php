@@ -60,21 +60,21 @@ class Kuismatakuliah extends MX_Controller
         redirect('id=' . md5('kuismatakuliah'));
     }
 
-    public function updateStatus()
+    public function updateStatusm()
     {
-        $id = $this->input->post('id');
+        $id = $this->input->post('kodesm');
         $status = $this->input->post('status');
-        $data =  $this->m_kuismatakuliah->getId($id);
+        $data =  $this->m_kuismatakuliah->getIdm($id);
         if (!$data) {
             $response['success'] = false;
             $response['message'] = 'Data not found';
         } else {
             $newStatus = $status == '1' ? '0' : '1';
-            $this->m_kuisdosen->updateStatus($newStatus, $id);
+            $this->m_kuismatakuliah->updateStatusm($newStatus, $id);
             $response['success'] = true;
             $response['message'] = 'Status changed successfully';
             echo json_encode($response);
-            // exit();
+            exit();
         }
     }
 }

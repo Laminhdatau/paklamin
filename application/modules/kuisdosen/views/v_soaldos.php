@@ -86,7 +86,7 @@
             $.ajax({
                 type: 'ajax',
                 method: 'POST',
-                url: 'kuisdosen/updateStatus',
+                url: 'kuisdosen/updateStatusd',
                 dataType: 'json',
                 data: {
                     kodes: id,
@@ -95,17 +95,16 @@
                 success: function(response) {
                     if (response.success) {
                         if (status == 1) {
-                            $('.change-status[data-kodes="' + id + '"]').html('<b><b><i class="glyphicon glyphicon-ok-sign"></i></b></b>').removeClass('btn-success').addClass('btn-danger').data('status', 0);
+                            $('.change-status[data-kodes="' + id + '"]').html('<b><b><i class="glyphicon glyphicon-remove-sign"></i></b></b>').removeClass('btn-success').addClass('btn-danger').data('status', 0);
 
                         } else {
-                            $('.change-status[data-kodes="' + id + '"]').html('<b><b><i class=" glyphicon glyphicon-remove-sign"></i></b></b>').removeClass('btn-danger').addClass('btn-success').data('status', 1);
+                            $('.change-status[data-kodes="' + id + '"]').html('<b><b><i class=" glyphicon glyphicon-ok-sign"></i></b></b>').removeClass('btn-danger').addClass('btn-success').data('status', 1);
 
                         }
                     } else {
                     }
                 },
                 error: function(xhr, textStatus, errorThrown) {
-                    // console.log(xhr.responseText);
                 }
             });
         });
@@ -226,11 +225,11 @@
                                     $no = 1;
                                     foreach ($data as $i) {
                                         if ($i->status == '1') {
-                                            $class = "success";
+                                            $class = "warning";
                                         } elseif ($i->status == '0') {
                                             $class = "danger";
                                         } else {
-                                            $class = "warning";
+                                            $class = "info";
                                         }
 
                                     ?>

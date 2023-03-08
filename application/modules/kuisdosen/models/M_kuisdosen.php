@@ -44,11 +44,11 @@ class M_kuisdosen extends CI_Model
         return $new_status;
     }
 
-    public function getId($id)
+    public function getIdd($id)
     {
         return  $this->db->get_where('t_soal', array('id_soal' => $id))->row();
     }
-    public function updateStatus($newStatus, $id)
+    public function updateStatusd($newStatus, $id)
     {
         $this->db->update('t_soal', array('status' => $newStatus), array('id_soal' => $id));
     }

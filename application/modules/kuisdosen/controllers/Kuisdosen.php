@@ -49,20 +49,21 @@ class Kuisdosen extends MX_Controller
         redirect('id=' . md5('kuisdosen'));
     }
 
-    public function updateStatus()
+    public function updateStatusd()
     {
         $id = $this->input->post('kodes');
         $status = $this->input->post('status');
-        $data =  $this->m_kuisdosen->getId($id);
+        $data =  $this->m_kuisdosen->getIdd($id);
         if (!$data) {
             $response['success'] = false;
             $response['message'] = 'Data Tidak Ada';
         } else {
             $newStatus = $status == '1' ? '0' : '1';
-            $this->m_kuisdosen->updateStatus($newStatus, $id);
+            $this->m_kuisdosen->updateStatusd($newStatus, $id);
             $response['success'] = true;
             $response['message'] = 'Status changed successfully';
             echo json_encode($response);
+            exit();
         }
     }
 }
