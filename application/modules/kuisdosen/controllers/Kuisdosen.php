@@ -14,8 +14,8 @@ class Kuisdosen extends MX_Controller
     {
 
 
-        $a['data'] = $this->m_kuisdosen->getData();
-
+        $a['data'] = $this->m_kuisdosen->getData()->result();
+        $a['bagianku'] = $this->m_kuisdosen->getData()->row()->id_bagian_soal;
         $a['bsoal'] = $this->m_kuisdosen->getBagianSoal();
         $a['hitung'] = $this->m_kuisdosen->hitung();
         $a['layout'] = 'v_soaldos';

@@ -44,7 +44,7 @@
                 $("#id_soal").val("");
                 $("#soal_kepuasan").val("");
                 $("#id_jenis_survei").val("");
-                $("id_bagian_soal").val("");
+                $("#id_bagian_soal").val("");
                 $("#title_addedit").html('<h2>Tambah Data : Soal</h2>');
                 $("#btn").html('Simpan');
             }
@@ -78,7 +78,7 @@
         }
     </style>
 
-<script>
+    <script>
         $(document).on('click', '.change-status', function() {
             var id = $(this).data('kodes');
             var status = $(this).data('status');
@@ -95,17 +95,15 @@
                 success: function(response) {
                     if (response.success) {
                         if (status == 1) {
-                            $('.change-status[data-kodes="' + id + '"]').html('<b><b><i class="glyphicon glyphicon-remove-sign"></i></b></b>').removeClass('btn-success').addClass('btn-danger').data('status', 0);
+                            $('.change-status[data-kodes="' + id + '"]').html('<b><b><i class="glyphicon glyphicon-remove-sign"></i></b></b>').removeClass('btn-warning').addClass('btn-danger').data('status', 0);
 
                         } else {
-                            $('.change-status[data-kodes="' + id + '"]').html('<b><b><i class=" glyphicon glyphicon-ok-sign"></i></b></b>').removeClass('btn-danger').addClass('btn-success').data('status', 1);
+                            $('.change-status[data-kodes="' + id + '"]').html('<b><b><i class=" glyphicon glyphicon-ok-sign"></i></b></b>').removeClass('btn-danger').addClass('btn-warning').data('status', 1);
 
                         }
-                    } else {
-                    }
+                    } else {}
                 },
-                error: function(xhr, textStatus, errorThrown) {
-                }
+                error: function(xhr, textStatus, errorThrown) {}
             });
         });
     </script>
@@ -144,8 +142,9 @@
                                         <label class="col-form-label col-md-2 col-sm-2 label-align">Bagian<span class="required"> *</span></label>
                                         <div class="col-md-8 col-sm-8">
                                             <select name="id_bagian_soal" id="id_bagian_soal" class="form-control">
+                                                <option value="">== Pilih Bagian Soal ==</option>
                                                 <?php foreach ($bsoal as $bs) { ?>
-                                                    <option value="<?= $bs->id_bagian_soal; ?>"><?= $bs->bagian_soal; ?></option>
+                                                    <option value="<?= $bs->id_bagian_soal; ?>" <?= ($bs->id_bagian_soal == $bagianku)?'selected' : ''; ?>><?= $bs->bagian_soal; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -252,7 +251,7 @@
 
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
-                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>'),'<?php echo $i->id_bagian_soal; ?>','<?php echo $i->bagian_soal; ?>';"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>','<?php echo $i->id_bagian_soal; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
                                                 </td>
                                             <?php } ?>
 
@@ -268,6 +267,4 @@
             </div>
         </div>
     </div>
-    <?php } ?>
-
-  
+<?php } ?>

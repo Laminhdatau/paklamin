@@ -13,7 +13,8 @@ class Kuismatakuliah extends MX_Controller
 
     public function index()
     {
-        $a['data'] = $this->m_kuismatakuliah->getData();
+        $a['data'] = $this->m_kuismatakuliah->getData()->result();
+        $a['bagiankum'] = $this->m_kuismatakuliah->getData()->row()->id_bagian_soal;
         $a['bsoal']=$this->m_kuismatakuliah->getBagianSoal();
         $a['hitung'] = $this->m_kuismatakuliah->hitung();
         $a['layout'] = 'v_soalmk';

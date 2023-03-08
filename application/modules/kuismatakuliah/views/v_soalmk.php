@@ -44,7 +44,7 @@
                 $("#id_soal").val("");
                 $("#soal_kepuasan").val("");
                 $("#id_jenis_survei").val("");
-                $("id_bagian_soal").val("");
+                $("#id_bagian_soal").val("");
                 $("#status").val("");
                 $("#title_addedit").html('<h2>Tambah Data : Soal</h2>');
                 $("#btn").html('Simpan');
@@ -86,10 +86,9 @@
             var status = $(this).data('status');
 
             $.ajax({
-                type: 'ajax',
-                method: 'POST',
-                url: 'kuismatakuliah/updateStatusm',
-                dataType: 'JSON',
+                type: 'POST',
+                url: 'kuismatakuliah/updateStatusm/',
+                dataType: 'json',
                 data: {
                     kodesm: id,
                     status: status
@@ -98,10 +97,10 @@
                     if (response.success) {
                         console.log(response.success);
                         if (status == 1) {
-                            $('.change-status[data-kodesm="' + id + '"]').html('<b><b><i class="glyphicon glyphicon-remove-sign"></i></b></b>').removeClass('btn-success').addClass('btn-danger').data('status', 0);
+                            $('.change-status[data-kodesm="' + id + '"]').html('<b><b><i class="glyphicon glyphicon-remove-sign"></i></b></b>').removeClass('btn-warning').addClass('btn-danger').data('status', 0);
 
                         } else {
-                            $('.change-status[data-kodesm="' + id + '"]').html('<b><b><i class=" glyphicon glyphicon-ok-sign"></i></b></b>').removeClass('btn-danger').addClass('btn-success').data('status', 1);
+                            $('.change-status[data-kodesm="' + id + '"]').html('<b><b><i class=" glyphicon glyphicon-ok-sign"></i></b></b>').removeClass('btn-danger').addClass('btn-warning').data('status', 1);
 
                         }
                     } else {
@@ -145,11 +144,14 @@
                                     <div class="field item form-group">
                                         <label class="col-form-label col-md-2 col-sm-2 label-align">Bagian<span class="required"> *</span></label>
                                         <div class="col-md-8 col-sm-8">
-                                            <select name="id_bagian_soal" id="id_bagian_soal" class="form-control">
+
+                                            <select name="id_bagian_soal" id="id_bagian_soal" class="form-control id_bagian_soal">
+                                                <option value="">== Pilih Bagian Soal ==</option>
                                                 <?php foreach ($bsoal as $bs) { ?>
-                                                    <option value="<?= $bs->id_bagian_soal; ?>" ><?= $bs->bagian_soal; ?></option>
+                                                    <option value="<?= $bs->id_bagian_soal; ?>" <?= ($bs->id_bagian_soal == $bagiankum) ? 'selected' : ''; ?>><?= $bs->bagian_soal; ?></option>
                                                 <?php } ?>
                                             </select>
+
                                         </div>
                                     </div>
                                     <div class="field item form-group">
@@ -246,13 +248,13 @@
                                             <td><?php echo $i->soal_kepuasan; ?></td>
                                             <td><?php echo $i->jenis_survei; ?></td>
                                             <td>
-                                                <button class="btn btn-<?= $class; ?>         change-status" data-kodesm="<?= $i->id_soal; ?>"    data-status="<?= $i->status; ?>">
+                                                <button class="btn btn-<?= $class; ?>         change-status" data-kodesm="<?= $i->id_soal; ?>" data-status="<?= $i->status; ?>">
                                                     <?= ($i->status == '1') ? '<b><i class="glyphicon glyphicon-ok-sign"></i></b>' : '<b><i class="glyphicon glyphicon-remove-sign"></i></i></b>'; ?>
                                                 </button>
                                             </td>
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
-                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>'),'<?php echo $i->status; ?>','<?php echo $i->id_bagian_soal; ?>';"><i class="glyphicon glyphicon-pencil"></i></button>
+                                                    <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>','<?php echo $i->status; ?>','<?php echo $i->id_bagian_soal; ?>');"><i class="glyphicon glyphicon-pencil"></i></button>
                                                 </td>
                                             <?php } ?>
                                         </tr>
