@@ -78,6 +78,39 @@
         }
     </style>
 
+<script>
+        $(document).on('click', '.change-status', function() {
+            var id = $(this).data('kodes');
+            var status = $(this).data('status');
+
+            $.ajax({
+                type: 'ajax',
+                method: 'POST',
+                url: 'kuisdosen/updateStatus',
+                dataType: 'json',
+                data: {
+                    kodes: id,
+                    status: status
+                },
+                success: function(response) {
+                    if (response.success) {
+                        if (status == 1) {
+                            $('.change-status[data-kodes="' + id + '"]').html('<b><b><i class="glyphicon glyphicon-ok-sign"></i></b></b>').removeClass('btn-success').addClass('btn-danger').data('status', 0);
+
+                        } else {
+                            $('.change-status[data-kodes="' + id + '"]').html('<b><b><i class=" glyphicon glyphicon-remove-sign"></i></b></b>').removeClass('btn-danger').addClass('btn-success').data('status', 1);
+
+                        }
+                    } else {
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    // console.log(xhr.responseText);
+                }
+            });
+        });
+    </script>
+
 
 
 
@@ -192,16 +225,15 @@
 
                                     $no = 1;
                                     foreach ($data as $i) {
-                                        if ($i->status == '0') {
-                                            $status = "<a href='kuisdosen/statusAktif/$i->id_soal' class='btn btn-warning btn-sm' data-popup='tooltip' data-placement='top' title='Hidupkan'><i class='fa fa-check' aria-hidden='true'></i></a>";
+                                        if ($i->status == '1') {
+                                            $class = "success";
+                                        } elseif ($i->status == '0') {
+                                            $class = "danger";
                                         } else {
-                                            $status = "<a href='kuisdosen/statusTidakAktif/$i->id_soal' class='btn btn-danger btn-sm' data-popup='tooltip' data-placement='top' title='Matikan'><i class='fa fa-close' aria-hidden='true'></i></a>";
-                                        } ?>
+                                            $class = "warning";
+                                        }
 
-
-
-
-
+                                    ?>
                                         <tr>
                                             <?php if ($akun[0]->zp[4] == "1") { ?>
                                                 <td>
@@ -214,9 +246,10 @@
                                             <td><?php echo $i->soal_kepuasan; ?></td>
                                             <td><?php echo $i->jenis_survei; ?></td>
                                             <td>
-                                                <?= $status; ?>
+                                                <button class="btn btn-<?= $class; ?> change-status" data-kodes="<?= $i->id_soal; ?>" data-status="<?= $i->status; ?>">
+                                                    <?= ($i->status == '1') ? '<b><i class="glyphicon glyphicon-ok-sign"></i></b>' : '<b><i class="glyphicon glyphicon-remove-sign"></i></i></b>'; ?>
+                                                </button>
                                             </td>
-                                            <!-- ================== -->
 
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
@@ -236,6 +269,6 @@
             </div>
         </div>
     </div>
+    <?php } ?>
 
-
-<?php } ?>
+  

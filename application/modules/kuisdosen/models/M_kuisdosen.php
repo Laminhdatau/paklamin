@@ -2,7 +2,6 @@
 
 class M_kuisdosen extends CI_Model
 {
-    //put your code here
     public function getData()
     {
         // disabled=\"disabled\"
@@ -43,5 +42,14 @@ class M_kuisdosen extends CI_Model
         $this->db->update('t_soal', $data);
 
         return $new_status;
+    }
+
+    public function getId($id)
+    {
+        return  $this->db->get_where('t_soal', array('id_soal' => $id))->row();
+    }
+    public function updateStatus($newStatus, $id)
+    {
+        $this->db->update('t_soal', array('status' => $newStatus), array('id_soal' => $id));
     }
 }

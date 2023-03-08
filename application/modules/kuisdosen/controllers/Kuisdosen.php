@@ -48,16 +48,21 @@ class Kuisdosen extends MX_Controller
         }
         redirect('id=' . md5('kuisdosen'));
     }
-    public function statusAktif($id)
+
+    public function updateStatus()
     {
-        $sql = $this->db->query("UPDATE t_soal set status='1' where id_soal='$id'");
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert" > Sementara Aktif<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-        redirect('id=' . md5('kuisdosen'));
-    }
-    public function statusTidakAKtif($id)
-    {
-        $sql = $this->db->query("UPDATE t_soal set status='0' where id_soal='$id'");
-        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert" > Tidak Aktif<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-        redirect('id=' . md5('kuisdosen'));
+        $id = $this->input->post('kodes');
+        $status = $this->input->post('status');
+        $data =  $this->m_kuisdosen->getId($id);
+        if (!$data) {
+            $response['success'] = false;
+            $response['message'] = 'Data Tidak Ada';
+        } else {
+            $newStatus = $status == '1' ? '0' : '1';
+            $this->m_kuisdosen->updateStatus($newStatus, $id);
+            $response['success'] = true;
+            $response['message'] = 'Status changed successfully';
+            echo json_encode($response);
+        }
     }
 }

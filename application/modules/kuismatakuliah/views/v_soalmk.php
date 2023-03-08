@@ -187,12 +187,14 @@
                                 <tbody>
                                     <?php $no = 0;
                                     foreach ($data as $i) {
-
-                                        if ($i->status == '0') {
-                                            $status = "<a href='kuismatakuliah/statusAktif/$i->id_soal' class='btn btn-warning btn-sm' data-popup='tooltip' data-placement='top' title='OK'><i class='fa fa-check' aria-hidden='true'></i></a>";
+                                        if ($i->status == '1') {
+                                            $class = "success";
+                                        } elseif ($i->status == '0') {
+                                            $class = "danger";
                                         } else {
-                                            $status = "<a href='kuismatakuliah/statusTidakAktif/$i->id_soal' class='btn btn-danger btn-sm' data-popup='tooltip' data-placement='top' title='OK'><i class='fa fa-close' aria-hidden='true'></i></a>";
+                                            $class = "warning";
                                         }
+
 
                                         // ==================end
                                         $no++; ?>
@@ -208,7 +210,9 @@
                                             <td><?php echo $i->bagian_soal; ?></td>
                                             <td><?php echo $i->soal_kepuasan; ?></td>
                                             <td><?php echo $i->jenis_survei; ?></td>
-                                            <td><?php echo $status; ?></td>
+                                            <td> <button class="btn btn-<?= $class; ?> change-status" data-kodes="<?= $i->id_soal; ?>" data-status="<?= $i->status; ?>">
+                                                    <?= ($i->status == '1') ? '<b><i class="glyphicon glyphicon-ok-sign"></i></b>' : '<b><i class="glyphicon glyphicon-remove-sign"></i></i></b>'; ?>
+                                                </button></td>
                                             <?php if ($akun[0]->zp[2] == "1") { ?>
                                                 <td>
                                                     <button type="button" <?= $i->ada; ?> class="btn btn-success btn-circle" onclick="editData('<?php echo $i->id_soal; ?>','<?php echo $i->soal_kepuasan; ?>','<?php echo $i->id_jenis_survei; ?>'),'<?php echo $i->status; ?>','<?php echo $i->id_bagian_soal; ?>';"><i class="glyphicon glyphicon-pencil"></i></button>
@@ -225,4 +229,40 @@
             </div>
         </div>
     </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.js"></script>
+
+    <script>
+        $(document).on('click', '.change-status', function() {
+            var id = $(this).data('kodes');
+            var status = $(this).data('status');
+
+            $.ajax({
+                type: 'ajax',
+                method: 'POST',
+                url: 'kuismatakuliah/updateStatus',
+                dataType: 'json',
+                data: {
+                    id: id,
+                    status: status
+                },
+                success: function(response) {
+                    if (response.success) {
+                        if (status == 1) {
+                            $('.change-status[data-kodes="' + id + '"]').html('<b><b><i class="glyphicon glyphicon-ok-sign"></i></b></b>').removeClass('btn-success').addClass('btn-danger').data('status', 0);
+
+                        } else {
+                            $('.change-status[data-kodes="' + id + '"]').html('<b><b><i class=" glyphicon glyphicon-remove-sign"></i></b></b>').removeClass('btn-danger').addClass('btn-success').data('status', 1);
+
+                        }
+                    } else {
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+    </script>
 <?php } ?>

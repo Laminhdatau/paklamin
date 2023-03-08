@@ -31,4 +31,13 @@ class M_kuismatakuliah extends CI_Model
         $this->db->where(array('id_soal' => $where));
         return $this->db->update('t_soal', $data);
     }
+
+    public function getId($id)
+    {
+        return  $this->db->get_where('t_soal', array('id_soal' => $id))->row_array();
+    }
+    public function updateStatus($newStatus, $id)
+    {
+        $this->db->update('t_soal', array('status' => $newStatus), array('id_soal' => $id));
+    }
 }
