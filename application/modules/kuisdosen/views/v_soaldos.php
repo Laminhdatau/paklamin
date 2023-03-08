@@ -84,8 +84,7 @@
             var status = $(this).data('status');
 
             $.ajax({
-                type: 'ajax',
-                method: 'POST',
+                type: 'post',
                 url: 'kuisdosen/updateStatusd',
                 dataType: 'json',
                 data: {
