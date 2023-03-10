@@ -156,7 +156,6 @@ class Survei extends MX_Controller
         }
         // cek apakah data berhasil dimasukkan ke database
         if ($b) {
-
             // tampilkan pesan sukses jika insert data berhasil
             $this->session->set_flashdata('message', '<div class="btn alert-success col-md-12">
             <strong>Terima Kasih!</strong> Anda Telah Mengisi Semua Kuisioner. Silahkan Mengurus KRS</div>');
