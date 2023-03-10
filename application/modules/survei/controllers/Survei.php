@@ -63,6 +63,7 @@ class Survei extends MX_Controller
         // print_r($a);die;
 
         $a['layout'] = 'v_isisurvei';
+        // $a['layout'] = 'v_testingno';
         $a['modules'] = 'survei';
         echo Modules::run('template/backend', $a);
     }
@@ -86,11 +87,27 @@ class Survei extends MX_Controller
 
         if (empty($kd_detail_krs) || empty($soal1) || empty($soal2) || empty($soal3) || empty($option1) || empty($option2) || empty($option3)) {
             // tampilkan pesan error jika data input tidak lengkap
+
             $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
-            Data tidak lengkap, silahkan isi kembali kuisioner.</div>');
+            Jawaban Tidak Valid, Silahkan isi kembali kuisioner.</div>');
             // redirect(base_url('survei'));
 
-            redirect('id=' . md5('survei'));
+            redirect('id=' . md5(''));
+        } else if (empty($_POST['radio'])) {
+            // tampilkan pesan error jika radio button tidak terpilih
+
+            $this->session->set_userdata('soal1', $soal1);
+            $this->session->set_userdata('soal2', $soal2);
+            $this->session->set_userdata('soal3', $soal3);
+            $this->session->set_userdata('option1', $option1);
+            $this->session->set_userdata('option2', $option2);
+            $this->session->set_userdata('option3', $option3);
+
+            $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
+    Semua Opsi Wajib Di isi yaa!!.</div>');
+            // redirect(base_url('survei'));
+
+            redirect('id=' . md5('isisurvei'));
         }
         $id_survei = uuid_generator();
         $survei = array(
@@ -142,7 +159,7 @@ class Survei extends MX_Controller
 
             // tampilkan pesan sukses jika insert data berhasil
             $this->session->set_flashdata('message', '<div class="btn alert-success col-md-12">
-            <strong>Terima Kasih!</strong> Anda Telah Mengisi Kuisioner.</div>');
+            <strong>Terima Kasih!</strong> Anda Telah Mengisi Semua Kuisioner. Silahkan Mengurus KRS</div>');
             // redirect(base_url('survei'));
             redirect('id=' . md5('survei'));
         } else {

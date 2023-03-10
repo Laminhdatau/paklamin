@@ -153,18 +153,22 @@
           </nav>
         </div>
       </div>
-      <!-- /top navigation -->
 
-      <!-- page content -->
       <style>
-        element {
-          min-height: 500px;
+        .right_col {
+          height: 100%;
+          overflow-y: scroll;
         }
       </style>
+      <script>
+        var rightCol = document.querySelector('.right_col');
+        rightCol.style.height = window.innerHeight + 'px';
+        window.addEventListener('resize', function() {
+          rightCol.style.height = window.innerHeight + 'px';
+        });
+      </script>
+
       <div class="right_col" role="main">
-        <!--          <div class="">
-            <div class="page-title">
-              <div class="title_left"> -->
         <?php
         $pri = $this->db->query("SELECT '1,1,1,1' as zp, '1' as zs")->result();
         $datactrl['akun'] = $pri;
@@ -178,10 +182,6 @@
         }
         $this->load->view($modules . '/' . $layout, $datactrl);
         ?>
-
-        <!--               </div>
-            </div>
-          </div> -->
       </div>
       <footer>
         <style>
@@ -205,7 +205,7 @@
 
 
   <!-- ISI KUIS SMART WIZARD -->
-
+  <script src="<?= base_url(); ?>assets/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
   <!-- Bootstrap -->
   <script src="<?= base_url(); ?>assets/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- FastClick -->

@@ -19,6 +19,7 @@
                 $mn[4] = 1;
                 $mn[6] = 1;
                 $mn[7] = 1;
+                $mn[9] = 1;
                 break;
             case 4:
                 $mn[6] = 1;
@@ -54,6 +55,9 @@
                         <?php } ?>
                         <?php if ($mn[3]) { ?>
                             <li><a href="<?php echo base_url('angket'); ?>">Option Jawaban</a></li>
+                        <?php } ?>
+                        <?php if ($mn[9]) { ?>
+                            <li><a href="<?php echo base_url('bagian'); ?>">Bagian Soal</a></li>
                         <?php } ?>
                         <?php if ($mn[4]) { ?>
                             <li><a href="<?php echo base_url('jenissurvei'); ?>">Jenis Survei</a></li>

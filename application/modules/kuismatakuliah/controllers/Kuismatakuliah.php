@@ -51,7 +51,6 @@ class Kuismatakuliah extends MX_Controller
         redirect('id=' . md5('kuismatakuliah'));
     }
 
-
     public function delete_data()
     {
         $dtdel = json_decode($_POST['id_del_arr']);

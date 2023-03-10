@@ -149,7 +149,6 @@ class M_grafik extends CI_Model
         so.id_bagian_soal")->result();
     }
 
-
     function getAllDosen($idp = null)
     {
         $w = "";
@@ -184,11 +183,13 @@ class M_grafik extends CI_Model
         " . $w . "
         group by mk.kd_mata_kuliah")->result();
     }
+
     function hapusAnswer($id)
     {
         $this->db->where('id_answer', $id);
         return $this->db->delete('t_answer_kuesioner');
     }
+
     function hapusSurvei($id1)
     {
         $this->db->where('id_survei', $id1);
@@ -199,14 +200,16 @@ class M_grafik extends CI_Model
     {
         return $this->db->query("select * from t_jawaban where id_jawaban !=0 order by id_jawaban")->result();
     }
+
     public function getSeluruh($kd = null)
     {
-        $semua = $this->db->query("SELECT dp.kd_dosen,count(distinct(kp.nim)) as jumlah_seluruh FROM t_dosen_pengampu dp
+        $semua = $this->db->query("SELECT dp.kd_dosen,count(kp.nim) as jumlah_seluruh FROM t_dosen_pengampu dp
         ,t_kelas_perkuliahan kp
         where dp.kd_dosen='" . $kd . "'
         and dp.id_periode_perkuliahan in (select id_periode_perkuliahan from t_periode_perkuliahan WHERE status='1')
         and kp.id_kelas=dp.id_kelas
         and kp.id_periode_perkuliahan=dp.id_periode_perkuliahan")->result();
+
         $partisipan = $this->db->query("select * from v_total_mhs_dosen where kd_dosen='" . $kd . "'")->result();
 
         $kelas = $this->db->query("SELECT dp.kd_dosen,count(distinct(kp.id_kelas)) as jumlah_kelas FROM t_dosen_pengampu dp
@@ -215,8 +218,8 @@ class M_grafik extends CI_Model
         and dp.id_periode_perkuliahan in (select id_periode_perkuliahan from t_periode_perkuliahan WHERE status='1')
         and kp.id_kelas=dp.id_kelas
         and kp.id_periode_perkuliahan=dp.id_periode_perkuliahan")->result();
-        $listmk
-            = $this->db->query("SELECT dp.kd_dosen,mk.kd_mata_kuliah,mk.nama_mata_kuliah,COUNT(DISTINCT(mk.kd_mata_kuliah)) as total_mk FROM t_dosen_pengampu dp
+       
+       $listmk= $this->db->query("SELECT dp.kd_dosen,mk.kd_mata_kuliah,mk.nama_mata_kuliah,COUNT(DISTINCT(mk.kd_mata_kuliah)) as total_mk FROM t_dosen_pengampu dp
         ,t_kelas_perkuliahan kp
         ,t_mata_kuliah mk
         where dp.kd_dosen='" . $kd . "'
@@ -226,12 +229,36 @@ class M_grafik extends CI_Model
         and kp.id_periode_perkuliahan=dp.id_periode_perkuliahan
         GROUP by dp.kd_dosen,mk.kd_mata_kuliah
         order by kd_mata_kuliah")->result();
-
+        
+        $koment = $this->db->query("select DISTINCT(s.komentar),day(s.waktu) as tan,
+        CASE 
+           WHEN MONTH(s.waktu) = 1 THEN 'Januari'
+           WHEN MONTH(s.waktu) = 2 THEN 'Februari'
+           WHEN MONTH(s.waktu) = 3 THEN 'Maret'
+           WHEN MONTH(s.waktu) = 4 THEN 'April'
+           WHEN MONTH(s.waktu) = 5 THEN 'Mei'
+           WHEN MONTH(s.waktu) = 6 THEN 'Juni'
+           WHEN MONTH(s.waktu) = 7 THEN 'Juli'
+           WHEN MONTH(s.waktu) = 8 THEN 'Agustus'
+           WHEN MONTH(s.waktu) = 9 THEN 'September'
+           WHEN MONTH(s.waktu) = 10 THEN 'Oktober'
+           WHEN MONTH(s.waktu) = 11 THEN 'November'
+           WHEN MONTH(s.waktu) = 12 THEN 'Desember'
+         END AS bulan
+        from t_dosen_pengampu dp
+                ,t_survei s
+                ,t_kelas_perkuliahan kp
+        where dp.kd_dosen='" . $kd . "'
+                and dp.id_periode_perkuliahan in (select id_periode_perkuliahan from t_periode_perkuliahan WHERE status='1')
+               
+        and s.kd_dosen=dp.kd_dosen")->result();
+        
         $responden = array(
             "1" => $partisipan,
             "2" => $semua,
             "3" => $kelas,
-            "4" => $listmk
+            "4" => $listmk,
+            "5" => $koment
         );
         return $responden;
     }

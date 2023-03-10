@@ -16,6 +16,7 @@
 </style>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
+        <?= $this->session->flashdata('message'); ?>
         <form class="form-horizontal form-label-left" action="<?= base_url('survei/prosesSurvei'); ?>" id="kuesioner" method="post">
             <div class="x_panel">
                 <div class="x_title">
@@ -160,6 +161,7 @@
                                 <textarea name="komentar" id="komentar" class="editor-wrapper placeholderText col-md-4" contenteditable="true"></textarea>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -172,6 +174,8 @@
 </script>
 
 
+
+<!-- 
 <script>
     /*
      * SmartWizard 3.3.1 plugin
@@ -200,9 +204,13 @@
             finish: $('<button>' + options.labelFinish + '</button>').attr("type", "submit").addClass("buttonFinish")
         };
 
-        /*
-         * Private functions
-         */
+
+
+
+
+
+
+
 
         var _init = function($this) {
             var elmActionBar = $('<div></div>').addClass("actionBar");
@@ -630,10 +638,48 @@
             labelNext: 'Next',
             labelFinish: 'Simpan',
             noForwardJumping: false,
-            onLeaveStep: null, // triggers when leaving a step
+            onLeaveStep: function() {
+                // Validasi di sini
+                return true; // Jika validasi berhasil, kembalikan nilai true, jika tidak, kembalikan nilai false.
+            }, // triggers when leaving a step
             onShowStep: null, // triggers when showing a step
             onFinish: null // triggers when Finish button is clicked
         };
 
+
+
+
+
     })(jQuery);
+</script> -->
+<script src="<?= base_url('assets'); ?>/vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+
+<script>
+    function validateForm() {
+        var forms = document.getElementsByClassName('form-horizontal');
+        var valid = true;
+
+        // loop through each form
+        for (var i = 0; i < forms.length; i++) {
+            var radios = forms[i].querySelectorAll('input[type="radio"]');
+            var radioChecked = false;
+
+            // loop through each radio button
+            for (var j = 0; j < radios.length; j++) {
+                if (radios[j].checked) {
+                    radioChecked = true;
+                    break;
+                }
+            }
+
+            // if none of the radio buttons are checked, set valid to false and display an error message
+            if (!radioChecked) {
+                valid = false;
+                alert('Please select one option.');
+                break;
+            }
+        }
+
+        return valid;
+    }
 </script>

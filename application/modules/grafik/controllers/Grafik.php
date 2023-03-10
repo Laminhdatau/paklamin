@@ -44,8 +44,6 @@ class Grafik extends MX_Controller
             $prodi = null;
         }
         $a['data'] = $this->m_grafik->getDetail($prodi);
-        // $a['datadosen'] = $this->m_grafik->getAllDosen($prodi);
-        // $a['grafik'] = $this->m_grafik->getData();
         $a['layout'] = 'v_detailgrafik';
         $a['modules'] = 'grafik';
         echo Modules::run('template/backend', $a);
