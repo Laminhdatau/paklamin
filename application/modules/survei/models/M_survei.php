@@ -5,8 +5,6 @@ class M_survei extends CI_Model
     //put your code here
     public function getData($nim, $kd = null, $kd_mk = null)
     {
-
-
         $wh = "";
         if ($kd != null) {
             $wh = " and dp.kd_dosen='" . $kd . "' ";
@@ -51,6 +49,8 @@ class M_survei extends CI_Model
                                     and kp.id_kelas = dp.id_kelas
                                     )")->result();
     }
+
+   
 
     public function getSoalStep1($id)
     {

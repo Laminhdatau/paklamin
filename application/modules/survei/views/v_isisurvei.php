@@ -17,6 +17,7 @@
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <?= $this->session->flashdata('message'); ?>
+
         <form class="form-horizontal form-label-left" action="<?= base_url('survei/prosesSurvei'); ?>" id="kuesioner" method="post">
             <div class="x_panel">
                 <div class="x_title">
@@ -172,6 +173,21 @@
 <script>
     CKEDITOR.replace('komentar');
 </script>
+<script>
+    // saat halaman dimuat, scroll ke bagian atas
+    window.scrollTo(0, 0);
+
+    // fungsi untuk scroll ke bagian bawah halaman
+    function scrollBottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    // saat tombol "Next" di klik, scroll ke bagian bawah halaman
+    document.querySelector('#wizard_verticle .next').addEventListener('click', function() {
+        scrollBottom();
+    });
+</script>
+
 
 
 

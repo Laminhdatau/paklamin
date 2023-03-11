@@ -79,6 +79,58 @@
         }
     </style>
 
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        @media screen and (max-width: 600px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            th {
+                text-align: center;
+            }
+
+            td {
+                text-align: center;
+                border-bottom: none;
+            }
+
+            td:before {
+                content: attr(data-label);
+                float: left;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+        }
+    </style>
+
+
 
     <script>
         $(document).on('click', '.change-status', function() {
@@ -113,6 +165,19 @@
             });
         });
     </script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#listdata').DataTable({
+                "paging": true,
+                "pageLength": 10,
+                "searching": true // fitur searching
+            });
+        });
+    </script>
+
+
 
     <!--  <div id='breadcrumb'>
         <ul>
@@ -259,8 +324,9 @@
                                             <?php } ?>
                                         </tr>
                                     <?php } ?>
-                                    <h7><b>Total Record</b> : <?= $hitung->jumlah_soal; ?></h7>
-                                </tbody>
+                                 
+                                    <h6 class="text-success"><b>Soal Aktif</b> : <?= $hitung0->jumlah_soal .' Soal'; ?></h6>
+                                    <h6 class="text-danger"><b>Soal Tidak Aktif</b> : <?= $hitung1->jumlah_soal .' Soal'; ?></h6> </tbody>
                             </table>
                         </div>
                     </div>

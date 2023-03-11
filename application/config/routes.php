@@ -22,9 +22,7 @@ $route['id=b6f62f1d0ea26be48a9a2acc6f9071fa']    = 'kuismatakuliah';
 $route['id=35465649f969f56eca07e9c526278c16']    = 'jenissurvei';
 $route['id=70eaa213c400ad418884df3ae5a471f1']    = 'periodekuisioner';
 $route['id=5c404d37aef84fc4d16c04089917d134']    = 'bagian';
-$route['id=60962d57ee45d65c709e8ed19da35ae3'] = 'survei/isisurvei';
 
-$route['id=3b6526beb6deaee9cc4bfbaca02e66d7'] = 'survei';
 // END LAMIN
 
 /*Url dispose Browser*/

@@ -107,6 +107,18 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function() {
+            $('#listdata').DataTable({
+                "paging": true,
+                "pageLength": 10,
+                "searching": true // fitur searching
+            });
+        });
+    </script>
+
+
+
 
 
 
@@ -143,7 +155,7 @@
                                             <select name="id_bagian_soal" id="id_bagian_soal" class="form-control">
                                                 <option value="">== Pilih Bagian Soal ==</option>
                                                 <?php foreach ($bsoal as $bs) { ?>
-                                                    <option value="<?= $bs->id_bagian_soal; ?>" <?= ($bs->id_bagian_soal == $bagianku)?'selected' : ''; ?>><?= $bs->bagian_soal; ?></option>
+                                                    <option value="<?= $bs->id_bagian_soal; ?>" <?= ($bs->id_bagian_soal == $bagianku) ? 'selected' : ''; ?>><?= $bs->bagian_soal; ?></option>
                                                 <?php } ?>
                                             </select>
                                         </div>
@@ -221,6 +233,10 @@
                                     <?php
 
                                     $no = 1;
+
+                                    // $per_page = 10; // Jumlah record yang ditampilkan per halaman
+                                    // $offset = isset($_GET['page']) ? ($_GET['page'] - 1) * $per_page : 0; // Mengambil halaman yang ditampilkan
+                                    // $data = array_slice($data, $offset, $per_page); // Memotong array data sesuai halaman
                                     foreach ($data as $i) {
                                         if ($i->status == '1') {
                                             $class = "warning";
@@ -238,7 +254,7 @@
                                                     <label for="<?php echo $no; ?>"></label>
                                                 </td>
                                             <?php } ?>
-                                            <td><?php echo $no; ?></td>
+                                            <td><?php echo $no++; ?></td>
                                             <td><?php echo $i->bagian_soal; ?></td>
                                             <td><?php echo $i->soal_kepuasan; ?></td>
                                             <td><?php echo $i->jenis_survei; ?></td>
@@ -257,7 +273,10 @@
                                         </tr>
                                     <?php $i++;
                                     } ?>
-                                    <h7><b>Total Record</b> : <?= $hitung->jumlah_soal; ?></h7>
+
+
+                                    <h6 class="text-success"><b>Soal Aktif</b> : <?= $hitung0->jumlah_soal .' Soal'; ?></h6>
+                                    <h6 class="text-danger"><b>Soal Tidak Aktif</b> : <?= $hitung1->jumlah_soal .' Soal'; ?></h6>
                                 </tbody>
                             </table>
                         </div>

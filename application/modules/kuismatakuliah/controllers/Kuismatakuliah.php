@@ -16,7 +16,8 @@ class Kuismatakuliah extends MX_Controller
         $a['data'] = $this->m_kuismatakuliah->getData()->result();
         $a['bagiankum'] = $this->m_kuismatakuliah->getData()->row()->id_bagian_soal;
         $a['bsoal']=$this->m_kuismatakuliah->getBagianSoal();
-        $a['hitung'] = $this->m_kuismatakuliah->hitung();
+        $a['hitung1'] = $this->m_kuismatakuliah->hitungAktif();
+        $a['hitung0'] = $this->m_kuismatakuliah->hitungTidakAktif();
         $a['layout'] = 'v_soalmk';
         $a['modules'] = 'kuismatakuliah';
         echo Modules::run('template/backend', $a);

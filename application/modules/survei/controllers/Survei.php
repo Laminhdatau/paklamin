@@ -34,8 +34,6 @@ class Survei extends MX_Controller
             $a['kd'] = "0"; //kd_dosen
             $a['kd_mk'] = $this->uri->segment(4); //kd_matakuliah
         }
-
-
         $data1 = $this->m_survei->getSoalStep1($id);
         if (!empty($data1)) {
             $a['survei1'] = $data1['survei'];
@@ -60,10 +58,7 @@ class Survei extends MX_Controller
             $a['jenis3'] = $data3['jenis'];
             $a['option3'] = $data3['option'];
         }
-        // print_r($a);die;
-
         $a['layout'] = 'v_isisurvei';
-        // $a['layout'] = 'v_testingno';
         $a['modules'] = 'survei';
         echo Modules::run('template/backend', $a);
     }
@@ -85,25 +80,57 @@ class Survei extends MX_Controller
         $komentar = $this->input->post('komentar');
         $kd_detail_krs = $this->m_survei->getData($nim, $kd, $kd_mk);
 
+
         if (empty($kd_detail_krs) || empty($soal1) || empty($soal2) || empty($soal3) || empty($option1) || empty($option2) || empty($option3)) {
             $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
             Jawaban Tidak Valid, Silahkan isi kembali kuisioner.</div>');
-            redirect(base_url('survei'));
+            // redirect(base_url('survei/isisurvei'));
+            redirect('survei');
+        } else {
+            foreach ($soal1 as $key => $value) {
+                if (empty($option1[$key])) {
+                    $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
+                    Opsi pada pertanyaan ' . $key . ' belum diisi. Silahkan isi kembali kuisioner.</div>');
+                    redirect('survei/');
+                }
+            }
 
-            redirect('id=' . md5(''));
-        } else if (empty($_POST['radio'])) {
-            // Menyimpan Jawaban SEBELUMNYA
-            $this->session->set_userdata('soal1', $soal1);
-            $this->session->set_userdata('soal2', $soal2);
-            $this->session->set_userdata('soal3', $soal3);
-            $this->session->set_userdata('option1', $option1);
-            $this->session->set_userdata('option2', $option2);
-            $this->session->set_userdata('option3', $option3);
-
-            $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
-    Semua Opsi Wajib Di isi yaa!!.</div>');
-            redirect(base_url('survei'));
+            foreach ($soal2 as $key => $value) {
+                if (empty($option2[$key])) {
+                    $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
+                    Opsi pada pertanyaan ' . $key . ' belum diisi. Silahkan isi kembali kuisioner.</div>');
+                    redirect('survei/');
+                }
+            }
+            foreach ($soal2 as $key => $value) {
+                if (empty($option2[$key])) {
+                    $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
+                    Opsi pada pertanyaan ' . $key . ' belum diisi. Silahkan isi kembali kuisioner.</div>');
+                    redirect('survei/');
+                }
+            }
         }
+
+
+
+
+
+
+        //     else if (empty($_POST['radio'])) {
+        //         // Menyimpan Jawaban SEBELUMNYA
+        //         $this->session->set_userdata('soal1', $soal1);
+        //         $this->session->set_userdata('soal2', $soal2);
+        //         $this->session->set_userdata('soal3', $soal3);
+        //         $this->session->set_userdata('option1', $option1);
+        //         $this->session->set_userdata('option2', $option2);
+        //         $this->session->set_userdata('option3', $option3);
+
+        //         $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
+        // Semua Opsi Kuisioner Dosen Wajib Di isi yaa!!.</div>');
+        //         // redirect(base_url('survei/isisurvei'));
+        //         redirect('survei/isisurvei/');
+
+        //     }
         $id_survei = uuid_generator();
         $survei = array(
             'id_survei' => $id_survei,
@@ -153,12 +180,12 @@ class Survei extends MX_Controller
         if ($b) {
             $this->session->set_flashdata('message', '<div class="btn alert-success col-md-12">
             <strong>Terima Kasih!</strong> Anda Telah Mengisi Semua Kuisioner. Silahkan Mengurus KRS</div>');
-            redirect('id=' . md5('survei'));
+            redirect('survei');
         } else {
             // GAGAL
             $this->session->set_flashdata('message', '<div class="btn alert-dangger col-md-12">
             <strong>Maaf!</strong> Anda Tidak Boleh Mengisi Kuisioner Yang Sama.</div>');
-            redirect('id=' . md5('survei'));
+            redirect('survei');
         }
     }
     // public function get_active_periods()

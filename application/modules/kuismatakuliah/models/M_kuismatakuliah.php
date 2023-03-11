@@ -8,9 +8,13 @@ class M_kuismatakuliah extends CI_Model
         // disabled=\"disabled\" 
         return $this->db->query('SELECT s.* ,js.jenis_survei,bs.bagian_soal,if((!isnull(js.id_jenis_survei)),"disabled=\"disabled\" "," ") as ada FROM t_soal s left join t_jenis_survei js on (js.id_jenis_survei = s.id_jenis_survei) left join t_bagian_soal bs on (bs.id_bagian_soal=s.id_bagian_soal) where s.id_jenis_survei="2" order by s.id_bagian_soal asc');
     }
-    public function hitung()
+    public function hitungAktif()
     {
-        return $this->db->query("SELECT COUNT(soal_kepuasan) as jumlah_soal FROM t_soal WHERE id_jenis_survei='2'")->row();
+        return $this->db->query("SELECT COUNT(soal_kepuasan) as jumlah_soal FROM t_soal WHERE id_jenis_survei='2' and status='1'")->row();
+    }
+    public function hitungTidakAktif()
+    {
+        return $this->db->query("SELECT COUNT(soal_kepuasan) as jumlah_soal FROM t_soal WHERE id_jenis_survei='2' and status='0'")->row();
     }
     public function getBagianSoal()
     {
@@ -36,7 +40,7 @@ class M_kuismatakuliah extends CI_Model
     {
         return  $this->db->get_where('t_soal', array('id_soal' => $id))->row();
     }
-    
+
     public function updateStatusm($newStatus, $id)
     {
         $this->db->update('t_soal', array('status' => $newStatus), array('id_soal' => $id));

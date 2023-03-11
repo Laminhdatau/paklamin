@@ -17,7 +17,8 @@ class Kuisdosen extends MX_Controller
         $a['data'] = $this->m_kuisdosen->getData()->result();
         $a['bagianku'] = $this->m_kuisdosen->getData()->row()->id_bagian_soal;
         $a['bsoal'] = $this->m_kuisdosen->getBagianSoal();
-        $a['hitung'] = $this->m_kuisdosen->hitung();
+        $a['hitung1'] = $this->m_kuisdosen->hitungAktif();
+        $a['hitung0'] = $this->m_kuisdosen->hitungTidakAktif();
         $a['layout'] = 'v_soaldos';
         $a['modules'] = 'kuisdosen';
         echo Modules::run('template/backend', $a);
