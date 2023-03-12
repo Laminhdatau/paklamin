@@ -1,4 +1,3 @@
-
 <div class="main_content">
     <div class="x_panel">
         <div class="x_title">
@@ -16,6 +15,21 @@
                 <a class="btn btn-info" href="<?= base_url('grafik/detailGrafik'); ?>">LIHAT DETAIL GRAFIK</a>
             </div> -->
             <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="xpanel col-md-12 col-sm-12" id="penilai">
+        <div class="col-md-3 col-sm-3 ">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Penilai</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content text-left">
+                    <h5 id="semua"></h5> <br>
+                    <h5 id="semuakelas"></h5>
+                </div>
+            </div>
         </div>
     </div>
     <div class="x_panel col-md-12 col-sm-12" id="lamin">
@@ -62,50 +76,71 @@
         </div>
     </div>
 
+
     <!-- ==================================================GRAFIK KHUSUS PANTAUAN MAHASISWA DAN KELAS -->
 
 
 
 
     <div id="laminket" class="col-md-12 col-sm-12">
-        <?php
+        <div class="col-sm-3 col-md-3">
+            <?php
 
-        foreach ($opt as $o) {
+            foreach ($opt as $o) {
 
 
-            switch ($o->id_jawaban) {
-                case 1:
-                    $color = 'purple';
-                    break;
-                case 2:
-                    $color = 'orange';
-                    break;
-                case 3:
-                    $color = 'yellow';
-                    break;
-                case 4:
-                    $color =  'green';
-                    break;
-                case 5:
-                    $color =  'blue';
-                    break;
-                default:
-                    $color = 'white';
-            }
-        ?>
-            <h2> <button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </h2>
-        <?php } ?>
+                switch ($o->id_jawaban) {
+                    case 1:
+                        $color = 'purple';
+                        break;
+                    case 2:
+                        $color = 'orange';
+                        break;
+                    case 3:
+                        $color = 'yellow';
+                        break;
+                    case 4:
+                        $color =  'green';
+                        break;
+                    case 5:
+                        $color =  'blue';
+                        break;
+                    default:
+                        $color = 'white';
+                }
+            ?>
+                <h2> <button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </h2>
+            <?php } ?>
+        </div>
+
+        <div class="col-sm-9 col-md-9">
+            <h4>Saran dan Masukan</h4>
+            <div class="x-panel">
+                <ul class="messages">
+                    <li>
+                        <div class="message_date" id="tw">
+
+
+                        </div>
+                        <div class="message_wrapper " id="kome">
+
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-
 
 </div>
 
 <script src="<?= base_url('assets/'); ?>vendors/echarts/dist/echarts.min.js"></script>
 <script type="text/javascript">
     $('#lamin').hide();
+    $('#penilai').hide();
     $('#laminket').hide();
     $('#mk').change(function() {
         $('#lamin').show();
+        $('#penilai').show();
         $('#laminket').show();
 
         var mk = $(this).val();
@@ -199,6 +234,39 @@
             }
 
 
+        });
+
+
+        $.ajax({
+            type: 'POST',
+            url: 'grafik/getSeluruhMkPunya',
+            data: 'mk=' + mk,
+            success: function(response) {
+                var datas = JSON.parse(response);
+                var totalMhsmk = datas[6][0].ttl_mhs;
+                var jumlahSeluruh = datas[7][0].jumlah_seluruh;
+                var jumlahKelas = datas[8][0].jumlah_kelas;
+                var komens = datas[9];
+                $('#semua').html('<b>' + totalMhsmk + '</b>' + " Dari " + '<b>' + jumlahSeluruh + '</b>' + " Responden");
+                $('#semuakelas').html('<b>' + jumlahKelas + '</b>' + " Kelas");
+
+                for (r = 0; r < komens.length; r++) {
+                    var kom = komens[r].komentar;
+                    r = r + 1;
+                    $('#kome ul').empty();
+                    $('#kome').append('<ul><h6 class="heading">' + r + kom + '</h6></ul>');
+
+                }
+                for (t = 0; t <= komens.length; t++) {
+                    var tan = komens[t].tan;
+                    var bul = komens[t].bulan;
+                    $('#tw').empty();
+                    $('#tw').append(
+                        '<h3 class="date text-info">' + tan + '</h3>' +
+                        '<p class="month">' + bul + '</p>'
+                    );
+                }
+            }
         });
 
 

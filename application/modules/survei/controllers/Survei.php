@@ -85,8 +85,21 @@ class Survei extends MX_Controller
             $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
             Jawaban Tidak Valid, Silahkan isi kembali kuisioner.</div>');
             // redirect(base_url('survei/isisurvei'));
+            $this->session->set_userdata('soal1', $soal1);
+            $this->session->set_userdata('soal2', $soal2);
+            $this->session->set_userdata('soal3', $soal3);
+            $this->session->set_userdata('option1', $option1);
+            $this->session->set_userdata('option2', $option2);
+            $this->session->set_userdata('option3', $option3);
             redirect('survei');
         } else {
+
+            $this->session->set_userdata('soal1', $soal1);
+            $this->session->set_userdata('soal2', $soal2);
+            $this->session->set_userdata('soal3', $soal3);
+            $this->session->set_userdata('option1', $option1);
+            $this->session->set_userdata('option2', $option2);
+            $this->session->set_userdata('option3', $option3);
             foreach ($soal1 as $key => $value) {
                 if (empty($option1[$key])) {
                     $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
@@ -102,8 +115,8 @@ class Survei extends MX_Controller
                     redirect('survei/');
                 }
             }
-            foreach ($soal2 as $key => $value) {
-                if (empty($option2[$key])) {
+            foreach ($soal3 as $key => $value) {
+                if (empty($option3[$key])) {
                     $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
                     Opsi pada pertanyaan ' . $key . ' belum diisi. Silahkan isi kembali kuisioner.</div>');
                     redirect('survei/');
@@ -111,26 +124,6 @@ class Survei extends MX_Controller
             }
         }
 
-
-
-
-
-
-        //     else if (empty($_POST['radio'])) {
-        //         // Menyimpan Jawaban SEBELUMNYA
-        //         $this->session->set_userdata('soal1', $soal1);
-        //         $this->session->set_userdata('soal2', $soal2);
-        //         $this->session->set_userdata('soal3', $soal3);
-        //         $this->session->set_userdata('option1', $option1);
-        //         $this->session->set_userdata('option2', $option2);
-        //         $this->session->set_userdata('option3', $option3);
-
-        //         $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
-        // Semua Opsi Kuisioner Dosen Wajib Di isi yaa!!.</div>');
-        //         // redirect(base_url('survei/isisurvei'));
-        //         redirect('survei/isisurvei/');
-
-        //     }
         $id_survei = uuid_generator();
         $survei = array(
             'id_survei' => $id_survei,

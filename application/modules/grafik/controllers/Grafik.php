@@ -36,7 +36,6 @@ class Grafik extends MX_Controller
         $a['modules'] = 'grafik';
         echo Modules::run('template/backend', $a);
     }
-
     public function detailGrafik()
     {
         $prodi = prodi($this->session->userdata('security')->id_cession);
@@ -48,8 +47,6 @@ class Grafik extends MX_Controller
         $a['modules'] = 'grafik';
         echo Modules::run('template/backend', $a);
     }
-
-
     public function getGrafik()
     {
         $kd = $this->input->post('dosen');
@@ -65,6 +62,12 @@ class Grafik extends MX_Controller
     public function getSeluruh()
     {
         $kd = $this->input->post('dosen');
+        $semua = $this->m_grafik->getSeluruh($kd);
+        echo json_encode($semua);
+    }
+    public function getSeluruhMkPunya()
+    {
+        $kd = $this->input->post('mk');
         $semua = $this->m_grafik->getSeluruh($kd);
         echo json_encode($semua);
     }

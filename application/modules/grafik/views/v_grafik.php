@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-12">
-            <div class="col-md-9 col-sm-9 " id="listfoto">
+            <div class="col-md-7 col-sm-7 " id="listfoto">
                 <div class="x_panel tile fixed_height_500 overflow_hidden">
                     <div class="x_title">
                         <h2>Dosen</h2>
@@ -44,7 +44,7 @@
                             <tr>
                                 <td>
                                     <div class="col-lg-2 col-md-2 col-sm-2 ">
-                                        <img class="img-circle mx-auto" id="foto" src="" alt="" style="width: 220px; height: 220px;">
+                                        <img class="img-circle mx-auto" id="foto" src="" alt="" style="width: 150px; height: 150px;">
                                     </div>
                                 </td>
                                 <td>
@@ -76,9 +76,12 @@
         </div>
 
         <div class="col-md-12 col-sm-12" id="lamin">
-        <div class="col-md-2 col-sm-2">
+            <div class="col-md-3 col-sm-3">
                 <div class="x_panel">
-                    <h2>Keterangan :</h2>
+                    <ul class="nav text-start panel_toolbox">
+                        <h2>Keterangan :</h2>
+                    </ul>
+                    <div class="clearfix"></div>
                     <?php
                     foreach ($opt as $o) {
                         switch ($o->id_jawaban) {
@@ -101,7 +104,9 @@
                                 $color = 'white';
                         }
                     ?>
-                        <h2> <button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </h2>
+                        <div class="x_content">
+                            <h2> <button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </h2>
+                        </div>
                     <?php } ?>
                 </div>
             </div>
@@ -145,23 +150,21 @@
                 </div>
             </div>
         </div>
-
+        <br><br>
         <div id="laminket" class="col-md-12 col-sm-12">
-            <div class="col-md-12 col-sm-12">
-                <h4>Saran dan Masukan</h4>
-                <div class="x-panel">
-                    <ul class="messages">
-                        <li>
-                            <div class="message_date" id="tw">
+            <h4>Saran dan Masukan</h4>
+            <div class="x-panel">
+                <ul class="messages">
+                    <li>
+                        <div class="message_date" id="tw">
 
 
-                            </div>
-                            <div class="message_wrapper " id="kome">
+                        </div>
+                        <div class="message_wrapper " id="kome">
 
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
