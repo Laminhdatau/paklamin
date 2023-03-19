@@ -25,38 +25,30 @@
         </ul> </div> <div style="width: 100%; height:1px; border: inset purple;"></div> <div style="width: 100%; height:10px; border: 0px solid white;"></div> -->
 
     <div class="body clearfix">
-        <div class="x_panel col-sm-12 col-xs-10">
-            <div class="x_title">
+        <div class="x_panel col-sm-12 col-xs-12">
+            <div class=" text-center">
 
-                <h2><small>Pg: </small><b> Survei Kepuasan</b></h2>
-                <ul class="nav navbar-right">
-                    <li><a class="close-link" href="<?php echo base_url('home'); ?>"><i class="fa fa-close"></i></a></li>
-                </ul>
+                <h1 class="text-center "><b> Survei Kepuasan</b></h1>
+                <hr class="border-top border-5  ">
 
-                <div class="clearfix"></div>
             </div>
             <div class="x_content text-black">
                 <h6 class="text-center">Silahkan Isi Kuisioner Dosen dan Matakuliah dibawah ini sesuai dengan pendapat anda..!!</h6>
                 <h6>Ket: </h6>
-                <h6><button class="btn alert-warning"></button>   : Belum Terisi</h6>
+                <h6><button class="btn alert-warning"></button> : Belum Terisi</h6>
                 <h6><button class="btn alert-secondary"></button> : Sudah Terisi</h6>
                 <div class="row">
                     <div class="col-sm-12 col-xs-12 justify-content-between">
-                        <!-- =============================================== -->
-
-
-                        <span><b>
-                                <p class="text-center text-danger" id="countdown"></p>
-                            </b>
-                        </span>
-
-                        <table id="formkuis" class="col-md-12 col-sm-12 col-xs-10 table table-bordered">
-
+                        <table id="formkuis" class="col-md-12 col-sm-12 col-xs-10 table-bordered table-hover">
                             <thead>
                                 <?php echo $this->session->flashdata('message'); ?>
-                                <tr>
-                                    <th>MATAKULIAH</th>
-                                    <th>DOSEN</th>
+                                <tr class="col-12">
+                                    <th class="h5 text-center p-3 font-weight-bold" >
+                                        MATAKULIAH
+                                    </th>
+                                    <th class="h5 text-center p-3 font-weight-bold">
+                                        DOSEN
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -81,7 +73,7 @@
                                 ?>
 
                                     <tr>
-                                        <td>
+                                        <td class="p-2 text-center">
                                             <?php if ($lamin == $dk->kd_mata_kuliah) { ?>
                                                 <span></span>
                                             <?php } else {
@@ -93,13 +85,13 @@
                                                 }
                                             ?>
 
-                                                <a href="<?= $ul; ?>" class="btn btn-round alert-<?= $button1; ?>"><?= $dk->nama_mata_kuliah; ?></a>
+                                                <a href="<?= $ul; ?>" class="btn alert-<?= $button1; ?>"><?= $dk->nama_mata_kuliah; ?></a>
 
 
                                             <?php } ?>
 
                                         </td>
-                                        <td>
+                                        <td class="p-2 text-center">
                                             <?php if ($lamin1 == $dk->kd_dosen) { ?>
                                                 <span></span>
                                             <?php } else {
@@ -109,7 +101,7 @@
                                                     $ul = base_url($dk->ada_dosen);
                                                 }
                                             ?>
-                                                <a href="<?= $ul; ?>" class="btn btn-round alert-<?= $button2; ?>"><?= $dk->nama_dosen; ?></a>
+                                                <a href="<?= $ul; ?>" class="btn alert-<?= $button2; ?> "><?= $dk->nama_dosen; ?></a>
                                             <?php } ?>
                                         </td>
 

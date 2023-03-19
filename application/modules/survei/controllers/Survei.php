@@ -172,7 +172,7 @@ class Survei extends MX_Controller
         // JIKA BERHASIL MASUK KE DATABASE
         if ($b) {
             $this->session->set_flashdata('message', '<div class="btn alert-success col-md-12">
-            <strong>Terima Kasih!</strong> Anda Telah Mengisi Semua Kuisioner. Silahkan Mengurus KRS</div>');
+            <strong>Terima Kasih!</strong> Anda Telah Mengisi Kuisioner. Silahkan Selesaikan Semuanya</div>');
             redirect('survei');
         } else {
             // GAGAL
@@ -181,10 +181,5 @@ class Survei extends MX_Controller
             redirect('survei');
         }
     }
-    // public function get_active_periods()
-    // {
-    //     $data = $this->m_survei->get_active_periods();
-
-    //     echo json_encode($data);
-    // }
+    
 }
