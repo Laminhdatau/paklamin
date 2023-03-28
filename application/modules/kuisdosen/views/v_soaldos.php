@@ -79,7 +79,6 @@
 
 
 
-        <style>
         table {
             border-collapse: collapse;
             width: 100%;
@@ -128,7 +127,6 @@
                 text-transform: uppercase;
             }
         }
-    </style>
     </style>
 
     <script>
@@ -328,8 +326,8 @@
                                     } ?>
 
 
-                                    <h6 class="text-success"><b>Soal Aktif</b> : <?= $hitung0->jumlah_soal .' Soal'; ?></h6>
-                                    <h6 class="text-danger"><b>Soal Tidak Aktif</b> : <?= $hitung1->jumlah_soal .' Soal'; ?></h6>
+                                    <h6 class="text-success"><b>Soal Aktif</b> : <?= $hitung1->jumlah_soal .' Soal'; ?></h6>
+                                    <h6 class="text-danger"><b>Soal Tidak Aktif</b> : <?= $hitung0->jumlah_soal .' Soal'; ?></h6>
                                 </tbody>
                             </table>
                         </div>

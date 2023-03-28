@@ -10,9 +10,9 @@ $db['default'] = array(
 // ==KONFIGURASI IP LOCAL==
 // _______________________________________________________
 	// 'hostname' => 'localhost',
-	// 'username' => 'root',
-	// 'password' => '',
-	// 'database' => 'db_siakad',
+	// 'username' => 'lamin',
+	// 'password' => ';',
+	// 'database' => 'db_latih',
 // _______________________________________________________
 
 // ==KONFIGURASI IP SIAKAD==
