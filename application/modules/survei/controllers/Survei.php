@@ -25,6 +25,10 @@ class Survei extends MX_Controller
     }
     public function isisurvei()
     {
+        $a['opt'] = $this->m_survei->getOption();
+
+
+
         $id = $this->uri->segment(3); //id_jenis_survei
         $a['id_jenis'] = $id;
         $a['kd'] = $this->uri->segment(4); //kd_dosen
@@ -67,6 +71,8 @@ class Survei extends MX_Controller
     public function prosesSurvei()
     {
         // ambil data dari form
+        $d = $this->uri->segment(5);
+        $t = $this->uri->segment(6);
         $nim = nim($this->session->userdata('security')->id_cession);
         $id_jenis = $this->input->post('id_jenis');
         $kd = $this->input->post('kd_dosen');
@@ -81,6 +87,10 @@ class Survei extends MX_Controller
         $kd_detail_krs = $this->m_survei->getData($nim, $kd, $kd_mk);
 
 
+        // ====Penyimpanan jawaban berkelajnutan
+
+        // =========
+
         if (empty($kd_detail_krs) || empty($soal1) || empty($soal2) || empty($soal3) || empty($option1) || empty($option2) || empty($option3)) {
             $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
             Jawaban Tidak Valid, Silahkan isi kembali kuisioner.</div>');
@@ -91,9 +101,8 @@ class Survei extends MX_Controller
             $this->session->set_userdata('option1', $option1);
             $this->session->set_userdata('option2', $option2);
             $this->session->set_userdata('option3', $option3);
-            redirect('survei');
+            redirect('survei/');
         } else {
-
             $this->session->set_userdata('soal1', $soal1);
             $this->session->set_userdata('soal2', $soal2);
             $this->session->set_userdata('soal3', $soal3);
@@ -104,7 +113,7 @@ class Survei extends MX_Controller
                 if (empty($option1[$key])) {
                     $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
                     Opsi pada pertanyaan ' . $key . ' belum diisi. Silahkan isi kembali kuisioner.</div>');
-                    redirect('survei/');
+                    redirect('survei/isisurvei/' . $id_jenis . '/' . $d . '/' . $t);
                 }
             }
 
@@ -112,14 +121,14 @@ class Survei extends MX_Controller
                 if (empty($option2[$key])) {
                     $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
                     Opsi pada pertanyaan ' . $key . ' belum diisi. Silahkan isi kembali kuisioner.</div>');
-                    redirect('survei/');
+                    redirect('survei/isisurvei/' . $id_jenis . '/' . $d . '/' . $t);
                 }
             }
             foreach ($soal3 as $key => $value) {
                 if (empty($option3[$key])) {
                     $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
                     Opsi pada pertanyaan ' . $key . ' belum diisi. Silahkan isi kembali kuisioner.</div>');
-                    redirect('survei/');
+                    redirect('survei/isisurvei/' . $id_jenis . '/' . $d . '/' . $t);
                 }
             }
         }
@@ -181,5 +190,4 @@ class Survei extends MX_Controller
             redirect('survei');
         }
     }
-    
 }

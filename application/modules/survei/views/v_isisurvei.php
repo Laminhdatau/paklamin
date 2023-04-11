@@ -17,12 +17,18 @@
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <?= $this->session->flashdata('message'); ?>
-
         <form class="form-horizontal form-label-left" action="<?= base_url('survei/prosesSurvei'); ?>" id="kuesioner" method="post">
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Pengisian Kuisioner <small><b> <?= $nama = str_replace("%20", " ", $nama); ?></b></small></h2>
-                    <div class="clearfix"></div>
+                    <div class="clearfix mt-3"></div>
+                </div>
+                <div class="row ">
+                    <h6 class="ml-2 mr-3 "><b>Sangat Tidak Baik : <?= $opt[5]->bobot; ?></b></h6>
+                    <h6 class="mr-3"><b>Kurang : <?= $opt[4]->bobot; ?></b></h6>
+                    <h6 class="mr-3"><b>Cukup : <?= $opt[3]->bobot; ?></b></h6>
+                    <h6 class="mr-3"><b>Baik : <?= $opt[2]->bobot; ?></b></h6>
+                    <h6><b>Sangat Baik : <?= $opt[1]->bobot; ?></b></h6>
                 </div>
                 <div class="x_content col-md-12 col-sm-12 col-xs-12">
                     <div id="wizard_verticle" class="form_wizard wizard_verticle">
