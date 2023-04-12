@@ -101,7 +101,7 @@
             <div class="col-md-3 col-sm-3">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h5>A. Kegiatan Awal Pembelajaran</h5>
+                        <b>A. Kegiatan Awal Pembelajaran</b>
                         <ul class="nav navbar-right panel_toolbox">
                         </ul>
                         <div class="clearfix"></div>
@@ -114,7 +114,7 @@
             <div class="col-md-3 col-sm-3">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h5>B. Pelaksanaan Pembelajaran</h5>
+                        <b>B. Pelaksanaan Pembelajaran</b>
                         <ul class="nav navbar-right panel_toolbox">
                         </ul>
                         <div class="clearfix"></div>
@@ -127,7 +127,7 @@
             <div class="col-md-3 col-sm-3">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h5>C. Penilaian Hasil Belajar</h5>
+                        <b>C. Penilaian Hasil Belajar</b>
                         <ul class="nav navbar-right panel_toolbox">
                         </ul>
                         <div class="clearfix"></div>
