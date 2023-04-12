@@ -57,7 +57,90 @@
                 </div>
             </div>
 
-            <div class="col-md-12 col-sm-12  ">
+            <!-- <div class="col-md-12 col-sm-12  ">
+
+            </div> -->
+
+        </div>
+
+        <div class="col-md-12 col-sm-12" id="lamin">
+            <div class="col-md-3 col-sm-3">
+                <div class="x_panel">
+                    <ul>
+                        <h4>Keterangan :</h4>
+                    </ul>
+                    <div class="clearfix"></div>
+                    <?php
+                    foreach ($opt as $o) {
+                        switch ($o->id_jawaban) {
+                            case 1:
+                                $color = 'purple';
+                                break;
+                            case 2:
+                                $color = 'orange';
+                                break;
+                            case 3:
+                                $color = 'yellow';
+                                break;
+                            case 4:
+                                $color =  'green';
+                                break;
+                            case 5:
+                                $color =  'blue';
+                                break;
+                            default:
+                                $color = 'white';
+                        }
+                    ?>
+                        <div class="x_content">
+                            <h2><button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </h2>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h5>A. Kegiatan Awal Pembelajaran</h5>
+                        <ul class="nav navbar-right panel_toolbox">
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <canvas id="grafika"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h5>B. Pelaksanaan Pembelajaran</h5>
+                        <ul class="nav navbar-right panel_toolbox">
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <canvas id="grafikb"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h5>C. Penilaian Hasil Belajar</h5>
+                        <ul class="nav navbar-right panel_toolbox">
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <canvas id="grafikc"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9 col-sm-9">
+
+
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Detail Grafik</h2>
@@ -113,102 +196,33 @@
                         </div>
                     </div>
                 </div>
+
             </div>
-
         </div>
+        <br><br><br>
 
-        <div class="col-md-12 col-sm-12" id="lamin">
-            <div class="col-md-3 col-sm-3">
-                <div class="x_panel">
-                    <ul class="nav text-start panel_toolbox">
-                        <h2>Keterangan :</h2>
-                    </ul>
+
+        <div id="laminket" class="col-md-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Saran dan Masukan</h2>
+
                     <div class="clearfix"></div>
-                    <?php
-                    foreach ($opt as $o) {
-                        switch ($o->id_jawaban) {
-                            case 1:
-                                $color = 'purple';
-                                break;
-                            case 2:
-                                $color = 'orange';
-                                break;
-                            case 3:
-                                $color = 'yellow';
-                                break;
-                            case 4:
-                                $color =  'green';
-                                break;
-                            case 5:
-                                $color =  'blue';
-                                break;
-                            default:
-                                $color = 'white';
-                        }
-                    ?>
-                        <div class="x_content">
-                            <h2><button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </h2>
+                </div>
+                <div class="x_content">
+                    <article class="media event">
+                        <a class="pull-left date" id="tw">
+
+                        </a>
+                        <div class="media-body" id="kome">
+
                         </div>
-                    <?php } ?>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>A. Kegiatan Awal Pembelajaran</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                        <canvas id="grafika"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>B. Pelaksanaan Pembelajaran</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                        <canvas id="grafikb"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>C. Penilaian Hasil Belajar</h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                        <canvas id="grafikc"></canvas>
-                    </div>
+                    </article>
+
                 </div>
             </div>
         </div>
-        <br><br>
-        <div id="laminket" class="col-md-12 col-sm-12">
-            <h4>Saran dan Masukan</h4>
-            <div class="x-panel">
-                <ul class="messages">
-                    <li>
-                        <div class="message_date" id="tw">
 
-
-                        </div>
-                        <div class="message_wrapper " id="kome">
-
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -243,7 +257,6 @@
                 myChart[3] = document.getElementById("grafikc");
                 Chart.defaults.global.defaultFontFamily = "Lato";
                 Chart.defaults.global.defaultFontSize = 15;
-
                 let lbl = [];
                 let dt = [];
                 const a = [];
@@ -336,9 +349,8 @@
                 }
                 for (r = 0; r < komens.length; r++) {
                     var kom = komens[r].komentar;
-                    r = r + 1;
                     $('#kome ul').empty();
-                    $('#kome').append('<ul><h6 class="heading">' + r + kom + '</h6></ul>');
+                    $('#kome').append('<p>' + kom + '</p>');
 
                 }
                 for (t = 0; t <= komens.length; t++) {
@@ -346,7 +358,7 @@
                     var bul = komens[t].bulan;
                     $('#tw').empty();
                     $('#tw').append(
-                        '<h3 class="date text-info">' + tan + '</h3>' +
+                        '<p class="day">' + tan + '</p>' +
                         '<p class="month">' + bul + '</p>'
                     );
                 }
