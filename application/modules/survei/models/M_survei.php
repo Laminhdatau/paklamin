@@ -47,7 +47,7 @@ class M_survei extends CI_Model
                                 and (dp.kd_mata_kuliah = pp.kd_mata_kuliah
                                     and dp.id_periode_perkuliahan = kp.id_periode_perkuliahan
                                     and kp.id_kelas = dp.id_kelas
-                                    )")->result();
+                                    )");
     }
 
 

@@ -17,9 +17,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-12">
-            <div class="clearfix"></div>
-
-            <div class="col-md-3 col-sm-3 " id="listfoto">
+            <div class="col-md-7 col-sm-7 " id="listfoto">
                 <div class="x_panel tile fixed_height_500 overflow_hidden">
                     <div class="x_title">
                         <h2>Dosen</h2>
@@ -28,14 +26,30 @@
                     </div>
                     <div class="x_content">
                         <table class="w-100">
-
+                            <tr>
+                                <th>
+                                    <div class="col-lg-2 col-md-2 col-sm-2 ">
+                                        <p class="">Dosen</p>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="col-lg-7 col-md-7 col-sm-7 text-left">
+                                        <p class="">Matakuliah Diampuh</p>
+                                    </div>
+                                </th>
+                            </tr>
                             <tr>
                                 <td>
                                     <div class="col-lg-2 col-md-2 col-sm-2 ">
                                         <img class="img-circle mx-auto" id="foto" src="" alt="" style="width: 150px; height: 150px;">
                                     </div>
                                 </td>
+                                <td>
+                                    <div class="col-lg-7 col-md-7 col-sm-7 text-left">
 
+                                        <h5 class="text-left" id="listMK"></h5>
+                                    </div>
+                                </td>
                             </tr>
                             <br>
                         </table>
@@ -44,7 +58,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-sm-6 " id="penilai">
+            <div class="col-md-3 col-sm-3 " id="penilai">
                 <div class="x_panel">
                     <div class="x_title">
                         <h2>Penilai</h2>
@@ -56,65 +70,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-12 col-sm-12  ">
-                <div class="x_panel">
-                    <div class="x_title">
-                        <h2>Detail Grafik</h2>
-
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="x_content">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Matakuliah</th>
-                                    <th>Kegiatan Awal Pembelajaran</th>
-                                    <th>Pelaksanaan Pembelajaran</th>
-                                    <th>Penilaian Hasil Belajar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Pancasila</td>
-                                    <td>20%</td>
-                                    <td>35%</td>
-                                    <td>90%</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>B. Inggris</td>
-                                    <td>20%</td>
-                                    <td>35%</td>
-                                    <td>90%</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Matematika</td>
-                                    <td>20%</td>
-                                    <td>35%</td>
-                                    <td>90%</td>
-                                </tr>
-
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th colspan="2" class="text-center">Total</th>
-
-                                    <th>50%</th>
-                                    <th>50%</th>
-                                    <th>50%</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        <div class="x_title">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         <div class="col-md-12 col-sm-12" id="lamin">
@@ -147,7 +102,7 @@
                         }
                     ?>
                         <div class="x_content">
-                            <h2><button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </h2>
+                            <h2> <button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </h2>
                         </div>
                     <?php } ?>
                 </div>
