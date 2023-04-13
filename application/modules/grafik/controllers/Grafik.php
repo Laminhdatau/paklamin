@@ -17,8 +17,9 @@ class Grafik extends MX_Controller
         if ($prodi == '') {
             $prodi = null;
         }
-        $kd = $this->input->post('dosen');
+        // $kd = $this->input->post('dosen');
         $a['opt'] = $this->m_grafik->getOption();
+        // $a['opt'] = $this->m_grafik->getSeluruh();
         $a['datadosen'] = $this->m_grafik->getAllDosen($prodi);
         $a['layout'] = 'v_grafik';
         $a['modules'] = 'grafik';

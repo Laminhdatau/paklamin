@@ -283,8 +283,7 @@ class M_grafik extends CI_Model
                 ,t_kelas_perkuliahan kp
         where dp.kd_dosen='" . $kd . "'
                 and dp.id_periode_perkuliahan in (select id_periode_perkuliahan from t_periode_perkuliahan WHERE status='1')
-               
-        and s.kd_dosen=dp.kd_dosen")->result();
+        and s.kd_dosen=dp.kd_dosen and s.komentar !='' order by day(s.waktu) desc")->result();
 
         $komentmk = $this->db->query("select DISTINCT(s.komentar),day(s.waktu) as tan,
         CASE 
@@ -307,10 +306,10 @@ class M_grafik extends CI_Model
                 ,t_paket_perkuliahan pp
                 ,t_detail_krs dk
                 
-        where pp.kd_mata_kuliah='".$kd."'
+        where pp.kd_mata_kuliah='" . $kd . "'
                 and dp.id_periode_perkuliahan in (select id_periode_perkuliahan from t_periode_perkuliahan WHERE status='1')
           and s.kd_detail_krs=dk.kd_detail_krs     
-        and dk.kd_paket_perkuliahan=pp.kd_paket_perkuliahan")->result();
+        and dk.kd_paket_perkuliahan=pp.kd_paket_perkuliahan order by day(s.waktu) desc")->result();
 
         $responden = array(
             "1" => $partisipan,

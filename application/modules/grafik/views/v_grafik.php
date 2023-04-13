@@ -19,11 +19,10 @@
         <div class="col-sm-12 col-md-12">
             <div class="clearfix"></div>
 
-            <div class="col-md-3 col-sm-3 " id="listfoto">
+            <div class="col-md-4 col-sm-4 " id="listfoto">
                 <div class="x_panel tile fixed_height_500 overflow_hidden">
                     <div class="x_title">
                         <h2>Dosen</h2>
-
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -51,8 +50,8 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content text-left">
-                        <h5 id="semua"></h5> <br>
-                        <h5 id="semuakelas"></h5>
+                        <p id="semua"></p> <br>
+                        <p id="semuakelas"></p>
                     </div>
                 </div>
             </div>
@@ -67,7 +66,7 @@
             <div class="col-md-3 col-sm-3">
                 <div class="x_panel">
                     <ul>
-                        <h4>Keterangan :</h4>
+                        <p>Keterangan :</p>
                     </ul>
                     <div class="clearfix"></div>
                     <?php
@@ -93,7 +92,7 @@
                         }
                     ?>
                         <div class="x_content">
-                            <h2><button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </h2>
+                            <p><button style="background-color: <?= $color; ?>;" class="btn"></button> <?= $o->jawaban ?> </p>
                         </div>
                     <?php } ?>
                 </div>
@@ -148,7 +147,7 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <table class="table table-hover">
+                        <table class="table table-hover table-responsive">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -158,31 +157,10 @@
                                     <th>Penilaian Hasil Belajar</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Pancasila</td>
-                                    <td>20%</td>
-                                    <td>35%</td>
-                                    <td>90%</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>B. Inggris</td>
-                                    <td>20%</td>
-                                    <td>35%</td>
-                                    <td>90%</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Matematika</td>
-                                    <td>20%</td>
-                                    <td>35%</td>
-                                    <td>90%</td>
-                                </tr>
+                            <tbody id="listMK">
 
                             </tbody>
-                            <tfoot>
+                            <!-- <tfoot id="kaki">
                                 <tr>
                                     <th colspan="2" class="text-center">Total</th>
 
@@ -190,7 +168,7 @@
                                     <th>50%</th>
                                     <th>50%</th>
                                 </tr>
-                            </tfoot>
+                            </tfoot> -->
                         </table>
                         <div class="x_title">
                         </div>
@@ -209,15 +187,7 @@
 
                     <div class="clearfix"></div>
                 </div>
-                <div class="x_content">
-                    <article class="media event">
-                        <a class="pull-left date" id="tw">
-
-                        </a>
-                        <div class="media-body" id="kome">
-
-                        </div>
-                    </article>
+                <div class="x_content" id="tw">
 
                 </div>
             </div>
@@ -343,24 +313,24 @@
                 var urlGambar = '<?= base_url('file/images/pasphoto/') ?>' + foto + '.jpeg ';
                 $('#foto').attr('src', urlGambar);
 
+                $('#listMK').empty();
                 for (i = 0; i < listMK.length; i++) {
                     var namaMK = listMK[i].nama_mata_kuliah;
-                    $('#listMK').append('<li>' + namaMK + '</li>');
+                    a = i + 1;
+                    $('#listMK').append('<tr><td>' + a + '</td>' +
+                        '<td>' + namaMK + '</td></tr>');
                 }
-                for (r = 0; r < komens.length; r++) {
-                    var kom = komens[r].komentar;
-                    $('#kome ul').empty();
-                    $('#kome').append('<p>' + kom + '</p>');
-
-                }
-                for (t = 0; t <= komens.length; t++) {
+                // // $('#kome').empty();
+                // for (r = 0; r < komens.length; r++) {
+                //     var kom = komens[r].komentar;
+                //     $('#tw').append();
+                // }
+                $('#tw').empty();
+                for (t = 0; t < komens.length; t++) {
+                    var kom = komens[t].komentar;
                     var tan = komens[t].tan;
                     var bul = komens[t].bulan;
-                    $('#tw').empty();
-                    $('#tw').append(
-                        '<p class="day">' + tan + '</p>' +
-                        '<p class="month">' + bul + '</p>'
-                    );
+                    $('#tw').append('<article class="media event mb-2"><a class="pull-left date"><p class="day">' + tan + '</p>' + '<p class="month">' + bul + '</p></a>' + '<div class="media-body""><p>' + kom + '</p></div></article>');
                 }
             }
         });
