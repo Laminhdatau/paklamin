@@ -6,6 +6,8 @@
         <div class="x_content">
             <div class="form-floating col-md-12 col-sm-12">
                 <select name="mk" id="mk" class="form-control">
+                <option value="">--PILIH MATAKULIAH--</option>
+
                     <?php foreach ($datamk as $mm) { ?>
                         <option value="<?= $mm->kd_mata_kuliah; ?>"><?= $mm->nama_mata_kuliah; ?></option>
                     <?php } ?>
@@ -176,7 +178,6 @@
                     lbl.push(list[i]['jawaban']);
                     dt.push(list[i]['persentase']);
                     j = list[i]['id_bagian_soal'];
-                    console.log(j);
                 }
 
                 labelx.push(lbl);

@@ -87,3 +87,45 @@ and pr.id_prodi="3"
 GROUP BY bs.bagian_soal
 ORDER BY jumlah_survei DESC
 LIMIT 0, 25
+
+
+
+
+
+-- LAST QUERY UNTUK DETAIL
+
+
+SELECT m.kd_mata_kuliah
+,m.nama_mata_kuliah
+,dp.kd_dosen_pengampu
+,pp.kd_paket_perkuliahan
+,p.id_periode_perkuliahan
+,p.status
+,p.id_semester
+,bs.id_bagian_soal,
+COALESCE(ROUND( (gd.jumlahsoal /(sd.total_soal * tm.total_mhs) ) * 100, 0 ),0) AS persentase
+FROM t_mata_kuliah m 
+, t_dosen_pengampu dp
+, t_paket_perkuliahan pp
+, t_periode_perkuliahan p
+, v_total_mhs_dosen md
+, t_soal s
+, t_bagian_soal bs 
+, v_ttl_soal_dosen sd
+, v_total_mhs_dosen tm
+, v_grafik gd
+where dp.kd_mata_kuliah=m.kd_mata_kuliah
+and pp.kd_mata_kuliah=m.kd_mata_kuliah
+and pp.kd_mata_kuliah=dp.kd_mata_kuliah
+and p.id_periode_perkuliahan=dp.id_periode_perkuliahan
+and md.kd_dosen=dp.kd_dosen
+and p.status='1'
+and md.kd_dosen=dp.kd_dosen
+and s.id_bagian_soal=bs.id_bagian_soal
+and sd.id_bagian_soal=bs.id_bagian_soal
+and gd.id_bagian_soal=bs.id_bagian_soal
+and gd.kd_dosen=dp.kd_dosen
+and tm.kd_dosen=dp.kd_dosen
+and gd.kd_dosen=tm.kd_dosen
+group by m.kd_mata_kuliah,dp.kd_dosen,p.id_periode_perkuliahan,bs.id_bagian_soal,pp.kd_paket_perkuliahan,gd.jumlahsoal,dp.kd_dosen_pengampu
+order by m.kd_mata_kuliah

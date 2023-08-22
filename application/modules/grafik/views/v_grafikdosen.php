@@ -7,6 +7,7 @@
             <div class="x_content text-center">
                 <div class="form-floating col-md-12 col-sm-12">
                     <select name="dosen" id="dosen" class="form-control">
+                    <option value="">--PILIH DOSEN--</option>
                         <?php foreach ($datadosen as $dd) { ?>
                             <option value="<?= $dd->kd_dosen; ?>"><?= $dd->nama_lengkap; ?></option>
                         <?php } ?>
@@ -199,6 +200,8 @@
                 Chart.defaults.global.defaultFontFamily = "Lato";
                 Chart.defaults.global.defaultFontSize = 15;
 
+              
+
                 let lbl = [];
                 let dt = [];
                 const a = [];
@@ -253,6 +256,10 @@
                         }]
                     };
                 }
+
+               
+
+
                 myChart1 = new Chart(myChart[1], {
                     type: 'pie',
                     data: dataKu[0]
@@ -265,6 +272,14 @@
                     type: 'pie',
                     data: dataKu[2]
                 });
+                
+                // if(myChart1){
+                //     myChart1.destroy();
+                // }else if(myChart2){
+                //     myChart2.destroy();
+                // }else if(myChart3){
+                //     myChart3.destroy();
+                // }
 
             }
         });

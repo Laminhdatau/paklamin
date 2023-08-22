@@ -7,6 +7,8 @@
             <div class="x_content text-center">
                 <div class="form-floating col-md-12 col-sm-12">
                     <select name="dosen" id="dosen" class="form-control">
+                    <option value="">--PILIH DOSEN--</option>
+
                         <?php foreach ($datadosen as $dd) { ?>
                             <option value="<?= $dd->kd_dosen; ?>"><?= $dd->nama_lengkap; ?></option>
                         <?php } ?>

@@ -85,10 +85,10 @@ class Survei extends MX_Controller
         $option2 = $this->input->post('option2');
         $option3 = $this->input->post('option3');
         $komentar = $this->input->post('komentar');
-        $kd_detail_krs = $this->m_survei->getData($nim, $kd, $kd_mk);
+        $kd_detail_krs = $this->m_survei->getData($nim, $kd, $kd_mk)->row();
 
+        // var_dump($kd_detail_krs);die;
 
-        // =========
 
         if (empty($kd_detail_krs) || empty($soal1) || empty($soal2) || empty($soal3) || empty($option1) || empty($option2) || empty($option3)) {
             $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
@@ -113,7 +113,6 @@ class Survei extends MX_Controller
                 if (empty($option1[$key])) {
                     $this->session->set_flashdata('message', '<div class="btn alert-danger col-md-12">
                     Opsi pada pertanyaan ' . $key . ' belum diisi. Silahkan isi kembali kuisioner.</div>');
-
                     redirect('survei');
                 }
             }
@@ -137,11 +136,14 @@ class Survei extends MX_Controller
         $id_survei = uuid_generator();
         $survei = array(
             'id_survei' => $id_survei,
-            'kd_detail_krs' => $kd_detail_krs[0]->kd_detail_krs,
+            // 'kd_detail_krs' => $kd_detail_krs[0]->kd_detail_krs,
+            'kd_detail_krs' => $kd_detail_krs->kd_detail_krs,
             'kd_dosen' => $kd,
             'id_jenis_survei' => $id_jenis,
             'komentar' => $komentar
         );
+
+      
         $b = $this->m_survei->simpanSurvei($survei);
 
         if ($b) {
