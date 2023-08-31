@@ -9,10 +9,10 @@ $db['default'] = array(
 
 // ==KONFIGURASI IP LOCAL==
 // _______________________________________________________
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'laminpunya',
+	'hostname' => 'localhost:3306',
+	'username' => 'minjeey',
+	'password' => 'hhhhh',
+	'database' => 'paklamin',
 // _______________________________________________________
 
 // ==KONFIGURASI IP SIAKAD==
@@ -24,7 +24,7 @@ $db['default'] = array(
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
+	'db_debug' => (ENVIRONMENT !== 'development'),
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',
